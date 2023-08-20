@@ -89,7 +89,7 @@ class Treatment(BaseModel):
 class Service(BaseModel):
     """ Services models """
 
-    animal = models.ManyToManyField(Animal)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     service_name = models.CharField(max_length=32, null=False)
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2, null=False)
