@@ -1,15 +1,23 @@
 from django.contrib import admin
-from .models import Pet, People
+from .models import Animal, UserProfile, Adoption, Treatments, Services
 
 
-@admin.register(Pet)
-class PetAdmin(admin.ModelAdmin):
+@admin.register(Animal)
+class AnimalAdmin(admin.ModelAdmin):
     list_display = ["name", "species","breed","colour", "chip", "available_for_adoption"]
     list_filter = ["breed","colour","available_for_adoption"]
     search_fields = ["species"]
 
-@admin.register(People)
-class PeopleAdmin(admin.ModelAdmin):
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
     list_display = ["name", "surname"]
     list_filter = ["id"]
     search_fields = ["surname"]
+
+
+admin.site.register(UserProfile)
+admin.site.register(Animal)
+admin.site.register(Adoption)
+admin.site.register(Treatments)
+admin.site.register(Services)
