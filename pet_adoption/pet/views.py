@@ -1,20 +1,19 @@
-from django.shortcuts import render
-from .models import UserProfile, Animal, Services, Treatments, Adoption
-from django.views.generic import ListView, FormView, CreateView, DetailView, UpdateView, DeleteView
-
+from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
+from .forms import CustomUserCreationForm
+from django.urls import reverse_lazy
 
 # Create your views here.
-
-class AnimalListView(ListView):
-    template_name = 'animals_list.html'
-    model = Animal
-
-
-class UserProfileListView(ListView):
-    template_name = 'users_list.html'
-    model = UserProfile
+class RegisterView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy('login')
 
 
-class AdoptionListView(ListView):
-    template_name = 'adoptions_list.html'
-    model = Adoption
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
