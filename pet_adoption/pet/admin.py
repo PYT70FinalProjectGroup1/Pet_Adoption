@@ -17,6 +17,24 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ["surname"]
 
 
-admin.site.register(Adoption)
-admin.site.register(Treatment)
-admin.site.register(Service)
+@admin.register(Adoption)
+class AdoptionAdmin(admin.ModelAdmin):
+    list_display = ["user", "animal" , "is_approved"]
+    list_filter = ["animal"]
+    search_fields = ["animal"]
+
+
+@admin.register(Treatment)
+class TreatmentAdmin(admin.ModelAdmin):
+    list_display = ["animal" , "treatment_name","date"]
+    list_filter = ["animal"]
+    search_fields = ["animal"]
+
+
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ["animal" , "service_name", "price"]
+    list_filter = ["animal"]
+    search_fields = ["animal"]
+
+
