@@ -47,7 +47,7 @@ class Animal(BaseModel):
     chip = models.CharField(max_length=64, unique=True, null=False)
     registration = models.DateField(default=timezone.now)
     about_pet = models.TextField()
-    image = models.ImageField(upload_to='animap_pics/')
+    image = models.ImageField(upload_to='animal_pics/')
     available_to_adoption = models.BooleanField(default=True)
 
     class Meta:

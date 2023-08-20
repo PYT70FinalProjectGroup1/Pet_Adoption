@@ -4,23 +4,58 @@
 {% block content %}
 
 <!-- animal list  -->
-<h3 class="my-5">Our Animals</h3>
-<div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
-    {% for animal in animals %}        
-        <div class="col">
-            <div class="card task-card shadow">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span class="me-auto">{{ animal.name }}</span>
-                    <span >{{ animal.breed }}</span>
-                </div>                
-                <div class="card-footer d-flex justify-content-between align-items-center">
-                    <span class="text-muted">{{ task.status }}</span>
-                    <img src="{{ animal.image.url }}" alt="{{ animal.image }}" width="150" height="150">
-                </div>
+<div class="fancy-container">
+    <div class="fancy-image">
+      <img src="https://img.freepik.com/premium-photo/vertical-shot-positive-woman-with-curly-hair-dressed-casual-clothes-poses-with-pedigree-dog-sits-chair-enjoys-company-pet-isolated-beige-background-people-animals-friendship_747379-644.jpg?w=400">
+    </div>
+    <div class="fancy-text">
+      <h3 class="fancy-heading">Discover Your Perfect Companion</h3>
+      <p class="fancy-subheading">Embrace the Joy of Animal Adoption</p>
+      <p>
+        Unleash the love and joy of bringing a new furry friend into your life. Whether it's a loyal canine
+        companion, a playful feline friend, or a cuddly critter, our shelter is home to a diverse selection of
+        lovable pets ready to find their forever homes.
+      </p>
+      <h4>Experience the Adoption Journey</h4>
+      <p>
+        Embarking on your adoption journey is simple and heartwarming. Explore the profiles of our available
+        pets below to find your ideal match, and then pay us a visit at one of our welcoming locations for a
+        delightful meet and greet.
+      </p>
+      <h4>Your Pet's Happiness is Guaranteed</h4>
+      <p>
+        We stand by our commitment to finding the best homes for our pets. Our 100% Adoption Guarantee means
+        that if the pet you choose isn't the perfect fit for your family, you can bring them back to us at any
+        point in their life, no questions asked.
+      </p>
+    </div>
+  </div>
+  
+  <div class="featured-pets">
+    <span>Featured Pets</span>
+  </div>
+
+  <div class="row row-cols-1 row-cols-lg-3 g-4 py-5">
+    {% for animal in animals %}
+      <div class="col">
+        <div class="fancy-card-home">
+          <img src="{{ animal.image.url }}" alt="Animal">
+          <div class="card-body">
+            <h2 class="card-title">{{ animal.name }}</h2>
+            <div class="animal-data">
+              <span>{{ animal.breed }}</span>
+              <span>{{ animal.sex }}</span>
             </div>
-        </div>        
+          </div>
+        </div>
+      </div>
     {% endfor %}
-</div>
-
-
-{% endblock %}
+  </div>
+  
+  {% endblock %}
+  
+  
+  
+  
+  
+  
