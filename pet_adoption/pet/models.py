@@ -77,7 +77,7 @@ class Services(BaseModel):
 
     animal = models.ManyToManyField(Animal)
     services = models.CharField(max_length=32, null=False)
-    description  = models.TextField()
+    description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2, null=False)
 
     def __str__(self):
