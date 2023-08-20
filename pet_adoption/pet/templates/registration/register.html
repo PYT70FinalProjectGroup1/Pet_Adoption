@@ -3,35 +3,33 @@
 
 {% block content %}
 
-<section class="my-5">
-  <div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-9 col-lg-6 col-xl-5">
+<section class="my-5 d-flex justify-content-center align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
         <div>
           <div class="card-body">
-            <h2 class="card-title mb-4 text-center" style="color: #333;">Register</h2>
+            <h2 class="card-title text-center mb-4" style="color: #333;">Register</h2>
             <form method="post">
-              <div class="mb-3 my-5">
-                {% csrf_token %} {{ form|bootstrap }}
-              </div>
+              {% csrf_token %}
+              {{ form|bootstrap }}
               <div class="text-center">
-                <button type="submit" class="btn btn-primary" style="background-color: #3498db; border-color: #3498db;">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+      <div class="col-md-6">
         <div>
-          <div class="card-body">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img2.webp"
-            alt="login form" class="img-fluid" />
-          </div>
+          <img src="https://patch.com/img/cdn20/shutterstock/24407956/20210301/064508/styles/patch_image/public/shutterstock-260124632___01184015806.jpg"
+               alt="login form" class="img-fluid">
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 
 
