@@ -2,5 +2,25 @@
 {% load static %} 
 
 {% block content %}
-Test Home
+
+<!-- animal list  -->
+<h3 class="my-5">Our Animals</h3>
+<div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
+    {% for animal in animals %}        
+        <div class="col">
+            <div class="card task-card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span class="me-auto">{{ animal.name }}</span>
+                    <span >{{ animal.breed }}</span>
+                </div>                
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <span class="text-muted">{{ task.status }}</span>
+                    <img src="{{ animal.image.url }}" alt="{{ animal.image }}" width="150" height="150">
+                </div>
+            </div>
+        </div>        
+    {% endfor %}
+</div>
+
+
 {% endblock %}

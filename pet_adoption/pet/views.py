@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
 from .forms import CustomUserCreationForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Animal
 
 # Create your views here.
 class RegisterView(CreateView):
@@ -11,9 +13,13 @@ class RegisterView(CreateView):
     success_url = reverse_lazy('login')
 
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin,TemplateView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        animals = Animal.objects.all()
+        context["animals"] = animals
+
         return context

@@ -1,16 +1,15 @@
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 
 
 class BaseModel(models.Model):
     """Base Model"""
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         """ Meta class"""
-
         abstract = True
 
 
@@ -18,15 +17,23 @@ class UserProfile(BaseModel):
     """ Class People """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=32, null=False)
-    surname = models.CharField(max_length=64, null=False)
-    id_client = models.CharField(max_length=64, unique=True, null=False)
-    mail = models.EmailField(max_length=64, null=True)
+    first_name = models.CharField(max_length=32, null=False)
+    last_name = models.CharField(max_length=64, null=False)    
+    email = models.EmailField(max_length=64, null=True)
     phone = models.CharField(max_length=32, null=False, unique=True)
     street = models.CharField(max_length=64, null=False)
+    profile_picture = models.ImageField(
+        upload_to="profile_pics/",
+        blank=True,
+        null=True,
+        default="profile_pics/default.jpg",
+    )
+
+    class Meta:
+        verbose_name_plural = "User Profiles"
 
     def __str__(self):
-        return self.name + " " + self.surname
+        return f'{self.first_name} {self.last_name}'
 
 
 class Animal(BaseModel):
@@ -38,10 +45,13 @@ class Animal(BaseModel):
     breed = models.CharField(max_length=32, null=False)
     sex = models.CharField(max_length=9, null=False)
     chip = models.CharField(max_length=64, unique=True, null=False)
-    registration = models.DateField()
+    registration = models.DateField(default=timezone.now)
     about_pet = models.TextField()
-    image = models.ImageField(upload_to='image/')
-    available_to_adoption = models.BooleanField()
+    image = models.ImageField(upload_to='animap_pics/')
+    available_to_adoption = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Animals"
 
     def __str__(self):
         return self.name
@@ -53,32 +63,39 @@ class Adoption(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     application_text = models.TextField()
-    application_date = models.DateTimeField()
-    is_approved = models.BooleanField()
+    application_date = models.DateTimeField(default=timezone.now)
+    is_approved = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Adoptions"
 
     def __str__(self):
-        return self.application_text + ' ' + self.is_approved
+        return f' {self.application_text} {self.is_approved}'
 
 
-class Treatments(BaseModel):
+class Treatment(BaseModel):
     """ Treatments models """
-
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     treatment_name = models.CharField(max_length=64, null=False)
-    date = models.DateField()
+    date = models.DateField(default=timezone.now)
     notes = models.TextField()
+    class Meta:
+        verbose_name_plural = "Treatments"
 
     def __str__(self):
-        return self.animal.name + ' ' + self.treatment_name
+        return f'{self.animal.name} {self.treatment_name}'
 
 
-class Services(BaseModel):
+class Service(BaseModel):
     """ Services models """
 
-    animal = models.ManyToManyField(Animal)
-    services = models.CharField(max_length=32, null=False)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    service_name = models.CharField(max_length=32, null=False)
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2, null=False)
 
+    class Meta:
+        verbose_name_plural = "Services"
+
     def __str__(self):
-        return self.animal.name + ' ' + self.services
+        return f'{self.animal.name} {self.service_name}'
