@@ -4,8 +4,8 @@ from .models import Pet, People
 
 @admin.register(Pet)
 class PetAdmin(admin.ModelAdmin):
-    list_display = ["name", "species","breed","color", "chip", "available_for_adoption"]
-    list_filter = ["breed","color","available_for_adoption"]
+    list_display = ["name", "species","breed","colour", "chip", "available_for_adoption"]
+    list_filter = ["breed","colour","available_for_adoption"]
     search_fields = ["species"]
 
 @admin.register(People)
