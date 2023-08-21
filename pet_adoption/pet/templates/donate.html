@@ -3,6 +3,10 @@
 
 
 {% block content %}
+
+
+<div id="user-data" data-logged-user="{{ logged_user }}" style="display: none;"></div>
+
 <div class="donate-text-container">
   <div class="donate-text">
     <div class="donate-heading">We’re On a Mission to Save More Lives</div>
@@ -28,5 +32,6 @@
   <button class="donate-button">Donate</button>
 
   <div class="donate-success" id="success-message"></div>
+
 </div>
 {% endblock %}

@@ -37,4 +37,6 @@ class DonateView(LoginRequiredMixin,TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        logged_user = f'{self.request.user.userprofile.first_name} {self.request.user.userprofile.last_name}'
+        context['logged_user'] = logged_user        
         return context
