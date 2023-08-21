@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>Animals Adopted by You</h2>
+  
+  {% if adoptions %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Animal Name</th>
+          <th>Application Date</th>
+          <th>Application Text</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for adoption in adoptions %}
+          <tr>
+            <td>{{ adoption.animal.name }}</td>
+            <td>{{ adoption.application_date }}</td>
+            <td>{{ adoption.application_text }}</td>
+            <td>
+              <a href="{% url 'services' adoption.animal.pk %}" class="btn btn-secondary">Services</a>
+              <a href="{% url 'treatments' adoption.animal.pk %}" class="btn btn-secondary">Treatments</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You haven't adopted any animals yet.</p>  
+  {% endif %}
+  
+  <a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}
+
+

@@ -1,12 +1,10 @@
-/*  Donate Scripts*/
-
+/*  Donate Page Scripts*/
 document.addEventListener('DOMContentLoaded', () => {
   const donateButtons = document.querySelectorAll('.donate-amount');
   const donateButton = document.querySelector('.donate-button');
   const successMessage = document.getElementById('success-message');
-  const userDataElement = document.getElementById('user-data');  // Add this line
-
-  const user = userDataElement.getAttribute('data-logged-user');  // Update this line
+  const userDataElement = document.getElementById('user-data');
+  const user = userDataElement.getAttribute('data-logged-user');
 
   donateButtons.forEach(button => {
     button.addEventListener('click', () => {

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<a href="{% url 'create_service' animal.pk %}" class="btn btn-secondary">Add Service</a>
+
+  <h2>Available Services:</h2>
+  
+  {% if services %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Service Name</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for service in services %}
+          <tr>
+            <td>{{ service.service_name }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No services are available for this animal.</p>
+  {% endif %}
+  
+  <a href="{% url 'adopted_animals' %}">Back to Adopted Animals</a>
+{% endblock %}
