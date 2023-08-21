@@ -75,10 +75,21 @@ class Adoption(BaseModel):
 
 class Treatment(BaseModel):
     """ Treatments models """
+
+    TREATMENTS_CHOICE = [
+        ("", "Select Treatment"),
+        ("Vaccination", "Vaccination"),
+        ("Deworming", "Deworming"),
+        ("Flea and Tick Prevention", "Flea and Tick Prevention"),
+        ("Dental Care", "Dental Care"),
+        ("Annual Wellness Check-up","Annual Wellness Check-up"),
+
+    ]
+    
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
-    treatment_name = models.CharField(max_length=64, null=False)
+    treatment_name = models.CharField(choices=TREATMENTS_CHOICE, max_length=64, null=False, default="")
     date = models.DateField(default=timezone.now)
-    notes = models.TextField()
+    notes = models.CharField(max_length=500)
     class Meta:
         verbose_name_plural = "Treatments"
 
@@ -87,12 +98,23 @@ class Treatment(BaseModel):
 
 
 class Service(BaseModel):
-    """ Services models """
+    """ Service models """
+
+    SERVICES_CHOICE = [
+        ("", "Select Service"),
+        ("Luxury Spa Day", "Luxury Spa Day"),
+        ("Canine Massage Therapy", "Canine Massage Therapy"),
+        ("Personalized Training Packages", "Personalized Training Packages"),
+        ("Pet Photography and Portraits", "Pet Photography and Portraits"),
+        ("Pet Parties and Events","Pet Parties and Events"),
+        ("VIP Boarding Suites","VIP Boarding Suites"),
+        ("Pet Concierge Services","Pet Concierge Services"),
+    ]
 
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
-    service_name = models.CharField(max_length=32, null=False)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=5, decimal_places=2, null=False)
+    service_name = models.CharField(choices=SERVICES_CHOICE, max_length=64, null=False, default="")
+    description = models.CharField(max_length=500)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=False)
 
     class Meta:
         verbose_name_plural = "Services"

@@ -34,23 +34,39 @@
   <div class="featured-pets">
     <span>Featured Pets</span>
   </div>
-
-  <div class="row row-cols-1 row-cols-lg-3 g-5 py-5">
+  
+  <div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
+    <!-- Loop for top 3 animals -->
     {% for animal in animals %}
-      <div class="col">
-        <div class="fancy-card-home">
-          <img src="{{ animal.image.url }}" alt="Animal">
-          <div class="card-body">
-            <h2 class="card-title">{{ animal.name }}</h2>
-            <div class="animal-data">
-              <span>{{ animal.breed }}</span>
-              <span>{{ animal.sex }}</span>
+      {% if forloop.counter <= 3 %}
+        <div class="col">
+          <div class="fancy-card-home">
+            <img src="{{ animal.image.url }}" alt="Animal">
+            <div class="card-body">
+              <h2 class="card-title">{{ animal.name }}</h2>
+              <div class="animal-data">
+                <span>{{ animal.breed }}</span>
+                <span>{{ animal.sex }}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {% endif %}
     {% endfor %}
+  
+    <!-- Summary box -->
+    <div class="col">
+      <div class="fancy-card-home-all">
+        <div class="card-body">
+          <h2 class="card-title">{{ available_animals }}</h2>
+          <div class="animal-data">
+            <span>All available animals</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
   
   {% endblock %}
   

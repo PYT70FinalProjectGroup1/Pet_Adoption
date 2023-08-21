@@ -33,7 +33,6 @@
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
 					</li>
-				<!-- Your other menu items here if needed -->
 			  	</ul>
 			  {% if user.is_authenticated %}
 			  <div class="navbar-nav">			
@@ -43,7 +42,7 @@
 				  </a>				  
 				  <ul class="dropdown-menu" aria-labelledby="profileDropdown">																				
 					<li>
-						<a class="dropdown-item" href="#">My Pets</a>
+						<a class="dropdown-item" href="{% url 'adopted_animals' %}">My Pets</a>
 					</li>
 					<li>
 						<a class="dropdown-item" href="#">Favourites</a>
@@ -61,20 +60,16 @@
 			</div>
 		  </div>
 		</nav>
-		
-
 
 		<div class="container">
 
-			{% block content %} 
-			
+			{% block content %}
 			{% endblock %}
 
 			<footer class="pt-5 my-5 text-body-secondary border-top">
 				Created by the Group_1 SDA_ZDPYTpol70 · © 2023
 			</footer>
 		</div>
-
 
 		<!-- Include Bootstrap JavaScript file -->
 		<script
@@ -83,7 +78,7 @@
 			crossorigin="anonymous"
 		></script>
 		
-		<!-- Include your custom scripts.js file -->
+		<!-- Include scripts.js JavaScript file -->
 		<script src="{% static 'scripts/scripts.js' %}"></script>	
 	</body>
 </html>
