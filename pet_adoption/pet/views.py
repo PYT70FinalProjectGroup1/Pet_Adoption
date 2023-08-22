@@ -36,6 +36,34 @@ class HomeView(TemplateView):
             
         return context
 
+class FindCatsView(TemplateView):
+    template_name = 'find_cats.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cats = Animal.objects.filter(species__in=["Cat", "cat"])
+        context["cats"] = cats
+        return context
+
+class FindDogsView(TemplateView):
+    template_name = 'find_dogs.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dogs = Animal.objects.filter(species__in=["Dog", "dog"])
+        context["dogs"] = dogs
+        return context
+
+class FindOtherPetsView(TemplateView):
+    template_name = 'find_other_pets.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        other_pets = Animal.objects.exclude(species__in=["dog", "Dog","cat", "Cat"])
+        context["other_pets"] = other_pets
+        return context
+
+
 class AboutView(TemplateView):
     template_name = 'about.html'
 
