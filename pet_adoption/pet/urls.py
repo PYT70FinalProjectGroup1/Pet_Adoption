@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomeView, AboutView, DonateView, AdoptedAnimalsView, AvailableServicesView, CreateServiceView,AvailableTreatmentsView,  CreateTreatmentView,  RegisterView
+from .views import HomeView, AboutView, DonateView, AdoptedAnimalsView, AvailableServicesView, CreateServiceView,AvailableTreatmentsView,  CreateTreatmentView, FindCatsView, FindDogsView, FindOtherPetsView, RegisterView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -14,6 +14,10 @@ urlpatterns = [
 
     path("treatments/<int:pk>/", AvailableTreatmentsView.as_view(), name="treatments"),
     path("create_treatment/<int:animal_id>/",CreateTreatmentView.as_view(),name="create_treatment"),
+
+    path("find/cats", FindCatsView.as_view(), name="find_cats"),
+    path("find/dogs", FindDogsView.as_view(), name="find_dogs"),
+    path("find/other_pets", FindOtherPetsView.as_view(), name="find_other_pets"),
     
     path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
