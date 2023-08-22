@@ -34,8 +34,7 @@ class UserProfile(BaseModel):
     first_name = models.CharField(max_length=32, null=False)
     last_name = models.CharField(max_length=64, null=False)    
     email = models.EmailField(max_length=64, null=True)
-    phone = models.CharField(max_length=32, null=False, unique=True)
-    street = models.CharField(max_length=64, null=False)
+    phone = models.CharField(max_length=32, null=False, unique=True)    
     location = models.CharField(max_length=32, choices=LOCATION_CHOICE, default="")
     profile_picture = models.ImageField(
         upload_to="profile_pics/",
@@ -88,13 +87,13 @@ class Animal(BaseModel):
     breed = models.CharField(max_length=32, null=False)
     gender = models.CharField(max_length=9, null=False, choices=GENDER_CHOICE, default="")
     size = models.CharField(max_length=32, choices=SIZE_CHOICE, default="")
-    age = models.IntegerField()
+    age = models.IntegerField(null=False)
     chip = models.CharField(max_length=64, unique=True, null=False)
     location = models.CharField(max_length=32, choices=LOCATION_CHOICE, default="")
-    registration = models.DateField(default=timezone.now)
+    registration = models.DateField(auto_now_add=True)
     about_pet = models.CharField(max_length=500, null=False)
     image = models.ImageField(upload_to='animal_pics/')
-    available_to_adoption = models.BooleanField(default=True)
+    is_available_for_adoption = models.BooleanField(default=True)
 
     class Meta:
         verbose_name_plural = "Animals"
@@ -116,7 +115,7 @@ class Adoption(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     application_text = models.CharField(max_length=500, null=False)
-    application_date = models.DateTimeField(default=timezone.now)
+    application_date = models.DateTimeField(auto_now_add=True)
     application_status = models.CharField(max_length=32, choices=STATUS_CHOICE, default="")
     is_approved = models.BooleanField(default=False)
 
@@ -124,7 +123,7 @@ class Adoption(BaseModel):
         verbose_name_plural = "Adoptions"
 
     def __str__(self):
-        return f' {self.application_text} {self.is_approved}'
+        return f' {self.id} - {self.is_approved}'
 
 
 class Treatment(BaseModel):
@@ -141,13 +140,14 @@ class Treatment(BaseModel):
     
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     treatment_name = models.CharField(choices=TREATMENTS_CHOICE, max_length=64, null=False, default="")
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(auto_now_add=True)
+    next_date = models.DateField(null=False)
     notes = models.CharField(max_length=500)
     class Meta:
         verbose_name_plural = "Treatments"
 
     def __str__(self):
-        return f'{self.animal.name} {self.treatment_name}'
+        return f'{self.animal.name}_{self.treatment_name}'
 
 
 class Service(BaseModel):
@@ -165,6 +165,7 @@ class Service(BaseModel):
     ]
 
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
     service_name = models.CharField(choices=SERVICES_CHOICE, max_length=64, null=False, default="")
     description = models.CharField(max_length=500)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False)
@@ -173,4 +174,4 @@ class Service(BaseModel):
         verbose_name_plural = "Services"
 
     def __str__(self):
-        return f'{self.animal.name} {self.service_name}'
+        return f'{self.animal.name}_{self.service_name}'
