@@ -35,37 +35,44 @@
 						<a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
 					</li>
 			  	</ul>
-			  {% if user.is_authenticated %}
-			  <div class="navbar-nav">
-				<div class="user-info">
-					<span class="user-name">{{ user.userprofile.first_name }} {{ user.userprofile.last_name }}</span>
-				</div>
-				<div class="nav-item dropdown">					
-				  <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">					
-					<img src="{{ user.userprofile.profile_picture.url }}" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
-				  </a>				  
-				  <ul class="dropdown-menu" aria-labelledby="profileDropdown">																				
-					<li>
-						<a class="dropdown-item" href="{% url 'adopted_animals' %}">My Pets</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">Favourites</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">Profile</a>
-					</li>
-					<li>
-					  <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
-					</li>
-				  </ul>				
-				</div>
-			  </div>
-			{% endif %}
+			  
+				<div class="navbar-nav">				
+					{% if user.is_authenticated %}
+					<div class="user-info">
+						<span class="user-name">{{ user.userprofile.first_name }} {{ user.userprofile.last_name }}</span>
+					</div>
+					<div class="nav-item dropdown">					
+						<a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">					
+							<img src="{{ user.userprofile.profile_picture.url }}" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+						</a>				  
+						<ul class="dropdown-menu" aria-labelledby="profileDropdown">																				
+							<li>
+								<a class="dropdown-item" href="{% url 'adopted_animals' %}">My Pets</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Favourites</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Profile</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
+							</li>
+						</ul>				
+					</div>
+					{% else %}
+					<div>
+						<a href="{% url 'login' %}">
+							<button class="btn btn-sm btn-warning">Login</button>
+						</a>
+					</div>
+					{% endif %}
+				</div>			
 			</div>
 		  </div>
 		</nav>
 
-		
+		{% block banner %}
 		<div class="banner-home">
 			<img src="https://www.petfinder.com/sites/default/files/styles/hero_image_1140_410/public/images/content/1140%20hero%20image_0.jpg?itok=wryBzVcI" alt="Cat or Dog Image" class="banner-image">
 			<div class="banner-text">
@@ -73,6 +80,7 @@
 			  <p>Browse pets from our network of over 100 shelters and rescues.</p>
 			</div>
 		</div>
+		{% endblock %}
 		
 
 		<div class="container">
