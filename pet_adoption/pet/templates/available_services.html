@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block content %}
+<div class="container">
+  <a href="{% url 'create_service' animal.pk %}" class="btn btn-sm btn-warning mb-3"><i class="bi bi-plus-circle"></i> Add Service</a>
 
-<a href="{% url 'create_service' animal.pk %}" class="btn btn-secondary">Add Service</a>
+  <h2>Performed Services:</h2>
 
-  <h2>Available Services:</h2>
-  
   {% if services %}
-    <table class="table">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>Service Name</th>
@@ -27,8 +27,10 @@
       </tbody>
     </table>
   {% else %}
-    <p>No services are available for this animal.</p>
+    <p>No services are performed for this animal.</p>
   {% endif %}
-  
-  <a href="{% url 'adopted_animals' %}">Back to Adopted Animals</a>
+
+  <a href="{% url 'adopted_animals' %}" class="mt-3 d-block">Back to Adopted Animals</a>
+</div>
 {% endblock %}
+
