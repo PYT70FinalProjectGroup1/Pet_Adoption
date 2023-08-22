@@ -60,10 +60,18 @@ class Animal(BaseModel):
 class Adoption(BaseModel):
     """ Adoption model """
 
+    STATUS_CHOICE = [
+        ("", "Select Status"),
+        ("Pending", "Pending"),
+        ("Accepted", "Accepted"),
+        ("Denied", "Denied"),        
+    ]
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     application_text = models.TextField()
     application_date = models.DateTimeField(default=timezone.now)
+    application_status = models.CharField(max_length=32, choices=STATUS_CHOICE, default="")
     is_approved = models.BooleanField(default=False)
 
     class Meta:
@@ -83,7 +91,6 @@ class Treatment(BaseModel):
         ("Flea and Tick Prevention", "Flea and Tick Prevention"),
         ("Dental Care", "Dental Care"),
         ("Annual Wellness Check-up","Annual Wellness Check-up"),
-
     ]
     
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)

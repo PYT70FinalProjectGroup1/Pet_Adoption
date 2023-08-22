@@ -26,7 +26,6 @@ class HomeView(LoginRequiredMixin,TemplateView):
         available_animals = animals.count()
         context["animals"] = animals
         context["available_animals"] = available_animals
-
         return context
 
 class AboutView(LoginRequiredMixin,TemplateView):
@@ -106,14 +105,4 @@ class AvailableTreatmentsView(LoginRequiredMixin, View):
         animal = get_object_or_404(Animal, pk=pk, adoption__user=request.user)
         treatments = Treatment.objects.filter(animal=animal)        
         context = {'animal': animal, 'treatments': treatments}
-        return render(request, self.template_name, context)
-
-class PerformedTreatmentsServicesView(LoginRequiredMixin, View):
-    template_name = 'performed_treatments_services.html'
-
-    def get(self, request, pk):
-        animal = get_object_or_404(Animal, pk=pk, adoption__user=request.user)
-        treatments = Treatment.objects.filter(animal=animal)
-        services = Service.objects.filter(animal=animal)
-        context = {'animal': animal, 'treatments': treatments, 'services': services}
         return render(request, self.template_name, context)

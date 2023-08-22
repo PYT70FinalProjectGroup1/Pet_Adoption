@@ -21,8 +21,7 @@ body{
   height: 300px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;  
-  background-color: #8b55b9;
-  color: white;
+  overflow: hidden;
 }
 
 .fancy-card-home img {
@@ -32,6 +31,14 @@ body{
   object-position: center;
   transition: transform 1.0s ease;
 }
+
+.fancy-card-home-all img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;  
+}
+
 
 .fancy-card-home:hover img {
   transform: scale(1.1);
@@ -53,8 +60,9 @@ body{
   left: 0;
   width: 100%;
   padding: 0.5rem;
-  background-color: rgba(97, 2, 118, 0.8);
+  background-color: rgba(97, 2, 118);
   text-align: center;
+  color: white;
 }
 
 .fancy-container {
