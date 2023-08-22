@@ -21,11 +21,19 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        
         animals = Animal.objects.filter(available_to_adoption = True)
         available_animals = animals.count()
+
         context["animals"] = animals
         context["available_animals"] = available_animals
+
+        if self.request.user.is_authenticated:
+            user_location = self.request.user.userprofile.location
+            animals_near_user = animals.filter(location=user_location)
+            context["animals_near_user"] = animals_near_user
+            context["user_location"] = user_location
+            
         return context
 
 class AboutView(TemplateView):
