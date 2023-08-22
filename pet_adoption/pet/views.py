@@ -22,7 +22,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        animals = Animal.objects.filter(available_to_adoption = True)
+        animals = Animal.objects.filter(is_available_for_adoption = True)
         available_animals = animals.count()
 
         context["animals"] = animals
@@ -36,12 +36,21 @@ class HomeView(TemplateView):
             
         return context
 
+class FindAllView(TemplateView):
+    template_name = 'find_all.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_pets = Animal.objects.all().filter(is_available_for_adoption = True)
+        context["all_pets"] = all_pets
+        return context
+
 class FindCatsView(TemplateView):
     template_name = 'find_cats.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cats = Animal.objects.filter(species__in=["Cat", "cat"])
+        cats = Animal.objects.filter(species__iexact="cat", is_available_for_adoption = True)
         context["cats"] = cats
         return context
 
@@ -50,7 +59,7 @@ class FindDogsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        dogs = Animal.objects.filter(species__in=["Dog", "dog"])
+        dogs = Animal.objects.filter(species__iexact="dog", is_available_for_adoption = True)
         context["dogs"] = dogs
         return context
 
@@ -59,10 +68,11 @@ class FindOtherPetsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        other_pets = Animal.objects.exclude(species__in=["dog", "Dog","cat", "Cat"])
+        other_pets = Animal.objects.filter(is_available_for_adoption=True) \
+                          .exclude(species__iexact="cat") \
+                          .exclude(species__iexact="dog")
         context["other_pets"] = other_pets
         return context
-
 
 class AboutView(TemplateView):
     template_name = 'about.html'

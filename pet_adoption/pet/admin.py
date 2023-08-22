@@ -4,8 +4,8 @@ from .models import Animal, UserProfile, Adoption, Treatment, Service
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
-    list_display = ["name", "species","breed","color", "gender","size","age","chip", "location","available_to_adoption"]
-    list_filter = ["breed","color","available_to_adoption", "age", "size"]
+    list_display = ["name", "species","breed","color", "gender","size","age","chip", "location","is_available_for_adoption"]
+    list_filter = ["breed","color","is_available_for_adoption", "age", "size"]
     search_fields = ["species"]
 
 
