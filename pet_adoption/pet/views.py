@@ -16,7 +16,7 @@ class RegisterView(CreateView):
     success_url = reverse_lazy('login')
 
 
-class HomeView(LoginRequiredMixin,TemplateView):
+class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
@@ -28,19 +28,23 @@ class HomeView(LoginRequiredMixin,TemplateView):
         context["available_animals"] = available_animals
         return context
 
-class AboutView(LoginRequiredMixin,TemplateView):
+class AboutView(TemplateView):
     template_name = 'about.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
-class DonateView(LoginRequiredMixin,TemplateView):
+class DonateView(TemplateView):
     template_name = 'donate.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        logged_user = f'{self.request.user.userprofile.first_name} {self.request.user.userprofile.last_name}'
+        if not self.request.user.is_authenticated:
+            logged_user = "Anonymous"
+        else:
+            logged_user = f'{self.request.user.userprofile.first_name} {self.request.user.userprofile.last_name}'
+        
         context['logged_user'] = logged_user        
         return context
 

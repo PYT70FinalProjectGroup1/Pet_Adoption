@@ -38,15 +38,46 @@ class UserProfile(BaseModel):
 
 class Animal(BaseModel):
     """ Pet Model """
+    
+    SIZE_CHOICE = [
+        ("", "Select Size"),
+        ("Small", "Small (0-10kg)"),
+        ("Medium", "Medium (11-30kg)"),
+        ("Large", "Large (31-50kg)"),
+        ("Exter Large", "Extra Large (51kg or more)"),
+    ]
+
+    GENDER_CHOICE = [
+        ("", "Select Size"),
+        ("Male", "Male"),
+        ("Female", "Female"),        
+    ]
+
+    LOCATION_CHOICE = [
+    ("", "Select Size"),
+    ("Warsaw", "WAW"),
+    ("Krakow", "KRK"),
+    ("Wroclaw", "WRO"),
+    ("Poznan", "POZ"),
+    ("Lodz", "LDZ"),
+    ("Gdansk", "GDA"),
+    ("Szczecin", "SCZ"),
+    ("Bydgoszcz", "BGD"),    
+    ("Katowice", "KAT"),    
+    ("Gdynia", "GDY"),        
+]
 
     name = models.CharField(max_length=32, null=False)
-    colour = models.CharField(max_length=64, null=False)
+    color = models.CharField(max_length=64, null=False)
     species = models.CharField(max_length=9, null=False)
     breed = models.CharField(max_length=32, null=False)
-    sex = models.CharField(max_length=9, null=False)
+    gender = models.CharField(max_length=9, null=False, choices=GENDER_CHOICE, default="")
+    size = models.CharField(max_length=32, choices=SIZE_CHOICE, default="")
+    age = models.IntegerField()
     chip = models.CharField(max_length=64, unique=True, null=False)
+    location = models.CharField(max_length=32, choices=LOCATION_CHOICE, default="")
     registration = models.DateField(default=timezone.now)
-    about_pet = models.TextField()
+    about_pet = models.CharField(max_length=500, null=False)
     image = models.ImageField(upload_to='animal_pics/')
     available_to_adoption = models.BooleanField(default=True)
 
@@ -69,7 +100,7 @@ class Adoption(BaseModel):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
-    application_text = models.TextField()
+    application_text = models.CharField(max_length=500, null=False)
     application_date = models.DateTimeField(default=timezone.now)
     application_status = models.CharField(max_length=32, choices=STATUS_CHOICE, default="")
     is_approved = models.BooleanField(default=False)
