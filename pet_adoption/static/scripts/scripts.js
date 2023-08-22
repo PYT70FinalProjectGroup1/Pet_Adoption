@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   donateButton.addEventListener('click', () => {
     let message = '';
 
-    if (customAmountInput.value !== '') {
+    if (customAmountInput.value !== '' && customAmountInput.value > 0) {
       message += `Donation of $${customAmountInput.value}`;
     }
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add similar checks for other divs
     const otherDivs = document.querySelectorAll('.other-div-class');
     otherDivs.forEach(div => {
-      if (div.textContent !== '') {
+      if (div.textContent !== '' && div.textContent !== 0) {
         message += ` ${div.textContent}`;
       }
     });
