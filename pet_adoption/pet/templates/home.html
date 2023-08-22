@@ -68,7 +68,30 @@
     </div>
   </div>
 
-  
+
+  <div class="featured-pets">
+    <span>Pets Near {{user.userprofile.location}}</span>
+  </div>
+
+  <div class="row row-cols-1 row-cols-lg-3 g-5 py-5">
+    {% for animal in animals %}
+      {% if animal.location == user.userprofile.location %}
+        <div class="col">
+          <div class="fancy-card-home-near">
+            <img src="{{ animal.image.url }}" alt="Animal">
+            <div class="card-body">
+              <h2 class="card-title">{{ animal.name }}</h2>
+              <div class="animal-data">
+                <span>{{ animal.breed }}</span>
+                <span>{{ animal.sex }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>  
+
   {% endblock %}
   
   
