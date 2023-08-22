@@ -1,11 +1,57 @@
 body{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 /* Home Page Section */
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.banner-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 40vh;
+  overflow: hidden;  
+  margin-bottom: 0vh;  
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transform: translateY(-20%);
+}
+
+.banner-text {
+  position: absolute;
+  text-align: center;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: large;
+  font-weight: 500;
+}
+
+
 .fancy-card-home {
   position: relative;
   width: 300px;
