@@ -19,15 +19,37 @@ class CustomUserCreationForm(UserCreationForm):
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Service
-        fields = '__all__'        
+        exclude = ("animal",)
         widgets = {
             "description": forms.Textarea(attrs={"rows": 5}),
         }
 
+    def save(self, commit=True, animal=None):
+        instance = super().save(commit=False)
+        
+        if animal is not None:
+            instance.animal = animal
+
+        if commit:
+            instance.save()
+        
+        return instance 
+
 class TreatmentForm(forms.ModelForm):
     class Meta:
         model = Treatment
-        fields = '__all__'
+        exclude = ("animal",)
         widgets = {
             "notes": forms.Textarea(attrs={"rows": 5}),
         }
+    
+    def save(self, commit=True, animal=None):
+        instance = super().save(commit=False)
+        
+        if animal is not None:
+            instance.animal = animal
+
+        if commit:
+            instance.save()
+        
+        return instance 
