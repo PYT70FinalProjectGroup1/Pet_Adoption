@@ -45,7 +45,7 @@
 						<a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">					
 							<img src="{{ user.userprofile.profile_picture.url }}" alt="User Profile" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
 						</a>				  
-						<ul class="dropdown-menu" aria-labelledby="profileDropdown">																				
+						<ul class="dropdown-menu" data-bs-theme="dark" aria-labelledby="profileDropdown">																				
 							<li>
 								<a class="dropdown-item" href="{% url 'adopted_animals' %}">My Pets</a>
 							</li>

@@ -16,12 +16,27 @@ class BaseModel(models.Model):
 class UserProfile(BaseModel):
     """ Class People """
 
+    LOCATION_CHOICE = [
+        ("", "Select Location"),
+        ("Warsaw", "WAW"),
+        ("Krakow", "KRK"),
+        ("Wroclaw", "WRO"),
+        ("Poznan", "POZ"),
+        ("Lodz", "LDZ"),
+        ("Gdansk", "GDA"),
+        ("Szczecin", "SCZ"),
+        ("Bydgoszcz", "BGD"),    
+        ("Katowice", "KAT"),    
+        ("Gdynia", "GDY"),        
+    ]
+    
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=32, null=False)
     last_name = models.CharField(max_length=64, null=False)    
     email = models.EmailField(max_length=64, null=True)
     phone = models.CharField(max_length=32, null=False, unique=True)
     street = models.CharField(max_length=64, null=False)
+    location = models.CharField(max_length=32, choices=LOCATION_CHOICE, default="")
     profile_picture = models.ImageField(
         upload_to="profile_pics/",
         blank=True,
@@ -54,18 +69,18 @@ class Animal(BaseModel):
     ]
 
     LOCATION_CHOICE = [
-    ("", "Select Size"),
-    ("Warsaw", "WAW"),
-    ("Krakow", "KRK"),
-    ("Wroclaw", "WRO"),
-    ("Poznan", "POZ"),
-    ("Lodz", "LDZ"),
-    ("Gdansk", "GDA"),
-    ("Szczecin", "SCZ"),
-    ("Bydgoszcz", "BGD"),    
-    ("Katowice", "KAT"),    
-    ("Gdynia", "GDY"),        
-]
+        ("", "Select Location"),
+        ("Warsaw", "WAW"),
+        ("Krakow", "KRK"),
+        ("Wroclaw", "WRO"),
+        ("Poznan", "POZ"),
+        ("Lodz", "LDZ"),
+        ("Gdansk", "GDA"),
+        ("Szczecin", "SCZ"),
+        ("Bydgoszcz", "BGD"),    
+        ("Katowice", "KAT"),    
+        ("Gdynia", "GDY"),        
+    ]
 
     name = models.CharField(max_length=32, null=False)
     color = models.CharField(max_length=64, null=False)
