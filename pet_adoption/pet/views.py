@@ -23,9 +23,11 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         
         animals = Animal.objects.filter(is_available_for_adoption = True)
+        adoptions = Adoption.objects.all()
         available_animals = animals.count()
 
         context["animals"] = animals
+        context["adoptions"] = adoptions
         context["available_animals"] = available_animals
 
         if self.request.user.is_authenticated:
