@@ -62,7 +62,7 @@ class Animal(BaseModel):
     ]
 
     GENDER_CHOICE = [
-        ("", "Select Size"),
+        ("", "Select Gender"),
         ("Male", "Male"),
         ("Female", "Female"),        
     ]
