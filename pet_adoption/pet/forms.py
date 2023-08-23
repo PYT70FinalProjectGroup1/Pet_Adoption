@@ -40,6 +40,7 @@ class TreatmentForm(forms.ModelForm):
         model = Treatment
         exclude = ("animal",)
         widgets = {
+            "next_date": forms.DateInput(attrs={"type": "date"}),
             "notes": forms.Textarea(attrs={"rows": 5}),
         }
     

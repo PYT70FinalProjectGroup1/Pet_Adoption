@@ -10,8 +10,9 @@
   {% if services %}
     <table class="table table-hover">
       <thead>
-        <tr>
+        <tr>          
           <th>Service Name</th>
+          <th>Current Date</th>
           <th>Description</th>
           <th>Price</th>
         </tr>
@@ -20,8 +21,9 @@
         {% for service in services %}
           <tr>
             <td>{{ service.service_name }}</td>
+            <td>{{ service.date }}</td>
             <td>{{ service.description }}</td>
-            <td>{{ service.price }}</td>
+            <td>$ {{ service.price }}</td>
           </tr>
         {% endfor %}
       </tbody>

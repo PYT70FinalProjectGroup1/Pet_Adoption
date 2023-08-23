@@ -12,7 +12,8 @@
       <thead>
         <tr>
           <th>Treatment Name</th>
-          <th>Date</th>
+          <th>Current Date</th>
+          <th>Next Date</th>
           <th>Notes</th>
         </tr>
       </thead>
@@ -21,6 +22,7 @@
           <tr>
             <td>{{ treatment.treatment_name }}</td>
             <td>{{ treatment.date }}</td>
+            <td>{{ treatment.next_date }}</td>
             <td>{{ treatment.notes }}</td>
           </tr>
         {% endfor %}
