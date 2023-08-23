@@ -32,9 +32,17 @@
   </div>
 
 
-  <!-- images for filer pages -->
-  <div class="featured-pets">
-    <span>Find Your Pet</span>
+
+  <!-- Find Your Pet -->
+  <div class="fancy-text">
+    <h4 class="mt-5 mb-4">Find Your Perfect Pet</h4>
+    <p>
+      Begin your journey to find the perfect furry companion! Explore our diverse selection of adorable pets eagerly
+      anticipating a loving home. Whether you're in search of an energetic cat, a devoted dog, or another endearing
+      furry friend, our selection is tailored to match your preferences.
+    </p>
+    <p>Embark on the path to becoming a cherished pet parent by adopting your new faithful companion today!</p>
+    
   </div>
 
   <div class="container my-5">
@@ -69,9 +77,20 @@
 
   <!-- Pets for adoption -->
   <div class="featured-pets">
-    <span>Pets Available for Adoption</span>
+    <span></span>
+  </div>  
+
+  <div class="fancy-text">
+    <h4 class="mt-5 mb-4">Pets Available for Adoption</h4>
+    <p>
+      Embrace the joy of adding a new furry family member! Explore our charming pets, each brimming with affection and
+      companionship, and awaiting a forever home. From the spirited playfulness of cats to the loyal devotion of dogs and
+      the unique charm of other companions, you're sure to find your perfect match here.
+    </p>
+    <p>Join the heartwarming community of proud pet owners by adopting your future companion today!</p>
+    
   </div>
-  
+
   <div class="row row-cols-1 row-cols-lg-4 g-5 py-5">    
     {% for animal in animals|slice:"items|length-3:items|length" %}
       {% if forloop.counter <= 3 %}
@@ -81,8 +100,9 @@
             <div class="card-body">
               <h2 class="card-title">{{ animal.name }}</h2>
               <div class="animal-data">
-                <span>{{ animal.breed }}</span>
-                <span>{{ animal.gender }}</span>
+                <span>{{ animal.breed }} &#8226 </span>
+                <span>{{ animal.gender }} &#8226 </span>
+                <span>{{ animal.size }}</span>
               </div>
             </div>
           </div>
@@ -111,7 +131,19 @@
   {% if user.is_authenticated %}
     {% if animals_near_user %}
       <div class="featured-pets">
-        <span>Pets Near {{ user.userprofile.location }}</span>
+        <span></span>
+      </div>
+      <div class="fancy-text">
+        <h4 class="mt-5 mb-4">Discover Pets Near {{ user.userprofile.location }}</h4>
+        <p>
+          Embrace the joy of adding a new furry family member from your very own neighborhood! Explore our charming pets, each
+          brimming with affection and companionship, and awaiting a forever home just around the corner. From the spirited
+          playfulness of cats to the loyal devotion of dogs and the unique charm of other companions, you're sure to find your
+          perfect match right here in your local area.
+        </p>
+        <p>Join the heartwarming community of proud pet owners by adopting your future companion from your own neighborhood today!</p>
+        
+        
       </div>
       <div class="row row-cols-1 row-cols-lg-3 g-5 py-5">
         {% for animal in animals_near_user %}
@@ -121,8 +153,9 @@
               <div class="card-body">
                 <h2 class="card-title">{{ animal.name }}</h2>
                 <div class="animal-data">
-                  <span>{{ animal.breed }}</span>
-                  <span>{{ animal.gender }}</span>
+                  <span>{{ animal.breed }} &#8226 </span>
+                  <span>{{ animal.gender }} &#8226 </span>
+                  <span>{{ animal.size }}</span>
                 </div>
               </div>
             </div>
@@ -131,6 +164,39 @@
       </div>
     {% endif %}
   {% endif %}
+
+  
+<!-- Adoption Histories -->
+<div class="featured-pets">
+  <span></span>
+</div>
+
+<!-- Your Pet's Happiness is Guaranteed Section -->
+<div class="fancy-text">
+  <h4 class="mt-5 mb-4">Your Pet's Happiness is Guaranteed</h4>
+  <p>
+    We stand by our commitment to finding the best homes for our pets. Our 100% Adoption Guarantee means
+    that if the pet you choose isn't the perfect fit for your family, you can bring them back to us at any
+    point in their life, no questions asked.
+  </p>
+  <p>Join the happy adopters who have given pets a loving home.</p>
+</div>
+
+
+<div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
+  {% for adoption in adoptions %}
+    <div class="col">
+      <div class="adoption-card">
+        <img class="animal-img" src="{{ adoption.user.userprofile.profile_picture.url }}" alt="Animal">
+        <img class="user-img" src="{{ adoption.animal.image.url }}" alt="User">
+        <div class="card-body">
+          <h2 class="card-title"><strong>{{ adoption.animal.name }}</strong></h2>
+          <p>{{ adoption.user.name }}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 
 
 {% endblock %}
