@@ -45,23 +45,26 @@ class FindAllView(TemplateView):
         
         # Process the filter form
         filter_form = AnimalFilterForm(self.request.GET)
-        if filter_form.is_valid():
-            color = filter_form.cleaned_data.get('color')
+        if filter_form.is_valid():            
+            species = filter_form.cleaned_data.get('species')
             breed = filter_form.cleaned_data.get('breed')
             gender = filter_form.cleaned_data.get('gender')
             size = filter_form.cleaned_data.get('size')
+            color = filter_form.cleaned_data.get('color')
             min_age = filter_form.cleaned_data.get('min_age')
             max_age = filter_form.cleaned_data.get('max_age')
             location = filter_form.cleaned_data.get('location')
 
-            if color:
-                all_pets = all_pets.filter(color__icontains=color)
+            if species:
+                all_pets = all_pets.filter(species__icontains=species)
             if breed:
                 all_pets = all_pets.filter(breed__icontains=breed)
             if gender:
                 all_pets = all_pets.filter(gender=gender)
             if size:
                 all_pets = all_pets.filter(size=size)
+            if color:
+                all_pets = all_pets.filter(color__icontains=color)
             if min_age:
                 all_pets = all_pets.filter(age__gte=min_age)
             if max_age:
@@ -81,24 +84,25 @@ class FindCatsView(TemplateView):
         
         cats = Animal.objects.filter(species__iexact="cat", is_available_for_adoption=True)
         
-        filter_form = AnimalFilterForm(self.request.GET)
-        if filter_form.is_valid():
-            color = filter_form.cleaned_data.get('color')
+        show_species = False        
+        filter_form = AnimalFilterForm(self.request.GET, show_species=show_species)
+        if filter_form.is_valid():            
             breed = filter_form.cleaned_data.get('breed')
             gender = filter_form.cleaned_data.get('gender')
             size = filter_form.cleaned_data.get('size')
+            color = filter_form.cleaned_data.get('color')
             min_age = filter_form.cleaned_data.get('min_age')
             max_age = filter_form.cleaned_data.get('max_age')
             location = filter_form.cleaned_data.get('location')
 
-            if color:
-                cats = cats.filter(color__icontains=color)
             if breed:
                 cats = cats.filter(breed__icontains=breed)
             if gender:
                 cats = cats.filter(gender=gender)
             if size:
                 cats = cats.filter(size=size)
+            if color:
+                cats = cats.filter(color__icontains=color)
             if min_age:
                 cats = cats.filter(age__gte=min_age)
             if max_age:
@@ -119,24 +123,25 @@ class FindDogsView(TemplateView):
         
         dogs = Animal.objects.filter(species__iexact="dog", is_available_for_adoption=True)
         
-        filter_form = AnimalFilterForm(self.request.GET)
-        if filter_form.is_valid():
-            color = filter_form.cleaned_data.get('color')
+        show_species = False        
+        filter_form = AnimalFilterForm(self.request.GET, show_species=show_species)
+        if filter_form.is_valid():            
             breed = filter_form.cleaned_data.get('breed')
             gender = filter_form.cleaned_data.get('gender')
             size = filter_form.cleaned_data.get('size')
+            color = filter_form.cleaned_data.get('color')
             min_age = filter_form.cleaned_data.get('min_age')
             max_age = filter_form.cleaned_data.get('max_age')
             location = filter_form.cleaned_data.get('location')
 
-            if color:
-                dogs = dogs.filter(color__icontains=color)
             if breed:
                 dogs = dogs.filter(breed__icontains=breed)
             if gender:
                 dogs = dogs.filter(gender=gender)
             if size:
                 dogs = dogs.filter(size=size)
+            if color:
+                dogs = dogs.filter(color__icontains=color)
             if min_age:
                 dogs = dogs.filter(age__gte=min_age)
             if max_age:
@@ -158,7 +163,8 @@ class FindOtherPetsView(TemplateView):
                            .exclude(species__iexact="cat") \
                            .exclude(species__iexact="dog")
         
-        filter_form = AnimalFilterForm(self.request.GET)
+        show_species = False        
+        filter_form = AnimalFilterForm(self.request.GET, show_species=show_species)
         if filter_form.is_valid():
             color = filter_form.cleaned_data.get('color')
             breed = filter_form.cleaned_data.get('breed')
