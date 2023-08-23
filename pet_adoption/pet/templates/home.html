@@ -77,11 +77,13 @@
       {% if forloop.counter <= 3 %}
         <div class="col">
           <div class="fancy-card-home">
+            <a href="{% url 'animal_detail' animal_id=animal.id %} ">
             <img src="{{ animal.image.url }}" alt="Animal">
+              </a>
             <div class="card-body">
               <h2 class="card-title">{{ animal.name }}</h2>
               <div class="animal-data">
-                <span>{{ animal.breed }}</span>
+                <span>{{ animal.breed }}</span><br>
                 <span>{{ animal.gender }}</span>
               </div>
             </div>

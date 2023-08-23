@@ -25,16 +25,16 @@ class UserProfile(BaseModel):
         ("Lodz", "LDZ"),
         ("Gdansk", "GDA"),
         ("Szczecin", "SCZ"),
-        ("Bydgoszcz", "BGD"),    
-        ("Katowice", "KAT"),    
-        ("Gdynia", "GDY"),        
+        ("Bydgoszcz", "BGD"),
+        ("Katowice", "KAT"),
+        ("Gdynia", "GDY"),
     ]
-    
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=32, null=False)
-    last_name = models.CharField(max_length=64, null=False)    
+    last_name = models.CharField(max_length=64, null=False)
     email = models.EmailField(max_length=64, null=True)
-    phone = models.CharField(max_length=32, null=False, unique=True)    
+    phone = models.CharField(max_length=32, null=False, unique=True)
     location = models.CharField(max_length=32, choices=LOCATION_CHOICE, default="")
     profile_picture = models.ImageField(
         upload_to="profile_pics/",
@@ -52,7 +52,14 @@ class UserProfile(BaseModel):
 
 class Animal(BaseModel):
     """ Pet Model """
-    
+
+    SPECIES_CHOICE = [
+        ("", "Select Species"),
+        ("Dog", "Dog"),
+        ("Cat", "Cat"),
+        ("Other", "Other")
+    ]
+
     SIZE_CHOICE = [
         ("", "Select Size"),
         ("Small", "Small (0-10kg)"),
@@ -62,9 +69,9 @@ class Animal(BaseModel):
     ]
 
     GENDER_CHOICE = [
-        ("", "Select Size"),
+        ("", "Select Gender"),
         ("Male", "Male"),
-        ("Female", "Female"),        
+        ("Female", "Female"),
     ]
 
     LOCATION_CHOICE = [
@@ -76,14 +83,14 @@ class Animal(BaseModel):
         ("Lodz", "LDZ"),
         ("Gdansk", "GDA"),
         ("Szczecin", "SCZ"),
-        ("Bydgoszcz", "BGD"),    
-        ("Katowice", "KAT"),    
-        ("Gdynia", "GDY"),        
+        ("Bydgoszcz", "BGD"),
+        ("Katowice", "KAT"),
+        ("Gdynia", "GDY"),
     ]
 
     name = models.CharField(max_length=32, null=False)
     color = models.CharField(max_length=64, null=False)
-    species = models.CharField(max_length=9, null=False)
+    species = models.CharField(max_length=9, choices=SPECIES_CHOICE, null=False)
     breed = models.CharField(max_length=32, null=False)
     gender = models.CharField(max_length=9, null=False, choices=GENDER_CHOICE, default="")
     size = models.CharField(max_length=32, choices=SIZE_CHOICE, default="")
@@ -109,7 +116,7 @@ class Adoption(BaseModel):
         ("", "Select Status"),
         ("Pending", "Pending"),
         ("Accepted", "Accepted"),
-        ("Denied", "Denied"),        
+        ("Denied", "Denied"),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -135,14 +142,15 @@ class Treatment(BaseModel):
         ("Deworming", "Deworming"),
         ("Flea and Tick Prevention", "Flea and Tick Prevention"),
         ("Dental Care", "Dental Care"),
-        ("Annual Wellness Check-up","Annual Wellness Check-up"),
+        ("Annual Wellness Check-up", "Annual Wellness Check-up"),
     ]
-    
+
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     treatment_name = models.CharField(choices=TREATMENTS_CHOICE, max_length=64, null=False, default="")
     date = models.DateField(auto_now_add=True)
     next_date = models.DateField(null=False)
     notes = models.CharField(max_length=500)
+
     class Meta:
         verbose_name_plural = "Treatments"
 
@@ -159,9 +167,9 @@ class Service(BaseModel):
         ("Canine Massage Therapy", "Canine Massage Therapy"),
         ("Personalized Training Packages", "Personalized Training Packages"),
         ("Pet Photography and Portraits", "Pet Photography and Portraits"),
-        ("Pet Parties and Events","Pet Parties and Events"),
-        ("VIP Boarding Suites","VIP Boarding Suites"),
-        ("Pet Concierge Services","Pet Concierge Services"),
+        ("Pet Parties and Events", "Pet Parties and Events"),
+        ("VIP Boarding Suites", "VIP Boarding Suites"),
+        ("Pet Concierge Services", "Pet Concierge Services"),
     ]
 
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
@@ -175,3 +183,25 @@ class Service(BaseModel):
 
     def __str__(self):
         return f'{self.animal.name}_{self.service_name}'
+
+
+class Favorite(BaseModel):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.name} - {self.animal.name}'
+
+
+class AdoptionForm(BaseModel):
+    STATUS_CHOICES = [
+        ("W", "Awaiting approval"),
+        ("A", "Approved"),
+        ("R", "Rejected")
+    ]
+
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='0')
+
+    def __str__(self):
+        return f'User request {self.user.name} - {self.status}'

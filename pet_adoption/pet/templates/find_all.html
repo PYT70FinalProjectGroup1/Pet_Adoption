@@ -20,11 +20,11 @@
             {% for pet in all_pets %}
                 <div class="col">
                     <div class="fancy-card-home">
-                        <img src="{{ pet.image.url }}" alt="Cat">
+                        <img src="{{ pet.image.url }}" alt="Pet">
                         <div class="card-body">
                             <h2 class="card-title">{{ pet.name }}</h2>
                             <div class="animal-data">
-                                <span>{{ pet.breed }}</span>
+                                <span>{{ pet.breed }}</span><br>
                                 <span>{{ pet.gender }}</span>
                             </div>
                         </div>

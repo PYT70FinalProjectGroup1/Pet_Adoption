@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Your adoption applications</h2>
+    <ul>
+        {% for application in applications %}
+            <li>
+                {{ application.get_status_display }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
