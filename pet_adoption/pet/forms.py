@@ -56,11 +56,18 @@ class TreatmentForm(forms.ModelForm):
         return instance 
     
 
-class AnimalFilterForm(forms.Form):
-    color = forms.CharField(max_length=64, required=False)
-    breed = forms.CharField(max_length=32, required=False)
+class AnimalFilterForm(forms.Form):    
+    species = forms.CharField(max_length=32, required=False)
+    breed = forms.CharField(max_length=32, required=False)    
     gender = forms.ChoiceField(choices=Animal.GENDER_CHOICE, required=False)
     size = forms.ChoiceField(choices=Animal.SIZE_CHOICE, required=False)
+    color = forms.CharField(max_length=64, required=False)
     min_age = forms.IntegerField(required=False)
     max_age = forms.IntegerField(required=False)
     location = forms.ChoiceField(choices=Animal.LOCATION_CHOICE, required=False)
+
+
+    def __init__(self, *args, show_species=True,**kwargs):
+        super().__init__(*args, **kwargs)
+        if not show_species:
+            self.fields['species'].widget = forms.HiddenInput()
