@@ -380,3 +380,30 @@ p {
   object-position: center;
   transition: transform 1.0s ease;
 }
+
+
+
+/* Find All Page Section*/
+
+.filters-all {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.filters-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+}
+
+.filters-content {
+  flex: 1;
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+
+.pet-cards {
+  background-color: #ffffff;
+  padding: 20px;
+}

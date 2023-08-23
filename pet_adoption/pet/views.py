@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
-from .forms import CustomUserCreationForm, ServiceForm, TreatmentForm
+from .forms import CustomUserCreationForm, ServiceForm, TreatmentForm, AnimalFilterForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Animal, Service, Treatment, Adoption
@@ -41,8 +41,36 @@ class FindAllView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        all_pets = Animal.objects.all().filter(is_available_for_adoption = True)
+        all_pets = Animal.objects.filter(is_available_for_adoption=True)
+        
+        # Process the filter form
+        filter_form = AnimalFilterForm(self.request.GET)
+        if filter_form.is_valid():
+            color = filter_form.cleaned_data.get('color')
+            breed = filter_form.cleaned_data.get('breed')
+            gender = filter_form.cleaned_data.get('gender')
+            size = filter_form.cleaned_data.get('size')
+            min_age = filter_form.cleaned_data.get('min_age')
+            max_age = filter_form.cleaned_data.get('max_age')
+            location = filter_form.cleaned_data.get('location')
+
+            if color:
+                all_pets = all_pets.filter(color__icontains=color)
+            if breed:
+                all_pets = all_pets.filter(breed__icontains=breed)
+            if gender:
+                all_pets = all_pets.filter(gender=gender)
+            if size:
+                all_pets = all_pets.filter(size=size)
+            if min_age:
+                all_pets = all_pets.filter(age__gte=min_age)
+            if max_age:
+                all_pets = all_pets.filter(age__lte=max_age)
+            if location:
+                all_pets = all_pets.filter(location=location)
+
         context["all_pets"] = all_pets
+        context["filter_form"] = filter_form
         return context
 
 class FindCatsView(TemplateView):
@@ -50,17 +78,74 @@ class FindCatsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cats = Animal.objects.filter(species__iexact="cat", is_available_for_adoption = True)
+        
+        cats = Animal.objects.filter(species__iexact="cat", is_available_for_adoption=True)
+        
+        filter_form = AnimalFilterForm(self.request.GET)
+        if filter_form.is_valid():
+            color = filter_form.cleaned_data.get('color')
+            breed = filter_form.cleaned_data.get('breed')
+            gender = filter_form.cleaned_data.get('gender')
+            size = filter_form.cleaned_data.get('size')
+            min_age = filter_form.cleaned_data.get('min_age')
+            max_age = filter_form.cleaned_data.get('max_age')
+            location = filter_form.cleaned_data.get('location')
+
+            if color:
+                cats = cats.filter(color__icontains=color)
+            if breed:
+                cats = cats.filter(breed__icontains=breed)
+            if gender:
+                cats = cats.filter(gender=gender)
+            if size:
+                cats = cats.filter(size=size)
+            if min_age:
+                cats = cats.filter(age__gte=min_age)
+            if max_age:
+                cats = cats.filter(age__lte=max_age)
+            if location:
+                cats = cats.filter(location=location)
+
         context["cats"] = cats
+        context["filter_form"] = filter_form
         return context
+
 
 class FindDogsView(TemplateView):
     template_name = 'find_dogs.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        dogs = Animal.objects.filter(species__iexact="dog", is_available_for_adoption = True)
+        
+        dogs = Animal.objects.filter(species__iexact="dog", is_available_for_adoption=True)
+        
+        filter_form = AnimalFilterForm(self.request.GET)
+        if filter_form.is_valid():
+            color = filter_form.cleaned_data.get('color')
+            breed = filter_form.cleaned_data.get('breed')
+            gender = filter_form.cleaned_data.get('gender')
+            size = filter_form.cleaned_data.get('size')
+            min_age = filter_form.cleaned_data.get('min_age')
+            max_age = filter_form.cleaned_data.get('max_age')
+            location = filter_form.cleaned_data.get('location')
+
+            if color:
+                dogs = dogs.filter(color__icontains=color)
+            if breed:
+                dogs = dogs.filter(breed__icontains=breed)
+            if gender:
+                dogs = dogs.filter(gender=gender)
+            if size:
+                dogs = dogs.filter(size=size)
+            if min_age:
+                dogs = dogs.filter(age__gte=min_age)
+            if max_age:
+                dogs = dogs.filter(age__lte=max_age)
+            if location:
+                dogs = dogs.filter(location=location)
+
         context["dogs"] = dogs
+        context["filter_form"] = filter_form
         return context
 
 class FindOtherPetsView(TemplateView):
@@ -68,11 +153,40 @@ class FindOtherPetsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         other_pets = Animal.objects.filter(is_available_for_adoption=True) \
-                          .exclude(species__iexact="cat") \
-                          .exclude(species__iexact="dog")
+                           .exclude(species__iexact="cat") \
+                           .exclude(species__iexact="dog")
+        
+        filter_form = AnimalFilterForm(self.request.GET)
+        if filter_form.is_valid():
+            color = filter_form.cleaned_data.get('color')
+            breed = filter_form.cleaned_data.get('breed')
+            gender = filter_form.cleaned_data.get('gender')
+            size = filter_form.cleaned_data.get('size')
+            min_age = filter_form.cleaned_data.get('min_age')
+            max_age = filter_form.cleaned_data.get('max_age')
+            location = filter_form.cleaned_data.get('location')
+
+            if color:
+                other_pets = other_pets.filter(color__icontains=color)
+            if breed:
+                other_pets = other_pets.filter(breed__icontains=breed)
+            if gender:
+                other_pets = other_pets.filter(gender=gender)
+            if size:
+                other_pets = other_pets.filter(size=size)
+            if min_age:
+                other_pets = other_pets.filter(age__gte=min_age)
+            if max_age:
+                other_pets = other_pets.filter(age__lte=max_age)
+            if location:
+                other_pets = other_pets.filter(location=location)
+
         context["other_pets"] = other_pets
+        context["filter_form"] = filter_form
         return context
+
 
 class AboutView(TemplateView):
     template_name = 'about.html'

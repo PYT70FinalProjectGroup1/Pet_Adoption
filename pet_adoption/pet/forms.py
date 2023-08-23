@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Service, Treatment
+from .models import Service, Treatment, Animal
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -53,3 +53,13 @@ class TreatmentForm(forms.ModelForm):
             instance.save()
         
         return instance 
+    
+
+class AnimalFilterForm(forms.Form):
+    color = forms.CharField(max_length=64, required=False)
+    breed = forms.CharField(max_length=32, required=False)
+    gender = forms.ChoiceField(choices=Animal.GENDER_CHOICE, required=False)
+    size = forms.ChoiceField(choices=Animal.SIZE_CHOICE, required=False)
+    min_age = forms.IntegerField(required=False)
+    max_age = forms.IntegerField(required=False)
+    location = forms.ChoiceField(choices=Animal.LOCATION_CHOICE, required=False)
