@@ -1,7 +1,9 @@
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.contrib.auth import get_user_model
+from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import AbstractUser
 
 class BaseModel(models.Model):
 
@@ -11,28 +13,29 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+class CustomUser(AbstractUser):
+    phone = PhoneNumberField(null=True, blank=True)
+    # Add any other fields you need in your custom user model
+
+    def __str__(self):
+        return self.username
+
+class Location(BaseModel):
+    city_key = models.CharField(max_length=3, null=False)
+    city_name = models.CharField(max_length=32, null=False)
+
+    class Meta:
+        verbose_name_plural = "Locations"
+
+    def __str__(self):
+        return f"{self.city_name}"
+
 
 class UserProfile(BaseModel):
 
-    LOCATION_CHOICE = [
-        ("", "Select Location"),
-        ("Warsaw", "WAW"),
-        ("Krakow", "KRK"),
-        ("Wroclaw", "WRO"),
-        ("Poznan", "POZ"),
-        ("Lodz", "LDZ"),
-        ("Gdansk", "GDA"),
-        ("Szczecin", "SCZ"),
-        ("Bydgoszcz", "BGD"),
-        ("Katowice", "KAT"),
-        ("Gdynia", "GDY"),
-    ]
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=32, null=False)
-    location = models.CharField(
-        max_length=32, choices=LOCATION_CHOICE, default="", null=False
-    )
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    phone = PhoneNumberField()
+    location = models.ForeignKey(Location,on_delete=models.CASCADE)
     profile_picture = models.ImageField(
         upload_to="profile_pics/",
         blank=False,
@@ -70,19 +73,6 @@ class Animal(BaseModel):
         ("Female", "Female"),
     ]
 
-    LOCATION_CHOICE = [
-        ("", "Select Location"),
-        ("Warsaw", "WAW"),
-        ("Krakow", "KRK"),
-        ("Wroclaw", "WRO"),
-        ("Poznan", "POZ"),
-        ("Lodz", "LDZ"),
-        ("Gdansk", "GDA"),
-        ("Szczecin", "SCZ"),
-        ("Bydgoszcz", "BGD"),
-        ("Katowice", "KAT"),
-        ("Gdynia", "GDY"),
-    ]
 
     name = models.CharField(max_length=32, null=False)
     color = models.CharField(max_length=64, null=False)
@@ -96,9 +86,7 @@ class Animal(BaseModel):
     size = models.CharField(max_length=32, blank=False, choices=SIZE_CHOICE, default="")
     age = models.IntegerField(null=False)
     chip = models.CharField(max_length=64, unique=True, null=False)
-    location = models.CharField(
-        max_length=32, blank=False, choices=LOCATION_CHOICE, default=""
-    )
+    location = models.ForeignKey(Location,on_delete=models.CASCADE)
     about_pet = models.TextField(max_length=500, null=False)
     image = models.ImageField(upload_to="animal_pics/")
     is_available_for_adoption = models.BooleanField(default=True)
@@ -127,7 +115,7 @@ class Adoption(BaseModel):
         ("Denied", "Denied"),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     application_text = models.TextField(max_length=500, null=False)
     application_date = models.DateTimeField(auto_now_add=True)

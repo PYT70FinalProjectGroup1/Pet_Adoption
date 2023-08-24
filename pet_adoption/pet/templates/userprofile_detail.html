@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
+{% block content %}
+    <div class="container userprofile-container">
+        <div class="card userprofile-card">
+            <img class="userprofile-animal-img" src="{{ user_profile.profile_picture.url }}" alt="{{ user_profile.user.username }}">
+            <div class="card-body">
+                <h2 class="userprofile-name card-title">{{ user_profile.user.first_name }} {{ user_profile.user.last_name }}</h2>
+                <p class="userprofile-email card-text">Email: {{ user_profile.user.email }}</p>
+                <p class="userprofile-phone card-text">Phone: {{ user_profile.phone }}</p>
+                <p class="userprofile-location card-text">Location: {{ user_profile.location }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

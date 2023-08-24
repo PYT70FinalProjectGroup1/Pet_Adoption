@@ -11,7 +11,7 @@ from .forms import (
 )
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Animal, Service, Treatment, Adoption
+from .models import Animal, Service, Treatment, Adoption, CustomUser, UserProfile
 from django.views import View
 from django.views.generic import ListView
 
@@ -337,3 +337,12 @@ class AdoptionStoriesView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Adoption.objects.filter(application_status="Accepted")
+
+class UserProfileDetailView(LoginRequiredMixin, DetailView):
+    model = UserProfile
+    template_name = 'userprofile_detail.html'
+    context_object_name = 'user_profile'
+    pk_url_kwarg = 'pk'
+
+    def get_queryset(self):
+        return UserProfile.objects.filter(user=self.request.user)
