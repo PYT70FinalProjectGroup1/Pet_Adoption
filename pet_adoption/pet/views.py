@@ -1,13 +1,14 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView
-from django.views.generic import TemplateView
-from .forms import CustomUserCreationForm, ServiceForm, TreatmentForm, AnimalFilterForm
+from django.views.generic import TemplateView, DetailView
+from .forms import CustomUserCreationForm, ServiceForm, TreatmentForm, AnimalFilterForm, AdoptionForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Animal, Service, Treatment, Adoption
 from django.views import View
 from django.views.generic import ListView
+
 
 # Create your views here.
 class RegisterView(CreateView):
@@ -25,8 +26,8 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        animals = Animal.objects.filter(is_available_for_adoption = True)
+
+        animals = Animal.objects.filter(is_available_for_adoption=True)
         adoptions = Adoption.objects.all()
         available_animals = animals.count()
 
@@ -35,7 +36,7 @@ class HomeView(TemplateView):
         context["available_animals"] = available_animals
 
         if self.request.user.is_authenticated:
-            try:                
+            try:
                 user_location = self.request.user.userprofile.location
                 animals_near_user = animals.filter(location=user_location)
                 context["animals_near_user"] = animals_near_user
@@ -43,8 +44,9 @@ class HomeView(TemplateView):
             except AttributeError:
                 default_location = ""
                 context["user_location"] = default_location
-            
+
         return context
+
 
 class FindAllView(TemplateView):
     template_name = 'find_all.html'
@@ -52,10 +54,10 @@ class FindAllView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         all_pets = Animal.objects.filter(is_available_for_adoption=True)
-        
+
         # Process the filter form
         filter_form = AnimalFilterForm(self.request.GET)
-        if filter_form.is_valid():            
+        if filter_form.is_valid():
             species = filter_form.cleaned_data.get('species')
             breed = filter_form.cleaned_data.get('breed')
             gender = filter_form.cleaned_data.get('gender')
@@ -86,17 +88,18 @@ class FindAllView(TemplateView):
         context["filter_form"] = filter_form
         return context
 
+
 class FindCatsView(TemplateView):
     template_name = 'find_cats.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         cats = Animal.objects.filter(species__iexact="cat", is_available_for_adoption=True)
-        
-        show_species = False        
+
+        show_species = False
         filter_form = AnimalFilterForm(self.request.GET, show_species=show_species)
-        if filter_form.is_valid():            
+        if filter_form.is_valid():
             breed = filter_form.cleaned_data.get('breed')
             gender = filter_form.cleaned_data.get('gender')
             size = filter_form.cleaned_data.get('size')
@@ -130,12 +133,12 @@ class FindDogsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         dogs = Animal.objects.filter(species__iexact="dog", is_available_for_adoption=True)
-        
-        show_species = False        
+
+        show_species = False
         filter_form = AnimalFilterForm(self.request.GET, show_species=show_species)
-        if filter_form.is_valid():            
+        if filter_form.is_valid():
             breed = filter_form.cleaned_data.get('breed')
             gender = filter_form.cleaned_data.get('gender')
             size = filter_form.cleaned_data.get('size')
@@ -163,17 +166,18 @@ class FindDogsView(TemplateView):
         context["filter_form"] = filter_form
         return context
 
+
 class FindOtherPetsView(TemplateView):
     template_name = 'find_other_pets.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         other_pets = Animal.objects.filter(is_available_for_adoption=True) \
-                           .exclude(species__iexact="cat") \
-                           .exclude(species__iexact="dog")
-        
-        show_species = False        
+            .exclude(species__iexact="cat") \
+            .exclude(species__iexact="dog")
+
+        show_species = False
         filter_form = AnimalFilterForm(self.request.GET, show_species=show_species)
         if filter_form.is_valid():
             color = filter_form.cleaned_data.get('color')
@@ -208,6 +212,7 @@ class AboutView(TemplateView):
     template_name = 'about.html'
     context_object_name = 'about'
 
+
 class DonateView(TemplateView):
     template_name = 'donate.html'
 
@@ -217,17 +222,19 @@ class DonateView(TemplateView):
             logged_user = "Anonymous"
         else:
             logged_user = f'{self.request.user.userprofile.first_name} {self.request.user.userprofile.last_name}'
-        
-        context['logged_user'] = logged_user        
+
+        context['logged_user'] = logged_user
         return context
 
+
 class AdoptedAnimalsView(LoginRequiredMixin, ListView):
-    model = Adoption    
+    model = Adoption
     template_name = 'adopted_animals.html'
     context_object_name = 'adoptions'
 
     def get_queryset(self):
         return Adoption.objects.filter(user=self.request.user, is_approved=True)
+
 
 class CreateServiceView(LoginRequiredMixin, CreateView):
     model = Service
@@ -241,11 +248,12 @@ class CreateServiceView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         animal_pk = self.kwargs["animal_id"]
         animal = Animal.objects.get(pk=animal_pk)
-        
+
         form.instance.animal = animal
         form.instance.user = self.request.user
-        form.save()        
+        form.save()
         return super().form_valid(form)
+
 
 class CreateTreatmentView(LoginRequiredMixin, CreateView):
     model = Treatment
@@ -259,10 +267,10 @@ class CreateTreatmentView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         animal_pk = self.kwargs["animal_id"]
         animal = Animal.objects.get(pk=animal_pk)
-        
+
         form.instance.animal = animal
         form.instance.user = self.request.user
-        form.save()        
+        form.save()
         return super().form_valid(form)
 
 
@@ -271,15 +279,39 @@ class AvailableServicesView(LoginRequiredMixin, View):
 
     def get(self, request, pk):
         animal = get_object_or_404(Animal, pk=pk, adoption__user=request.user)
-        services = Service.objects.filter(animal=animal)        
+        services = Service.objects.filter(animal=animal)
         context = {'animal': animal, 'services': services}
         return render(request, self.template_name, context)
+
 
 class AvailableTreatmentsView(LoginRequiredMixin, View):
     template_name = 'available_treatments.html'
 
     def get(self, request, pk):
         animal = get_object_or_404(Animal, pk=pk, adoption__user=request.user)
-        treatments = Treatment.objects.filter(animal=animal)        
+        treatments = Treatment.objects.filter(animal=animal)
         context = {'animal': animal, 'treatments': treatments}
         return render(request, self.template_name, context)
+
+
+class AnimalDetailView(DetailView):
+    model = Animal
+    template_name = 'animal_detail.html'
+    pk_url_kwarg = 'animal_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        other_available_adoption = Animal.objects.filter(is_available_for_adoption=True)
+        context['other_available_adoption'] = other_available_adoption
+        return context
+
+
+class CreateAdoptionView(LoginRequiredMixin, CreateView):
+    model = Adoption
+    form_class = AdoptionForm
+    template_name = 'create_adoption.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ animal.name }}</h1>
+        <img src="{{ animal.image.url }}" alt="{{ animal.name }}">
+        <p>Color: {{ animal.color }}</p>
+        <p>Species: {{ animal.species }}</p>
+        <p>Breed: {{ animal.breed }}</p>
+        <p>Gender: {{ animal.get_gender_display }}</p>
+        <p>Size: {{ animal.get_size_display }}</p>
+        <p>Age: {{ animal.age }}</p>
+        <p>Location: {{ animal.get_location_display }}</p>
+        <p>About: {{ animal.about_pet }}</p>
+
+        <h3>Fill out the form to adopt me</h3>
+        <a href="{% url 'create_adoption' %}" class="btn btn-primary">Form</a>
+
+        <a href="{% url 'find_all_pets' %}" class="btn btn-secondary">Back to All Pets</a>
+    </div>
+{% endblock %}

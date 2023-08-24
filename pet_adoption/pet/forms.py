@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Service, Treatment, Animal, UserProfile
+from .models import Service, Treatment, Animal, UserProfile, Adoption
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -107,3 +107,22 @@ class AnimalFilterForm(forms.Form):
         super().__init__(*args, **kwargs)
         if not show_species:
             self.fields['species'].widget = forms.HiddenInput()
+
+
+class AdoptionForm(forms.ModelForm):
+    class Meta:
+        model = Adoption
+        exclude = ("animal", "user")
+
+    def save(self, commit=True, animal=None, user=None):
+        instance = super().save(commit=False)
+
+        if animal and user is not None:
+            instance.animal = animal
+            instance.user = user
+
+        if commit:
+            instance.save()
+
+        return instance
+
