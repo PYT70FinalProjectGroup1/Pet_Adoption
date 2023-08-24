@@ -230,7 +230,7 @@ class DonateView(TemplateView):
         if not self.request.user.is_authenticated:
             logged_user = "Anonymous"
         else:
-            logged_user = f"{self.request.user.userprofile.first_name} {self.request.user.userprofile.last_name}"
+            logged_user = f"{self.request.user.first_name} {self.request.user.last_name}"
 
         context["logged_user"] = logged_user
         return context
