@@ -227,9 +227,9 @@ class DonateView(TemplateView):
         return context
 
 
-class AdoptedAnimalsView(LoginRequiredMixin, ListView):
+class MyPetsView(LoginRequiredMixin, ListView):
     model = Adoption
-    template_name = 'adopted_animals.html'
+    template_name = 'my_pets.html'
     context_object_name = 'adoptions'
 
     def get_queryset(self):
@@ -315,3 +315,13 @@ class CreateAdoptionView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+class AdoptionStoriesView(LoginRequiredMixin, ListView):    
+    template_name = 'adoption_stories.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['adoption_stories'] = Adoption.objects.filter(application_status='Accepted')
+        return context
+
+    def get_queryset(self):
+        return Adoption.objects.filter(application_status='Accepted')
