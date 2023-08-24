@@ -20,7 +20,8 @@
             {% for other in other_pets %}
                 <div class="col">
                     <div class="fancy-card-home">
-                        <img src="{{ other.image.url }}" alt="Other Pet">
+                        <a href="{% url 'animal_detail' animal_id=other.id %}">
+                        <img src="{{ other.image.url }}" alt="Other Pet"></a>
                         <div class="card-body">
                             <h2 class="card-title">{{ other.name }}</h2>
                             <div class="animal-data">
