@@ -1,38 +1,40 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="container">
-  <a href="{% url 'create_service' animal.pk %}" class="btn btn-sm btn-warning mb-3"><i class="bi bi-plus-circle"></i> Add Service</a>
+	<a
+		href="{% url 'create_service' animal.pk %}"
+		class="btn btn-sm btn-warning mb-3"
+		><i class="bi bi-plus-circle"></i> Add Service</a
+	>
 
-  <h2>Performed Services:</h2>
+	<h2>Performed Services:</h2>
 
-  {% if services %}
-    <table class="table table-hover">
-      <thead>
-        <tr>          
-          <th>Service Name</th>
-          <th>Current Date</th>
-          <th>Description</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for service in services %}
-          <tr>
-            <td>{{ service.service_name }}</td>
-            <td>{{ service.date }}</td>
-            <td>{{ service.description }}</td>
-            <td>$ {{ service.price }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>No services are performed for this animal.</p>
-  {% endif %}
+	{% if services %}
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Service Name</th>
+				<th>Current Date</th>
+				<th>Description</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for service in services %}
+			<tr>
+				<td>{{ service.service_name }}</td>
+				<td>{{ service.date }}</td>
+				<td>{{ service.description }}</td>
+				<td>$ {{ service.price }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p>No services are performed for this animal.</p>
+	{% endif %}
 
-  <a href="{% url 'my_pets' %}"  class="btn btn-secondary my-3">Back to My Pets</a>
+	<a href="{% url 'my_pets' %}" class="btn btn-secondary my-3"
+		>Back to My Pets</a
+	>
 </div>
 {% endblock %}
-

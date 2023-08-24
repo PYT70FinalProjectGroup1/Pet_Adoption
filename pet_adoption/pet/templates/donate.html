@@ -1,38 +1,58 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-
-{% block content %}
-
-
-<div id="user-data" data-logged-user="{{ logged_user }}" style="display: none;"></div>
+<div
+	id="user-data"
+	data-logged-user="{{ logged_user }}"
+	style="display: none"
+></div>
 
 <div class="donate-text-container">
-  <div class="donate-text">
-    <div class="donate-heading">We’re On a Mission to Save More Lives</div>
-    <p>In 2023, the Programing Guys Society decided that the impact we had been making for 60 years could be even bigger. We set out with an ambitious goal to end animal suffering, homelessness and needless euthanasia in Maricopa County. We made strategic partnerships, and implemented a host of innovative new programs. And the numbers are in: It’s working.</p>
+	<div class="donate-text">
+		<div class="donate-heading">We’re On a Mission to Save More Lives</div>
+		<p>
+			In 2023, the Programing Guys Society decided that the impact we had been
+			making for 60 years could be even bigger. We set out with an ambitious
+			goal to end animal suffering, homelessness and needless euthanasia in
+			Maricopa County. We made strategic partnerships, and implemented a host of
+			innovative new programs. And the numbers are in: It’s working.
+		</p>
 
-    <p>150,000 More Pets Saved</p>
-    <p>Since 2022, we’ve reduced euthanasia by 83%. That’s 150,000 additional lives saved. Our trauma hospital and rescue and cruelty investigations team save thousands of dogs, cats, and critters every year. Our Mutternity Suites, Kitten Nursery, Bottle Baby ICU and Parvo Puppy ICU care for the pets who would be quickly euthanized in other shelters. And every day, we’re providing our community with affordable veterinary care and financial assistance to keep more pets in homes.</p>
+		<p>150,000 More Pets Saved</p>
+		<p>
+			Since 2022, we’ve reduced euthanasia by 83%. That’s 150,000 additional
+			lives saved. Our trauma hospital and rescue and cruelty investigations
+			team save thousands of dogs, cats, and critters every year. Our Mutternity
+			Suites, Kitten Nursery, Bottle Baby ICU and Parvo Puppy ICU care for the
+			pets who would be quickly euthanized in other shelters. And every day,
+			we’re providing our community with affordable veterinary care and
+			financial assistance to keep more pets in homes.
+		</p>
 
-    <p>Innovative and visionary programs like these have made our community into a national model of what’s possible when saving lives becomes the top priority.</p>
-  </div>
+		<p>
+			Innovative and visionary programs like these have made our community into
+			a national model of what’s possible when saving lives becomes the top
+			priority.
+		</p>
+	</div>
 </div>
 
 <div class="donate-container">
-  <div class="donate-heading">Give Now</div>
+	<div class="donate-heading">Give Now</div>
 
-  <div class="donate-amounts">
-    <div class="donate-amount" data-amount="5">$5</div>
-    <div class="donate-amount" data-amount="10">$10</div>
-    <div class="donate-amount" data-amount="50">$50</div>
-    <div class="donate-amount" data-amount="100">$100</div>
-    <input class="donate-amount custom-amount" type="number" placeholder="Custom Amount $">
-  </div>
+	<div class="donate-amounts">
+		<div class="donate-amount" data-amount="5">$5</div>
+		<div class="donate-amount" data-amount="10">$10</div>
+		<div class="donate-amount" data-amount="50">$50</div>
+		<div class="donate-amount" data-amount="100">$100</div>
+		<input
+			class="donate-amount custom-amount"
+			type="number"
+			placeholder="Custom Amount $"
+		/>
+	</div>
 
-  <button class="donate-button">Donate</button>
+	<button class="donate-button">Donate</button>
 
-  <div class="donate-success" id="success-message"></div>
-
+	<div class="donate-success" id="success-message"></div>
 </div>
 {% endblock %}
