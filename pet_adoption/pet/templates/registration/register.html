@@ -11,10 +11,11 @@
       <div class="col-md-6">
         <div>
           <div class="card-body">
-            <h2 class="card-title text-center mb-4" style="color: #333;">Register</h2>
+            <h2 class="card-title text-center" style="color: #333;">Register</h2>
             <form method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              {{ form|bootstrap }}
+              <div class="my-5">
+                {% csrf_token %} {{ form|bootstrap }}
+              </div>
               <div class="text-center">
                 <button type="submit" class="btn" style="background-color: #3498db; color: #fff;">Submit</button>
               </div>
