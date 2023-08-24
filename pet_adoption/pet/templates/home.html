@@ -184,17 +184,19 @@
 
 
 <div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
-  {% for adoption in adoptions %}
+  {% for adoption in adoptions|slice:"items|length-4:items|length" %}
+    {% if forloop.counter <= 4 %}  
     <div class="col">
       <div class="adoption-card">
-        <img class="animal-img" src="{{ adoption.user.userprofile.profile_picture.url }}" alt="Animal">
-        <img class="user-img" src="{{ adoption.animal.image.url }}" alt="User">
+        <img class="animal-img" src="{{ adoption.animal.image.url }}" alt="Animal">
+        <img class="user-img" src="{{ adoption.user.userprofile.profile_picture.url }}" alt="User">
         <div class="card-body">
-          <h2 class="card-title">{{ adoption.animal.name }}</h2>
+          <h2 class="card-title">{{ adoption.user.userprofile.first_name }} {{ adoption.user.userprofile.last_name }}</h2>
           <p>{{ adoption.user.name }}</p>
         </div>
       </div>
     </div>
+    {% endif %}
   {% endfor %}
 </div>
 
