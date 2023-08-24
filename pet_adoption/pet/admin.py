@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Animal, UserProfile, Adoption, Treatment, Service
+from django.contrib.auth import get_user_model
+from .models import Animal, UserProfile, Adoption, Treatment, Service, Location
 
 
 @admin.register(Animal)
@@ -18,6 +19,18 @@ class AnimalAdmin(admin.ModelAdmin):
     ]
     list_filter = ["breed", "color", "is_available_for_adoption", "age", "size"]
     search_fields = ["species"]
+
+
+@admin.register(get_user_model())
+class UserModelAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    list_display = ["city_key", "city_name"]
+    list_filter = ["city_key"]
+    search_fields = ["city_name"]
 
 
 @admin.register(UserProfile)

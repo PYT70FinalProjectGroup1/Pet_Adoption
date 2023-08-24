@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Animals</title>
+		<title>AdoptMe</title>
 		<meta name="description" content="Our first page" />
 		<meta name="keywords" content="html tutorial template" />
 		<link
@@ -106,7 +106,7 @@
 									>
 								</li>
 								<li>
-									<a class="dropdown-item" href="#">User Profile</a>
+									<a class="dropdown-item" href="{% url 'userprofile_detail' pk=user.id%}">User Profile</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="{% url 'logout' %}"
