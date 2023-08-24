@@ -22,7 +22,7 @@
 			{% for treatment in treatments %}
 			<tr>
 				<td>{{ treatment.treatment_name }}</td>
-				<td>{{ treatment.date }}</td>
+				<td>{{ treatment.created_at.date }}</td>
 				<td>{{ treatment.next_date }}</td>
 				<td>{{ treatment.notes }}</td>
 			</tr>

@@ -22,7 +22,7 @@
 			{% for service in services %}
 			<tr>
 				<td>{{ service.service_name }}</td>
-				<td>{{ service.date }}</td>
+				<td>{{ service.created_at.date }}</td>
 				<td>{{ service.description }}</td>
 				<td>$ {{ service.price }}</td>
 			</tr>

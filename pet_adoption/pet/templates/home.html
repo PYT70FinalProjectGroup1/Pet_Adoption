@@ -194,8 +194,8 @@
         <img class="animal-img" src="{{ adoption.animal.image.url }}" alt="Animal">
         <img class="user-img" src="{{ adoption.user.userprofile.profile_picture.url }}" alt="User"></a>
         <div class="card-body">
-          <h2 class="card-title">{{ adoption.user.userprofile.first_name }} {{ adoption.user.userprofile.last_name }}</h2>
-          <p>{{ adoption.user.name }}</p>
+          <h2 class="card-title">{{ adoption.user.first_name }} {{ adoption.user.last_name }}</h2>
+          <p>{{ adoption.user.userprofile.location }}</p>
         </div>
       </div>
     </div>  

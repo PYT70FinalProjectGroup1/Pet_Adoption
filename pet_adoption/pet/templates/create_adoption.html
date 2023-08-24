@@ -2,6 +2,6 @@
 <h1>Create Adoption Form</h1>
 <form method="post" enctype="multipart/form-data">
 	{% csrf_token %} {{ form|bootstrap }}
-	<button type="submit" class="btn btn-primary mt-3">Submit</button>
+	<button type="submit" class="btn btn-success mt-3">Submit</button>
 </form>
 {% endblock %}

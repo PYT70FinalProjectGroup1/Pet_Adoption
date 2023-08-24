@@ -107,7 +107,7 @@ class AnimalFilterForm(forms.Form):
 class AdoptionForm(forms.ModelForm):
     class Meta:
         model = Adoption
-        exclude = ("animal", "user")
+        exclude = ("animal", "user" ,"application_status","is_approved")
 
     def save(self, commit=True, animal=None, user=None):
         instance = super().save(commit=False)
