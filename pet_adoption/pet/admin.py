@@ -36,7 +36,7 @@ class AdoptionAdmin(admin.ModelAdmin):
 
 @admin.register(Treatment)
 class TreatmentAdmin(admin.ModelAdmin):
-    list_display = ["animal", "treatment_name", "date"]
+    list_display = ["animal", "treatment_name", "created_at"]
     list_filter = ["animal"]
     search_fields = ["animal"]
 
