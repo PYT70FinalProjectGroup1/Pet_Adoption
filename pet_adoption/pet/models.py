@@ -34,12 +34,12 @@ class UserProfile(BaseModel):
     first_name = models.CharField(max_length=32, null=False)
     last_name = models.CharField(max_length=64, null=False)    
     email = models.EmailField(max_length=64, null=True)
-    phone = models.CharField(max_length=32, null=False, unique=True)    
-    location = models.CharField(max_length=32, choices=LOCATION_CHOICE, default="")
+    phone = models.CharField(max_length=32, null=False)    
+    location = models.CharField(max_length=32, choices=LOCATION_CHOICE, default="", null=False)
     profile_picture = models.ImageField(
         upload_to="profile_pics/",
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         default="profile_pics/default.jpg",
     )
 

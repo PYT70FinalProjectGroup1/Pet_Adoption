@@ -15,6 +15,10 @@ class RegisterView(CreateView):
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -31,10 +35,14 @@ class HomeView(TemplateView):
         context["available_animals"] = available_animals
 
         if self.request.user.is_authenticated:
-            user_location = self.request.user.userprofile.location
-            animals_near_user = animals.filter(location=user_location)
-            context["animals_near_user"] = animals_near_user
-            context["user_location"] = user_location
+            try:                
+                user_location = self.request.user.userprofile.location
+                animals_near_user = animals.filter(location=user_location)
+                context["animals_near_user"] = animals_near_user
+                context["user_location"] = user_location
+            except AttributeError:
+                default_location = ""
+                context["user_location"] = default_location
             
         return context
 
@@ -198,10 +206,7 @@ class FindOtherPetsView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'about.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    context_object_name = 'about'
 
 class DonateView(TemplateView):
     template_name = 'donate.html'
