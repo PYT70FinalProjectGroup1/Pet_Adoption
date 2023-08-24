@@ -44,7 +44,7 @@ class UserProfile(BaseModel):
         verbose_name_plural = "User Profiles"
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user}"
 
 
 class Animal(BaseModel):
