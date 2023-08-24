@@ -52,6 +52,13 @@ class UserProfile(BaseModel):
 
 class Animal(BaseModel):
     """ Pet Model """
+
+    SPECIES_CHOICE = [
+        ("", "Select Species"),
+        ("Dog", "Dog"),
+        ("Cat", "Cat"),
+        ("Other", "Other"),
+    ]
     
     SIZE_CHOICE = [
         ("", "Select Size"),
@@ -83,7 +90,7 @@ class Animal(BaseModel):
 
     name = models.CharField(max_length=32, null=False)
     color = models.CharField(max_length=64, null=False)
-    species = models.CharField(max_length=9, null=False)
+    species = models.CharField(max_length=9, choices=SPECIES_CHOICE, default="")
     breed = models.CharField(max_length=32, null=False)
     gender = models.CharField(max_length=9, null=False, choices=GENDER_CHOICE, default="")
     size = models.CharField(max_length=32, choices=SIZE_CHOICE, default="")
@@ -104,6 +111,17 @@ class Animal(BaseModel):
 
 class Adoption(BaseModel):
     """ Adoption model """
+    LIFE_CHOICE = [
+        ("", "Select Status"),
+        ('House', 'House'),
+        ('Apartment', 'Apartment')
+    ]
+
+    EVER_PET_CHOICES = [
+        ("", "Select Status"),
+        ('Yes', 'Yes'),
+        ('No', 'No')
+    ]
 
     STATUS_CHOICE = [
         ("", "Select Status"),
@@ -117,6 +135,16 @@ class Adoption(BaseModel):
     application_text = models.CharField(max_length=500, null=False)
     application_date = models.DateTimeField(auto_now_add=True)
     application_status = models.CharField(max_length=32, choices=STATUS_CHOICE, default="")
+
+    adopt = models.CharField(max_length=32, choices=Animal.SPECIES_CHOICE, default="")
+    why_do_you_want_to_adopt = models.TextField(null=False, default="")
+    how_do_you_like_spend_time = models.TextField(null=False, default="")
+    what_will_happen_to_the_pet = models.TextField(null=False, default="")
+    street = models.CharField(max_length=64, null=False, default="")
+    city = models.CharField(max_length=64, null=False, default="")
+    house_or_apartment = models.CharField(max_length=32, choices=LIFE_CHOICE, default="")
+    m2 = models.CharField(max_length=9, null=False, default="")
+    ever_pet = models.CharField(max_length=32, choices=EVER_PET_CHOICES, default="")
     is_approved = models.BooleanField(default=False)
 
     class Meta:
