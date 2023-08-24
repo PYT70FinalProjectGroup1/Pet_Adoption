@@ -125,6 +125,7 @@ body::-webkit-scrollbar-thumb {
   height: 100%;
   object-fit: cover;
   object-position: center;  
+  transition: transform 1.0s ease;
 }
 
 .fancy-card-home-near img {
@@ -412,22 +413,10 @@ p {
 .adopted_animal_image {
   position: relative;
   width: 200px;
-  height: 200px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
   border-radius: 5px;  
   overflow: hidden;
 }
 
-.adopted_animal_image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.fancy-card-home img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 1.0s ease;
-}
