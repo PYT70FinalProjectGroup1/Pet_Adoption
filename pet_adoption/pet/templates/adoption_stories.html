@@ -1,39 +1,49 @@
-{% extends 'base.html' %}
-{% load bootstrap %}
-{% load static %}
+{% extends 'base.html' %} {% load bootstrap %} {% load static %} {% block
+content %}
 
-{% block content %}
+<div class="container adoption-stories">
+	<div class="fancy-text">
+		<h4 class="mt-5 mb-4">Your Pet's Happiness is Guaranteed</h4>
+		<p>
+			We stand by our commitment to finding the best homes for our pets. Our
+			100% Adoption Guarantee means that if the pet you choose isn't the perfect
+			fit for your family, you can bring them back to us at any point in their
+			life, no questions asked.
+		</p>
+		<p>Join the happy adopters who have given pets a loving home.</p>
+	</div>
 
-
-
-    <div class="container adoption-stories">
-
-        <div class="fancy-text">
-            <h4 class="mt-5 mb-4">Your Pet's Happiness is Guaranteed</h4>
-            <p>
-                We stand by our commitment to finding the best homes for our pets. Our 100% Adoption Guarantee means
-                that if the pet you choose isn't the perfect fit for your family, you can bring them back to us at any
-                point in their life, no questions asked.
-            </p>
-            <p>Join the happy adopters who have given pets a loving home.</p>
-        </div>
-        
-        <div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
-            {% for story in adoption_stories %}
-                <div class="col">
-                    <div class="adoption_story-card">
-                        <img class="animal-img" src="{{ story.animal.image.url }}" alt="{{ story.animal.name }}">
-                        <img class="user-img" src="{{ story.user.userprofile.profile_picture.url }}" alt="{{ story.user.userprofile.first_name }}">
-                        <div class="card-body adoption-story-body">
-                            <h2 class="card-title">{{ story.animal.name }}<span class="found-home-text"></span></h2>
-                            <p>{{ story.application_text }}</p>
-                            <p>{{ story.why_do_you_want_to_adopt }}</p>
-                            <p class="mb-0">Adopted by: {{ story.user.userprofile.first_name }} {{ story.user.userprofile.last_name }}</p>
-                            <p class="mb-0">Location: {{ story.user.userprofile.get_location_display }}</p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+	<div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
+		{% for story in adoption_stories %}
+		<div class="col">
+			<div class="adoption_story-card">
+				<img
+					class="animal-img"
+					src="{{ story.animal.image.url }}"
+					alt="{{ story.animal.name }}"
+				/>
+				<img
+					class="user-img"
+					src="{{ story.user.userprofile.profile_picture.url }}"
+					alt="{{ story.user.userprofile.first_name }}"
+				/>
+				<div class="card-body adoption-story-body">
+					<h2 class="card-title">
+						{{ story.animal.name }}<span class="found-home-text"></span>
+					</h2>
+					<p>{{ story.application_text }}</p>
+					<p>{{ story.why_do_you_want_to_adopt }}</p>
+					<p class="mb-0">
+						Adopted by: {{ story.user.userprofile.first_name }} {{
+						story.user.userprofile.last_name }}
+					</p>
+					<p class="mb-0">
+						Location: {{ story.user.userprofile.get_location_display }}
+					</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 {% endblock %}

@@ -1,47 +1,54 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="container">
-  <h2>Animals Adopted by You</h2>
-  
-  {% if adoptions %}
-    <table class="table align-middle">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Animal Name</th>
-          <th>Application Date</th>
-          <th>Application Text</th>
-          <th>Service</th>
-          <th>Treatment</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for adoption in adoptions %}
-          <tr>
-            <td>
-              <img src="{{ adoption.animal.image.url }}" class="adopted_animal_image">
-            </td>
-            <td>{{ adoption.animal.name }}</td>
-            <td>{{ adoption.application_date }}</td>
-            <td>{{ adoption.application_text }}</td>
-            <td>
-              <a href="{% url 'services' adoption.animal.pk %}" class="btn btn-outline-success btn-sm">Services</a>
-            </td>
-            <td>
-              <a href="{% url 'treatments' adoption.animal.pk %}" class="btn btn-outline-success btn-sm">Treatments</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>You haven't adopted any animals yet.</p>  
-  {% endif %}
-  
-  <a href="{% url 'home' %}" class="mt-3 d-block">Back to Home</a>
-</div>
+	<h2>Animals Adopted by You</h2>
 
+	{% if adoptions %}
+	<table class="table align-middle">
+		<thead>
+			<tr>
+				<th>Image</th>
+				<th>Animal Name</th>
+				<th>Application Date</th>
+				<th>Application Text</th>
+				<th>Service</th>
+				<th>Treatment</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for adoption in adoptions %}
+			<tr>
+				<td>
+					<img
+						src="{{ adoption.animal.image.url }}"
+						class="adopted_animal_image"
+					/>
+				</td>
+				<td>{{ adoption.animal.name }}</td>
+				<td>{{ adoption.application_date }}</td>
+				<td>{{ adoption.application_text }}</td>
+				<td>
+					<a
+						href="{% url 'services' adoption.animal.pk %}"
+						class="btn btn-outline-success btn-sm"
+						>Services</a
+					>
+				</td>
+				<td>
+					<a
+						href="{% url 'treatments' adoption.animal.pk %}"
+						class="btn btn-outline-success btn-sm"
+						>Treatments</a
+					>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p>You haven't adopted any animals yet.</p>
+	{% endif %}
+
+	<a href="{% url 'home' %}" class="mt-3 d-block">Back to Home</a>
+</div>
 
 {% endblock %}
