@@ -13,5 +13,11 @@
                 <p class="userprofile-location card-text">Location: {{ user_profile.location }}</p>
             </div>
         </div>
+        <div class="my-5 d-flex justify-content-center">
+            <a href="{% url 'userprofile_update' pk=user.id %}" class="btn btn-success"
+                >Update</a
+            >        
+        </div>
     </div>
+
 {% endblock %}

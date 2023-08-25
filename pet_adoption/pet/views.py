@@ -1,13 +1,15 @@
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView, DetailView
+from django.contrib.auth import get_user_model
 from .forms import (
     CustomUserCreationForm,
     ServiceForm,
     TreatmentForm,
     AnimalFilterForm,
     AdoptionForm,
+    UserProfileUpdateForm
 )
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -346,3 +348,38 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return UserProfile.objects.filter(user=self.request.user)
+
+class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserProfile
+    form_class = UserProfileUpdateForm
+    template_name = 'userprofile_update.html'
+    context_object_name = 'user_profile'
+    pk_url_kwarg = 'pk'
+
+    def get_queryset(self):
+        return UserProfile.objects.filter(user=self.request.user)
+
+    def get_success_url(self):
+        return reverse_lazy('userprofile_detail', kwargs={'pk': self.object.pk})
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        
+        user = get_user_model()
+        user_instance = user.objects.get(pk=self.request.user.pk)
+        
+        form.fields['email'].initial = user_instance.email
+        form.fields['first_name'].initial = user_instance.first_name
+        form.fields['last_name'].initial = user_instance.last_name
+        
+        return form
+
+    def form_valid(self, form):
+        user = get_user_model()
+        user_instance = user.objects.get(pk=self.request.user.pk)
+        
+        user_instance.first_name = form.cleaned_data['first_name']
+        user_instance.last_name = form.cleaned_data['last_name']
+        user_instance.save()
+        
+        return super().form_valid(form)
