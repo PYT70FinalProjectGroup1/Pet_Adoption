@@ -101,12 +101,12 @@ class Animal(BaseModel):
 class Adoption(BaseModel):
 
     RESIDENCE_TYPE_CHOICE = [
-        ("", "Select Status"),
+        ("", "Select Type"),
         ("House", "House"),
         ("Apartment", "Apartment"),
     ]
 
-    FIRST_PET_CHOICES = [("", "Select Status"), ("Yes", "Yes"), ("No", "No")]
+    FIRST_PET_CHOICES = [("", "Select Choice"), ("Yes", "Yes"), ("No", "No")]
 
     STATUS_CHOICE = [
         ("", "Select Status"),
