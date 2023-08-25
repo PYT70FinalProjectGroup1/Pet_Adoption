@@ -17,6 +17,7 @@ from .views import (
     CreateAdoptionView,
     AdoptionStoriesView,
     UserProfileDetailView,
+    UserProfileUpdateView
 )
 from django.contrib.auth import views as auth_views
 
@@ -36,6 +37,7 @@ urlpatterns = [
     path("find/all_pets", FindAllView.as_view(), name="find_all_pets"),
     path("adoption_stories", AdoptionStoriesView.as_view(), name="adoption_stories"),
     path('userprofile/<int:pk>/', UserProfileDetailView.as_view(), name='userprofile_detail'),
+    path('userprofile/<int:pk>/update', UserProfileUpdateView.as_view(), name='userprofile_update'),
     path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("accounts/register/", RegisterView.as_view(), name="register"),

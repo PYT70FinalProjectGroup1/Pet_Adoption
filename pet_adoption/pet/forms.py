@@ -126,3 +126,14 @@ class AdoptionForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class UserProfileUpdateForm(forms.ModelForm):
+    email = forms.EmailField(label="Email")
+    first_name = forms.CharField(max_length=32, label="First Name")
+    last_name = forms.CharField(max_length=32, label="Last Name")
+    class Meta:
+        model = UserProfile
+        fields = ["phone","location","profile_picture"]
+    
+    
