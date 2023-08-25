@@ -90,7 +90,7 @@
     <p>Join the heartwarming community of proud pet owners by adopting your future companion today!</p>
     
   </div>
-
+  
   <div class="row row-cols-1 row-cols-lg-4 g-5 py-5">    
     {% for animal in animals|slice:"items|length-3:items|length" %}
       {% if forloop.counter <= 3 %}
@@ -112,6 +112,7 @@
     {% endfor %}
   
     <!-- Summary box -->
+    {% if animals %}
     <div class="col">
       <a href="{% url 'find_all_pets'%}">
       <div class="fancy-card-home-all">
@@ -126,6 +127,22 @@
     </div>
   </a>
   </div>
+  {% else %}
+  <div class="col">
+    <a href="{% url 'find_all_pets'%}">
+    <div class="fancy-card-home-all">
+      <img src="https://cdn3.vectorstock.com/i/1000x1000/05/12/dog-and-cat-logo-vector-26730512.jpg" alt="Animal">
+      <div class="card-body">
+        <h2 class="card-title">No Pets</h2>
+        <div class="animal-data">
+          <span>Available yet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+</div>
+  {% endif %}
 
 
   <!-- Pets Near User -->
@@ -184,23 +201,26 @@
   <p>Join the happy adopters who have given pets a loving home.</p>
 </div>
 
-
-<div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
-  {% for adoption in adoptions|slice:"items|length-4:items|length" %}
-    {% if forloop.counter <= 4 %}  
-    <div class="col">      
-      <div class="adoption-card">
-        <a href="{% url 'adoption_stories' %}">
-        <img class="animal-img" src="{{ adoption.animal.image.url }}" alt="Animal">
-        <img class="user-img" src="{{ adoption.user.userprofile.profile_picture.url }}" alt="User"></a>
-        <div class="card-body">
-          <h2 class="card-title">{{ adoption.user.first_name }} {{ adoption.user.last_name }}</h2>
-          <p>{{ adoption.user.userprofile.location }}</p>
+  {% if adoptions %}
+  <div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
+    {% for adoption in adoptions|slice:"items|length-4:items|length" %}
+      {% if forloop.counter <= 4 %}  
+      <div class="col">      
+        <div class="adoption-card">
+          <a href="{% url 'adoption_stories' %}">
+          <img class="animal-img" src="{{ adoption.animal.image.url }}" alt="Animal">
+          <img class="user-img" src="{{ adoption.user.userprofile.profile_picture.url }}" alt="User"></a>
+          <div class="card-body">
+            <h2 class="card-title">{{ adoption.user.first_name }} {{ adoption.user.last_name }}</h2>
+            <p>{{ adoption.user.userprofile.location }}</p>
+          </div>
         </div>
-      </div>
-    </div>  
-    {% endif %}
-  {% endfor %}
+      </div>  
+      {% endif %}
+    {% endfor %}
+  {% else %}
+	<p class="my-5">We don't have any adoption stories yet.</p>
+{% endif %}
 </div>
 
 

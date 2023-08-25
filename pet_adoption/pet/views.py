@@ -381,5 +381,10 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         user_instance.first_name = form.cleaned_data['first_name']
         user_instance.last_name = form.cleaned_data['last_name']
         user_instance.save()
+
+        if 'profile_picture' in self.request.FILES:
+            user_profile = user_instance.userprofile
+            user_profile.profile_picture = self.request.FILES['profile_picture']
+            user_profile.save()
         
         return super().form_valid(form)
