@@ -126,7 +126,7 @@ class Adoption(BaseModel):
     time_spending_habbit = models.TextField(null=False, default="")
     pet_fate = models.TextField(null=False, default="")
     street = models.CharField(max_length=64, null=False, default="")
-    city = models.CharField(max_length=64, null=False, default="")
+    city = models.ForeignKey(Location,on_delete=models.CASCADE)
     living_space = models.CharField(
         max_length=32, choices=RESIDENCE_TYPE_CHOICE, null=False, blank=False, default=""
     )
@@ -194,3 +194,14 @@ class Service(BaseModel):
 
     def __str__(self):
         return f"{self.animal.name}_{self.service_name}"
+
+class AdoptionStory(BaseModel):
+    adoption = models.OneToOneField(Adoption, on_delete=models.CASCADE)
+    story_title = models.CharField(max_length=128, null=False)
+    story_description = models.TextField(max_length=500)
+
+    class Meta:
+        verbose_name_plural = "Adoption Stories"
+
+        def __str__(self):
+            return f"{self.story_title}"

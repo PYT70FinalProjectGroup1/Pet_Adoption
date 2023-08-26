@@ -54,9 +54,8 @@
 						</tbody>
 					</table>
 					<div class="buttons-container mt-5">
-						<a href="{% url 'create_adoption' %}" class="btn btn-success"
-							>Adopt {{ animal.name }}</a
-						>
+						<a href="{% url 'create_adoption' %}?animal_id={{ object.id }}" class="btn btn-success">Adopt {{ object.name }}</a>
+
 						<a
 							href="{% url 'find_all_pets' %}"
 							class="btn btn-outline-secondary"

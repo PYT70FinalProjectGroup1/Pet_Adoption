@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load bootstrap %} {% load static %} 
+{% block content %}
+{% if user.is_authenticated and user.is_superuser %}
+    <div class="container">
+        {% if adoption_pending %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Animal</th>				
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for adoption in adoption_pending %}
+                <tr>
+                    <td>{{ adoption.user.first_name }} {{ adoption.user.last_name }}</td>
+                    <td>{{ adoption.animal.name }}</td>				
+                    <td>{{ adoption.application_date|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ adoption.application_status }}</td>
+                    <td>
+                        <a href="{% url 'approve_adoption' adoption.pk %}" class="btn btn-outline-success">Process</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="my-5">We don't have any adoptions pending forms.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Service, Treatment, Animal, UserProfile, Adoption, Location, CustomUser
+from .models import Service, Treatment, Animal, UserProfile, Adoption, Location, CustomUser, AdoptionStory
 from phonenumber_field.modelfields import PhoneNumberField
 
 class CustomUserCreationForm(UserCreationForm):
@@ -136,4 +136,18 @@ class UserProfileUpdateForm(forms.ModelForm):
         model = UserProfile
         fields = ["phone","location","profile_picture"]
     
-    
+class AdoptionStoryForm(forms.ModelForm):
+    class Meta:
+        model = AdoptionStory
+        exclude = ("adoption",)
+
+    def save(self, commit=True, adoption=None, user=None):
+        instance = super().save(commit=False)
+
+        if adoption and user:
+            instance.adoption = adoption
+
+        if commit:
+            instance.save()
+
+        return instance
