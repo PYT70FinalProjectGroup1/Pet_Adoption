@@ -30,13 +30,12 @@
 				/>
 				<div class="card-body adoption-story-body">
 					<h2 class="card-title">
-						{{ story.animal.name }}<span class="found-home-text"></span>
+						{{ story.adoption.animal.name }}<span class="found-home-text"></span>
 					</h2>
 					<p>{{ story.story_title }}</p>
 					<p>{{ story.story_description }}</p>
 					<p class="mb-0">
-						Adopted by: {{ story.adoption.user.first_name }} {{
-						story.adoption.user.last_name }}
+						Adopted by: {{ story.adoption.user.first_name }} {{ story.adoption.user.last_name }}
 					</p>
 					<p class="mb-0">
 						Location: {{ story.adoption.user.userprofile.location }}

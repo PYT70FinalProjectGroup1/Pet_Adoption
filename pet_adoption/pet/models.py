@@ -5,7 +5,18 @@ from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractUser
 
+
 class BaseModel(models.Model):
+    """
+    A base model that includes common fields for tracking creation and modification timestamps.
+
+    Fields:
+        created_at (DateTimeField): The timestamp when the instance was created.
+        updated_at (DateTimeField): The timestamp when the instance was last updated.
+
+    Meta:
+        abstract = True: Specifies that this is an abstract base class and won't create a separate database table.
+    """
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -13,14 +24,41 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+
 class CustomUser(AbstractUser):
+    """
+    A custom user model extending Django's AbstractUser with an additional 'phone' field.
+
+    Fields:
+        phone (PhoneNumberField): The user's phone number.
+
+    You can further extend this class by adding any other fields you need in your custom user model.
+
+    Methods:
+        __str__(): Returns a string representation of the user by their username.
+    """
+
     phone = PhoneNumberField(null=True, blank=True)
-    # Add any other fields you need in your custom user model
 
     def __str__(self):
         return self.username
 
+
 class Location(BaseModel):
+    """
+    Represents a location with a city key and city name.
+
+    Fields:
+        city_key (CharField): The city key for the location.
+        city_name (CharField): The name of the city.
+
+    Meta:
+        verbose_name_plural = "Locations": Specifies the plural name for this model.
+
+    Methods:
+        __str__(): Returns a string representation of the location using its city name.
+    """
+
     city_key = models.CharField(max_length=3, null=False)
     city_name = models.CharField(max_length=32, null=False)
 
@@ -32,12 +70,27 @@ class Location(BaseModel):
 
 
 class UserProfile(BaseModel):
+    """
+    Represents a user profile with additional information.
+
+    Fields:
+        user (OneToOneField): A one-to-one relationship to the User model.
+        phone (PhoneNumberField): The user's phone number.
+        location (ForeignKey): A foreign key to the Location model representing the user's location.
+        profile_picture (ImageField): The user's profile picture.
+
+    Meta:
+        verbose_name_plural = "User Profiles": Specifies the plural name for this model.
+
+    Methods:
+        __str__(): Returns a string representation of the user's profile using their username.
+    """
 
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     phone = PhoneNumberField()
-    location = models.ForeignKey(Location,on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     profile_picture = models.ImageField(
-        upload_to="profile_pics/",        
+        upload_to="profile_pics/",
         null=True,
         default="profile_pics/default.jpg",
     )
@@ -50,6 +103,30 @@ class UserProfile(BaseModel):
 
 
 class Animal(BaseModel):
+    """
+    Represents an animal available for adoption.
+
+    Fields:
+        name (CharField): The name of the animal.
+        color (CharField): The color of the animal.
+        species (CharField): The species of the animal.
+        breed (CharField): The breed of the animal.
+        gender (CharField): The gender of the animal.
+        size (CharField): The size category of the animal.
+        age (IntegerField): The age of the animal.
+        chip (CharField): A unique identifier for the animal.
+        location (ForeignKey): A foreign key to the Location model representing the animal's location.
+        about_pet (TextField): A description of the animal.
+        image (ImageField): An image of the animal.
+        favourites (ManyToManyField): A many-to-many relationship to UserProfiles representing favorite users.
+        is_available_for_adoption (BooleanField): Indicates if the animal is available for adoption.
+
+    Meta:
+        verbose_name_plural = "Animals": Specifies the plural name for this model.
+
+    Methods:
+        __str__(): Returns a string representation of the animal using its name.
+    """
 
     SPECIES_CHOICE = [
         ("", "Select Species"),
@@ -72,7 +149,6 @@ class Animal(BaseModel):
         ("Female", "Female"),
     ]
 
-
     name = models.CharField(max_length=32, null=False)
     color = models.CharField(max_length=64, null=False)
     species = models.CharField(
@@ -85,10 +161,12 @@ class Animal(BaseModel):
     size = models.CharField(max_length=32, blank=False, choices=SIZE_CHOICE, default="")
     age = models.IntegerField(null=False)
     chip = models.CharField(max_length=64, unique=True, null=False)
-    location = models.ForeignKey(Location,on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     about_pet = models.TextField(max_length=500, null=False)
     image = models.ImageField(upload_to="animal_pics/")
-    favourites = models.ManyToManyField(UserProfile, related_name='favorites', blank=True, default=None)
+    favourites = models.ManyToManyField(
+        UserProfile, related_name="favorites", blank=True, default=None
+    )
     is_available_for_adoption = models.BooleanField(default=True)
 
     class Meta:
@@ -99,6 +177,31 @@ class Animal(BaseModel):
 
 
 class Adoption(BaseModel):
+    """
+    Represents an adoption application.
+
+    Fields:
+        user (ForeignKey): A foreign key to the User model representing the applicant.
+        animal (ForeignKey): A foreign key to the Animal model representing the adopted animal.
+        application_text (TextField): A text field for the application description.
+        application_date (DateTimeField): The timestamp when the application was submitted.
+        application_status (CharField): The status of the application.
+        reason_for_adoption (TextField): The reason for wanting to adopt the animal.
+        time_spending_habbit (TextField): The applicant's time spending habits with the pet.
+        pet_fate (TextField): The applicant's plans for the adopted pet's future.
+        street (CharField): The street address of the applicant.
+        city (ForeignKey): A foreign key to the Location model representing the city.
+        living_space (CharField): The type of living space of the applicant.
+        square_meters (CharField): The square meters of the living space.
+        initial_pet (CharField): Whether the applicant has had a pet before.
+        is_approved (BooleanField): Indicates if the application is approved.
+
+    Meta:
+        verbose_name_plural = "Adoptions": Specifies the plural name for this model.
+
+    Methods:
+        __str__(): Returns a string representation of the adoption using its ID and approval status.
+    """
 
     RESIDENCE_TYPE_CHOICE = [
         ("", "Select Type"),
@@ -111,7 +214,7 @@ class Adoption(BaseModel):
     STATUS_CHOICE = [
         ("", "Select Status"),
         ("Pending", "Pending"),
-        ("Accepted", "Accepted"),
+        ("Approved", "Approved"),
         ("Denied", "Denied"),
     ]
 
@@ -126,9 +229,13 @@ class Adoption(BaseModel):
     time_spending_habbit = models.TextField(null=False, default="")
     pet_fate = models.TextField(null=False, default="")
     street = models.CharField(max_length=64, null=False, default="")
-    city = models.ForeignKey(Location,on_delete=models.CASCADE)
+    city = models.ForeignKey(Location, on_delete=models.CASCADE)
     living_space = models.CharField(
-        max_length=32, choices=RESIDENCE_TYPE_CHOICE, null=False, blank=False, default=""
+        max_length=32,
+        choices=RESIDENCE_TYPE_CHOICE,
+        null=False,
+        blank=False,
+        default="",
     )
     square_meters = models.CharField(max_length=9, null=False, default="")
     initial_pet = models.CharField(
@@ -144,6 +251,21 @@ class Adoption(BaseModel):
 
 
 class Treatment(BaseModel):
+    """
+    Represents a medical treatment record for an animal.
+
+    Fields:
+        animal (ForeignKey): A foreign key to the Animal model representing the treated animal.
+        treatment_name (CharField): The name of the treatment.
+        next_date (DateField): The next scheduled date for the treatment.
+        description (TextField): A description of the treatment.
+
+    Meta:
+        verbose_name_plural = "Treatments": Specifies the plural name for this model.
+
+    Methods:
+        __str__(): Returns a string representation of the treatment using the animal's name and treatment name.
+    """
 
     TREATMENTS_CHOICE = [
         ("", "Select Treatment"),
@@ -169,6 +291,22 @@ class Treatment(BaseModel):
 
 
 class Service(BaseModel):
+    """
+    Represents a service offered for animals.
+
+    Fields:
+        animal (ForeignKey): A foreign key to the Animal model representing the subject of the service.
+        date (DateField): The date the service was provided.
+        service_name (CharField): The name of the service.
+        description (TextField): A description of the service.
+        price (DecimalField): The price of the service.
+
+    Meta:
+        verbose_name_plural = "Services": Specifies the plural name for this model.
+
+    Methods:
+        __str__(): Returns a string representation of the service using the animal's name and service name.
+    """
 
     SERVICES_CHOICE = [
         ("", "Select Service"),
@@ -195,7 +333,23 @@ class Service(BaseModel):
     def __str__(self):
         return f"{self.animal.name}_{self.service_name}"
 
+
 class AdoptionStory(BaseModel):
+    """
+    Represents a story related to an adoption.
+
+    Fields:
+        adoption (OneToOneField): A one-to-one relationship to the Adoption model.
+        story_title (CharField): The title of the adoption story.
+        story_description (TextField): A description of the adoption story.
+
+    Meta:
+        verbose_name_plural = "Adoption Stories": Specifies the plural name for this model.
+
+    Methods:
+        __str__(): Returns a string representation of the story using its title.
+    """
+
     adoption = models.OneToOneField(Adoption, on_delete=models.CASCADE)
     story_title = models.CharField(max_length=128, null=False)
     story_description = models.TextField(max_length=500)

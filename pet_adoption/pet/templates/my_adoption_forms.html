@@ -3,31 +3,33 @@
 
 {% block content %}
 <div class="container">
-  <h2>Your Adoption Forms</h2>
-			{% if adoption_forms %}
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>User</th>
-						<th>Animal</th>
-						<th>Is Approved</th>
-						<th>Status</th>						
-					</tr>
-				</thead>
-				<tbody>
-					{% for adoption_form in adoption_forms %}
-					<tr>
-            <td>{{ adoption_form.user.first_name }} {{ adoption_form.user.last_name }}</td>
-            <td>{{ adoption_form.animal }}</td>						
-            <td>{{ adoption_form.is_approved }}</td>            
-            <td>{{ adoption_form.application_status }}</td>													
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-		{% else %}
-			<p class="my-5">You don't have any adoptions forms.</p>
-		{% endif %}
-  </div>
+    <h2>Your Adoption Forms</h2>
+    {% if adoption_forms %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Animal</th>
+                <th>Approved</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adoption_form in adoption_forms %}
+            <tr>
+                <td>{{ adoption_form.user.get_full_name }}</td>
+                <td>{{ adoption_form.animal }}</td>
+                <td>{{ adoption_form.is_approved }}</td>
+                <td style="{% if adoption_form.application_status == 'Approved' %}font-weight:bold; color:green;{% elif adoption_form.application_status == 'Denied' %}font-weight:bold; color:red;{% endif %}">
+                    {{ adoption_form.application_status }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="my-5">You don't have any adoption forms.</p>
+    {% endif %}
+</div>
 {% endblock %}
+
