@@ -12,6 +12,16 @@
 					/>
 					<div class="info-overlay">
 						<p>{{ animal.name }}</p>
+						<form method="post" action="{% url 'animal_detail' animal_id=animal.id %}">
+							{% csrf_token %}
+							<button type="submit" class="btn btn" style="color: red;">
+								{% if animal in user_favourite_animals %}
+									<h4><i class="bi bi-heart-fill"></i></h4>
+								{% else %}
+									<h4><i class="bi bi-heart"></i></h4>
+								{% endif %}
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -56,16 +66,6 @@
 					<div class="buttons-container mt-5">
 						<a href="{% url 'create_adoption' %}?animal_id={{ animal.id }}" class="btn btn-success">Adopt {{ animal.name }}</a>
 						<a href="{% url 'find_all_pets' %}" class="btn btn-outline-secondary">Back to All Pets</a>
-    					<form method="post" action="{% url 'animal_detail' animal_id=animal.id %}">
-							{% csrf_token %}
-        					<button type="submit" class="btn btn-link">
-            				{% if is_favourite %}
-                				<i class="bi bi-heart-fill"></i> Remove from Favourites
-            				{% else %}
-                				<i class="bi bi-heart"></i> Add to Favourites
-            				{% endif %}
-        					</button>
-    					</form>
 					</div>
 				</div>
 			</div>

@@ -318,6 +318,11 @@ class AnimalDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         other_available_adoption = Animal.objects.filter(is_available_for_adoption=True)
         context["other_available_adoption"] = other_available_adoption
+        
+        if self.request.user.is_authenticated:
+            user_profile = UserProfile.objects.get(user=self.request.user)
+            context["user_favourite_animals"] = user_profile.favorites.all()
+
         return context
 
     def post(self, request, animal_id):
@@ -472,17 +477,12 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-@method_decorator(login_required, name='dispatch')
-class AnimalFavouriteListView(View):
+class AnimalFavouriteListView(LoginRequiredMixin ,View):
     template_name = 'animal_favourite_list.html'
 
     def get(self, request):
         favourite_animals = request.user.userprofile.favorites.all()
-
-        context = {
-            'favourite_animals': favourite_animals,
-        }
-
+        context = {'favourite_animals': favourite_animals}
         return render(request, self.template_name, context)
 
 
