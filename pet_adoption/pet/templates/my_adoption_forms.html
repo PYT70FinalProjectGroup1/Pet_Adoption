@@ -4,12 +4,30 @@
 {% block content %}
 <div class="container">
   <h2>Your Adoption Forms</h2>
-  <ul>
-    {% for adoption_form in adoption_forms %}
-    {{ adoption_form.application_status }}
-    {{ adoption_form.application_text }}
-    {{ adoption_form.application_date }}
-    {% endfor %}
-  </ul>
-</div>
+			{% if adoption_forms %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>User</th>
+						<th>Animal</th>
+						<th>Is Approved</th>
+						<th>Status</th>						
+					</tr>
+				</thead>
+				<tbody>
+					{% for adoption_form in adoption_forms %}
+					<tr>
+            <td>{{ adoption_form.user.first_name }} {{ adoption_form.user.last_name }}</td>
+            <td>{{ adoption_form.animal }}</td>						
+            <td>{{ adoption_form.is_approved }}</td>            
+            <td>{{ adoption_form.application_status }}</td>													
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		{% else %}
+			<p class="my-5">You don't have any adoptions forms.</p>
+		{% endif %}
+  </div>
 {% endblock %}
