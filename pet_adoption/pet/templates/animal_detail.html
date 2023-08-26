@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load bootstrap %} {% load static %} 
+{% extends 'base.html' %} {% load bootstrap %} {% load static %}
 {% block content %}
 <div class="container">
 	<div class="card mb-3 mt-5 animal-card">
@@ -54,7 +54,11 @@
 						</tbody>
 					</table>
 					<div class="buttons-container mt-5">
-						<a href="{% url 'create_adoption' %}?animal_id={{ object.id }}" class="btn btn-success">Adopt {{ object.name }}</a>
+						<a
+							href="{% url 'create_adoption' %}?animal_id={{ object.id }}"
+							class="btn btn-success"
+							>Adopt {{ object.name }}</a
+						>
 
 						<a
 							href="{% url 'find_all_pets' %}"
