@@ -16,6 +16,7 @@ class CustomUserCreationForm(UserCreationForm):
     )
     profile_picture = forms.ImageField(
         label="Profile Picture",
+        required=False,
         widget=forms.ClearableFileInput(attrs={"multiple": False}),
     )
 
@@ -40,8 +41,11 @@ class CustomUserCreationForm(UserCreationForm):
             user=user,
             phone=self.cleaned_data["phone"],
             location=self.cleaned_data["location"],
-            profile_picture=self.cleaned_data["profile_picture"],
         )
+
+        profile_picture = self.cleaned_data.get("profile_picture")
+        if not profile_picture:
+            user_profile.profile_picture = "profile_pics/default.jpg"
 
         if commit:
             user.save()
@@ -101,7 +105,7 @@ class AnimalFilterForm(forms.Form):
     location = forms.ModelChoiceField(
         label="Location",
         queryset=Location.objects.all(),  # Provide the queryset for available locations
-        required=True,
+        required=False,
     )
 
     def __init__(self, *args, show_species=True, **kwargs):
