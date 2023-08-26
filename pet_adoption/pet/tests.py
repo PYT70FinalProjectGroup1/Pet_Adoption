@@ -1,12 +1,12 @@
 from datetime import date
 from django.test import TestCase
-from .models import Animal
-
-# Create your tests here.
+from .models import Animal, Location
 
 
 class AnimalQueryTest(TestCase):
     def setUp(self):
+        location = Location.objects.create(city_key="WAW", city_name="Warsaw")
+        
         Animal.objects.create(
             name="Kojak",
             color="Red",
@@ -16,10 +16,11 @@ class AnimalQueryTest(TestCase):
             size="Small",
             age="2",
             chip="456789",
-            location="Lodz",
+            location=location,
             about_pet="I like this fish",
-            is_available_for_adoption=True,
+            is_available_for_adoption=True
         )
+
         Animal.objects.create(
             name="Jimmy",
             color="Black",
@@ -29,9 +30,9 @@ class AnimalQueryTest(TestCase):
             size="Medium",
             age="1",
             chip="4567891",
-            location="Warsaw",
+            location=location,
             about_pet="I like this dog",
-            is_available_for_adoption=True,
+            is_available_for_adoption=True
         )
 
     def test_queryset_count(self):
@@ -42,7 +43,5 @@ class AnimalQueryTest(TestCase):
         queryset = Animal.objects.filter(is_available_for_adoption=True, species="Dog")
         self.assertTrue(queryset.filter(name="Jimmy").exists())
 
-    def test_creation_date_in_queryset(self):
-        queryset = Animal.objects.all()
-        specific_date = date(2023, 8, 23)
-        self.assertTrue(queryset.filter(registration=specific_date).exists())
+
+

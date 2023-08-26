@@ -38,16 +38,15 @@
     <h4 class="mt-5 mb-4">Find Your Perfect Pet</h4>
     <p>
       Begin your journey to find the perfect furry companion! Explore our diverse selection of adorable pets eagerly
-      anticipating a loving home. Whether you're in search of an energetic cat, a devoted dog, or another endearing
-      furry friend, our selection is tailored to match your preferences.
+      anticipating a loving home.
     </p>
     <p>Embark on the path to becoming a cherished pet parent by adopting your new faithful companion today!</p>
     
   </div>
 
   <div class="container my-5">
-    <div class="row justify-content-center">      
-      <div class="col-3">
+    <div class="row row-cols-1 row-cols-lg-3 g-5 py-5">      
+      <div class="col">
         <a href="{% url 'find_cats' %}">
           <div class="box search-image-home">
             <img src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg" alt="cats">
@@ -55,7 +54,7 @@
         </a>    
       </div>
       
-      <div class="col-3">
+      <div class="col">
         <a href="{% url 'find_dogs' %}">
           <div class="box search-image-home">
             <img src="https://cdn.pixabay.com/photo/2016/02/19/15/46/labrador-retriever-1210559_1280.jpg" alt="dogs">
@@ -64,7 +63,7 @@
       </div>
     
     
-      <div class="col-3">
+      <div class="col">
         <a href="{% url 'find_other_pets' %}">
           <div class="box search-image-home">
             <img src="https://cdn.pixabay.com/photo/2020/02/28/15/35/bird-4887736_1280.jpg" alt="other_pets">
@@ -84,8 +83,7 @@
     <h4 class="mt-5 mb-4">Pets Available for Adoption</h4>
     <p>
       Embrace the joy of adding a new furry family member! Explore our charming pets, each brimming with affection and
-      companionship, and awaiting a forever home. From the spirited playfulness of cats to the loyal devotion of dogs and
-      the unique charm of other companions, you're sure to find your perfect match here.
+      companionship, and awaiting a forever home.
     </p>
     <p>Join the heartwarming community of proud pet owners by adopting your future companion today!</p>
     
@@ -155,9 +153,7 @@
         <h4 class="mt-5 mb-4">Discover Pets Near {{ user.userprofile.location }}</h4>
         <p>
           Embrace the joy of adding a new furry family member from your very own neighborhood! Explore our charming pets, each
-          brimming with affection and companionship, and awaiting a forever home just around the corner. From the spirited
-          playfulness of cats to the loyal devotion of dogs and the unique charm of other companions, you're sure to find your
-          perfect match right here in your local area.
+          brimming with affection and companionship, and awaiting a forever home just around the corner.
         </p>
         <p>Join the heartwarming community of proud pet owners by adopting your future companion from your own neighborhood today!</p>
         
