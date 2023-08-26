@@ -37,8 +37,18 @@
 					<a
 						href="{% url 'treatments' adoption.animal.pk %}"
 						class="btn btn-outline-success btn-sm"
-						>Treatments</a
+						>Treatments
+					</a>
+				</td>
+				<td>
+					{% if not adoption.adoptionstory %}
+					<a
+						href="{% url 'add_adoption_story' adoption_pk=adoption.id %}"
+						class="btn btn-outline-warning btn-sm"
 					>
+						Add Story
+					</a>
+					{% endif %}
 				</td>
 			</tr>
 			{% endfor %}

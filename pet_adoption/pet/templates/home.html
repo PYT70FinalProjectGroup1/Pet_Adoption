@@ -201,25 +201,24 @@
   <p>Join the happy adopters who have given pets a loving home.</p>
 </div>
 
-  {% if adoptions %}
-  <div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
-    {% for adoption in adoptions|slice:"items|length-4:items|length" %}
-      {% if forloop.counter <= 4 %}  
-      <div class="col">      
-        <div class="adoption-card">
-          <a href="{% url 'adoption_stories' %}">
-          <img class="animal-img" src="{{ adoption.animal.image.url }}" alt="Animal">
-          <img class="user-img" src="{{ adoption.user.userprofile.profile_picture.url }}" alt="User"></a>
-          <div class="card-body">
-            <h2 class="card-title">{{ adoption.user.first_name }} {{ adoption.user.last_name }}</h2>
-            <p>{{ adoption.user.userprofile.location }}</p>
-          </div>
+{% if adoption_stories %}
+<div class="row row-cols-1 row-cols-lg-4 g-5 py-5">
+  {% for story in adoption_stories %}
+    <div class="col">      
+      <div class="adoption-card">
+        <a href="{% url 'adoption_stories' %}">
+        <img class="animal-img" src="{{ story.adoption.animal.image.url }}" alt="Animal">
+        <img class="user-img" src="{{ story.adoption.user.userprofile.profile_picture.url }}" alt="User"></a>
+        <div class="card-body">
+          <h2 class="card-title">{{ story.adoption.user.first_name }} {{ story.adoption.user.last_name }}</h2>
+          <p>{{ story.adoption.user.userprofile.location }}</p>
         </div>
-      </div>  
-      {% endif %}
-    {% endfor %}
-  {% else %}
-	<p class="my-5">We don't have any adoption stories yet.</p>
+      </div>
+    </div>  
+  {% endfor %}
+</div>
+{% else %}
+<p class="my-5">We don't have any adoption stories yet.</p>
 {% endif %}
 </div>
 

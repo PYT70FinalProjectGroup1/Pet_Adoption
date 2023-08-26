@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="row">
+    {% if cats %}
     <div class="mt-5 col-md-3 filters-all">
         <div class="filters-header">
             <h3>Filters</h3>
@@ -14,7 +15,7 @@
                 <button type="submit" class="btn btn-sm btn-success my-3">Apply Filters</button>
             </form>
         </div>
-    </div>
+    </div>    
     <div class="col-md-9 pet-cards">
         <div class="row row-cols-1 row-cols-lg-3 g-5 py-5">
             {% for cat in cats %}
@@ -35,5 +36,8 @@
             {% endfor %}
         </div>
     </div>
+    {% else%}
+    <p>No Animals in Dataset.</p>
+    {% endif %}
 </div>
 {% endblock %}

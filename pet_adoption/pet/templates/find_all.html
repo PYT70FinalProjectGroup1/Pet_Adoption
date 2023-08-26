@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="row">
+    {% if all_pets %}
     <div class="mt-5 col-md-3 filters-all">
         <div class="filters-header">
             <h3>Filters</h3>
@@ -35,5 +36,8 @@
             {% endfor %}
         </div>
     </div>
+    {% else%}
+    <p>No Animals in Dataset.</p>
+    {% endif %}
 </div>
 {% endblock %}

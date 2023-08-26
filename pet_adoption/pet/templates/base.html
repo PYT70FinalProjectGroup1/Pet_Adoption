@@ -94,9 +94,14 @@
 								data-bs-theme="dark"
 								aria-labelledby="profileDropdown"
 							>
+								{% if user.is_authenticated and user.is_superuser %}
+								<li>
+									<a class="dropdown-item border-bottom" href="{% url 'adoption_pending_list'%}">Pending Forms (Admin)</a>
+								</li>
+								{% endif %}
 								<li>
 									<a class="dropdown-item" href="#">Favourite Pets</a>
-								</li>
+								</li>								
 								<li>
 									<a class="dropdown-item" href="#">My Adoption Forms</a>
 								</li>
@@ -106,7 +111,7 @@
 									>
 								</li>
 								<li>
-									<a class="dropdown-item" href="{% url 'userprofile_detail' pk=user.id%}">User Profile</a>
+									<a class="dropdown-item border-bottom" href="{% url 'userprofile_detail' pk=user.id%}">User Profile</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="{% url 'logout' %}"
@@ -126,6 +131,7 @@
 				</div>
 			</div>
 		</nav>
+
 
 		{% block banner %}
 		<div class="banner-home">

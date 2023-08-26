@@ -17,7 +17,10 @@ from .views import (
     CreateAdoptionView,
     AdoptionStoriesView,
     UserProfileDetailView,
-    UserProfileUpdateView
+    UserProfileUpdateView,
+    AdoptionPendingListView,
+    ApproveAdoptionView,
+    AddAdoptionStoryView,
 )
 from django.contrib.auth import views as auth_views
 
@@ -28,18 +31,25 @@ urlpatterns = [
     path("animal_detail/<int:animal_id>/",AnimalDetailView.as_view(),name="animal_detail"),
     path("my_pets/", MyPetsView.as_view(), name="my_pets"),
     path("services/<int:pk>/", AvailableServicesView.as_view(), name="services"),
-    path("create_service/<int:animal_id>/",CreateServiceView.as_view(),name="create_service"),
+    path("service/create/<int:animal_id>/",CreateServiceView.as_view(),name="create_service"),
     path("treatments/<int:pk>/", AvailableTreatmentsView.as_view(), name="treatments"),
-    path("create_treatment/<int:animal_id>/",CreateTreatmentView.as_view(),name="create_treatment"),
-    path("find/cats", FindCatsView.as_view(), name="find_cats"),
-    path("find/dogs", FindDogsView.as_view(), name="find_dogs"),
-    path("find/other_pets", FindOtherPetsView.as_view(), name="find_other_pets"),
-    path("find/all_pets", FindAllView.as_view(), name="find_all_pets"),
-    path("adoption_stories", AdoptionStoriesView.as_view(), name="adoption_stories"),
+    path("treatment/create/<int:animal_id>/",CreateTreatmentView.as_view(),name="create_treatment"),
+    
+    path("cats/find", FindCatsView.as_view(), name="find_cats"),
+    path("dogs/find", FindDogsView.as_view(), name="find_dogs"),
+    path("other_pets/find", FindOtherPetsView.as_view(), name="find_other_pets"),
+    path("all_pets/find", FindAllView.as_view(), name="find_all_pets"),
+        
+    path("adoption/create/", CreateAdoptionView.as_view(), name="create_adoption"),
+    path("adoption/pending/", AdoptionPendingListView.as_view(), name="adoption_pending_list"),
+    path("adoption/approve/<int:pk>/", ApproveAdoptionView.as_view(), name="approve_adoption"),
+    path("adoption/story/add/<int:adoption_pk>/", AddAdoptionStoryView.as_view(), name="add_adoption_story"),
+    path("adoption/story", AdoptionStoriesView.as_view(), name="adoption_stories"),
+
     path('userprofile/<int:pk>/', UserProfileDetailView.as_view(), name='userprofile_detail'),
     path('userprofile/<int:pk>/update', UserProfileUpdateView.as_view(), name='userprofile_update'),
+        
     path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("accounts/register/", RegisterView.as_view(), name="register"),
-    path("create_adoption/", CreateAdoptionView.as_view(), name="create_adoption"),
 ]

@@ -9,12 +9,13 @@ from .forms import (
     TreatmentForm,
     AnimalFilterForm,
     AdoptionForm,
-    UserProfileUpdateForm
+    UserProfileUpdateForm,
+    AdoptionStoryForm
 )
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Animal, Service, Treatment, Adoption, CustomUser, UserProfile
-from django.views import View
+from .models import Animal, Service, Treatment, Adoption, CustomUser, UserProfile, AdoptionStory
+from django.views import View   
 from django.views.generic import ListView
 
 
@@ -35,11 +36,11 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         animals = Animal.objects.filter(is_available_for_adoption=True)
-        adoptions = Adoption.objects.all()
+        adoption_stories = AdoptionStory.objects.all()
         available_animals = animals.count()
 
         context["animals"] = animals
-        context["adoptions"] = adoptions
+        context["adoption_stories"] = adoption_stories
         context["available_animals"] = available_animals
 
         if self.request.user.is_authenticated:
@@ -324,21 +325,84 @@ class CreateAdoptionView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.application_status = "Pending"
+
+        animal_id = self.request.GET.get("animal_id")
+        if animal_id:
+            animal = Animal.objects.get(pk=animal_id)
+            form.instance.animal = animal
+
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse("home")
+    
 
-class AdoptionStoriesView(LoginRequiredMixin, ListView):
-    template_name = "adoption_stories.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["adoption_stories"] = Adoption.objects.filter(
-            application_status="Accepted"
-        )
-        return context
+class AdoptionPendingListView(LoginRequiredMixin, ListView):
+    template_name = "adoption_pending_view.html"
+    model = Adoption
+    context_object_name = "adoption_pending"
 
     def get_queryset(self):
-        return Adoption.objects.filter(application_status="Accepted")
+        return Adoption.objects.filter(application_status="Pending")
+    
+
+class ApproveAdoptionView(LoginRequiredMixin, View):
+    template_name = "adoption_approval.html"
+
+    def get(self, request, pk):
+        adoption = get_object_or_404(Adoption, pk=pk)
+        context = {"adoption": adoption}
+        return render(request, self.template_name, context)
+    
+    def post(self, request, pk):
+        adoption = get_object_or_404(Adoption, pk=pk)
+        application_status = request.POST.get("application_status")
+        is_approved = request.POST.get("is_approved")
+        
+        if application_status in ["Accepted"]:
+            adoption.application_status = application_status            
+            adoption.is_approved = True
+
+            animal = adoption.animal
+            animal.is_available_for_adoption = False
+            animal.save()            
+
+        elif application_status in ["Denied"]:
+            adoption.application_status = application_status            
+            adoption.is_approved = False
+        
+        adoption.save()
+            
+        return redirect("adoption_pending_list")
+
+class AddAdoptionStoryView(LoginRequiredMixin, View):
+    template_name = "add_adoption_story.html"
+    form_class = AdoptionStoryForm
+
+    def get(self, request, adoption_pk):
+        adoption = get_object_or_404(Adoption, pk=adoption_pk)
+        form = self.form_class()
+        context = {"adoption": adoption, "form": form}
+        return render(request, self.template_name, context)
+
+    def post(self, request, adoption_pk):
+        adoption = get_object_or_404(Adoption, pk=adoption_pk)
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            form.save(adoption=adoption, user=request.user)
+            return redirect('home')
+
+        context = {"adoption": adoption, "form": form}
+        return render(request, self.template_name, context)
+    
+class AdoptionStoriesView(ListView):
+    template_name = "adoption_stories.html"
+    context_object_name = "adoption_stories"
+
+    def get_queryset(self):
+        return AdoptionStory.objects.all()
 
 class UserProfileDetailView(LoginRequiredMixin, DetailView):
     model = UserProfile

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap %}  <!-- Load other necessary template tags here if needed -->
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h2 class="card-title">{{ object.adoption.animal.name }} Adoption Story</h2>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Adopted by: {{ object.adoption.user.first_name }} {{ object.adoption.user.last_name }}</h4>
+                    <p class="card-text">Story Title: {{ object.story_title }}</p>
+                    <p class="card-text">Story Description: {{ object.story_description }}</p>
+                </div>
+            </div>
+            <div class="my-5 d-flex justify-content-center">
+                <a href="{% url 'update_adoption_story' pk=story.adoptionstory.pk %}" class="btn btn-success">Update</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

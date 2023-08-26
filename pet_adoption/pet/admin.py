@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from .models import Animal, UserProfile, Adoption, Treatment, Service, Location
+from .models import Animal, UserProfile, Adoption, Treatment, Service, Location, AdoptionStory
 
 
 @admin.register(Animal)
@@ -59,3 +59,9 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display = ["animal", "service_name", "price"]
     list_filter = ["animal"]
     search_fields = ["animal"]
+
+@admin.register(AdoptionStory)
+class AdoptionStoryAdmin(admin.ModelAdmin):
+    list_display = ["story_title"]
+    list_filter = ["story_title"]
+    search_fields = ["story_title"]
