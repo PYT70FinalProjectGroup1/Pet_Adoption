@@ -122,10 +122,13 @@
 							</ul>
 						</div>
 						{% else %}
-						<div>
+						<div class="navbar-nav me-auto mb-2 mb-lg-0">
 							<a class="nav-link" aria-current="page" href="{% url 'login' %}"
-								>Login</a
+								>Login</a								
 							>
+							<a class="nav-link" aria-current="page" href="{% url 'register' %}"
+							>SignUp</a
+						>
 						</div>
 						{% endif %}
 					</div>
@@ -150,52 +153,19 @@
 
 		<div class="container flex-grow-1">{% block content %} {% endblock %}</div>
 
-		<div class="container">
-			<footer
-				class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
-			>
-				<p class="col-md-4 mb-0 text-body-secondary">
-					Created by the Group_1 (SDA_ZDPYTpol70) · © 2023
-				</p>
 
-				<a
-					href="/"
-					class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-				>
-					<svg class="bi me-2" width="40" height="32">
-						<use xlink:href="#bootstrap"></use>
-					</svg>
-				</a>
 
-				<ul class="nav col-md-4 justify-content-end">
-					<li class="nav-item">
-						<a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary"
-							>Home</a
-						>
-					</li>
-					<li class="nav-item">
-						<a
-							href="{% url 'adoption_stories' %}"
-							class="nav-link px-2 text-body-secondary"
-							>Adoption Stories</a
-						>
-					</li>
-					<li class="nav-item">
-						<a
-							href="{% url 'donate' %}"
-							class="nav-link px-2 text-body-secondary"
-							>Donate</a
-						>
-					</li>
-					<li class="nav-item">
-						<a
-							href="{% url 'about' %}"
-							class="nav-link px-2 text-body-secondary"
-							>About</a
-						>
-					</li>
+			<footer class="py-3 mt-5 bg-dark" data-bs-theme="dark">
+				<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+				  <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+				  <li class="nav-item"><a href="{% url 'adoption_stories' %}" class="nav-link px-2 text-body-secondary">Adoption Stories</a></li>
+				  <li class="nav-item"><a href="{% url 'donate' %}" class="nav-link px-2 text-body-secondary">Donate</a></li>
+				  <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
 				</ul>
+				<p class="text-center text-body-secondary">Created by the Group_1 (SDA_ZDPYTpol70) · © 2023</p>
 			</footer>
+
+
 		</div>
 
 		<!-- Include Bootstrap JavaScript file -->

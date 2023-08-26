@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load bootstrap %} {% load static %} 
+{% extends 'base.html' %} {% load bootstrap %} {% load static %}
 {% block content %}
 <div class="container">
 	<div class="card mb-3 mt-5 animal-card">
@@ -66,6 +66,18 @@
             				{% endif %}
         					</button>
     					</form>
+						<a
+							href="{% url 'create_adoption' %}?animal_id={{ object.id }}"
+							class="btn btn-success"
+							>Adopt {{ object.name }}</a
+						>
+
+						<a
+							href="{% url 'find_all_pets' %}"
+							class="btn btn-outline-secondary"
+							>Back to All Pets</a
+						>
+
 					</div>
 				</div>
 			</div>

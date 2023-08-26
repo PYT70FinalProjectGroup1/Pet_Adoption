@@ -1,42 +1,53 @@
-{% extends 'base.html' %}
-{% load bootstrap %}
-{% load static %}
-
+{% extends 'base.html' %} {% load bootstrap %} {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h2>Adoption Approval</h2>
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h4 class="card-title">{{ adoption.user.first_name }} {{ adoption.user.last_name }}</h4>
-                    <p class="">Application Date: {{ adoption.application_date|date:"Y-m-d H:i:s" }}</p>
-                    <p class="">Application Text: {{ adoption.application_text }}</p>
-                    <p class="">Reason for Adoption: {{ adoption.reason_for_adoption }}</p>
-                    <p class="">Time Spending Habit: {{ adoption.time_spending_habbit }}</p>
-                    <p class="">Pet Fate: {{ adoption.pet_fate }}</p>
-                    <p class="">Street: {{ adoption.street }}</p>
-                    <p class="">City: {{ adoption.city }}</p>
-                    <p class="">Living Space: {{ adoption.living_space }}</p>
-                    <p class="">Square Meters: {{ adoption.square_meters }}</p>
-                    <p class="">Initial Pet: {{ adoption.initial_pet }}</p>
-                    
-                    <form method="post">
-                        {% csrf_token %}
-                        
-                        <div class="mb-3">
-                            <label for="application_status" class="form-label">Application Status</label>
-                            <select name="application_status" id="application_status" class="form-control">
-                                <option value="Accepted">Accepted</option>
-                                <option value="Denied">Denied</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-md-8 offset-md-2">
+			<h2>Adoption Approval</h2>
+			<div class="card mt-4">
+				<div class="card-body">
+					<h4 class="card-title">
+						{{ adoption.user.first_name }} {{ adoption.user.last_name }}
+					</h4>
+					<p class="">
+						Application Date: {{ adoption.application_date|date:"Y-m-d H:i:s" }}
+					</p>
+					<p class="">Application Text: {{ adoption.application_text }}</p>
+					<p class="">
+						Reason for Adoption: {{ adoption.reason_for_adoption }}
+					</p>
+					<p class="">
+						Time Spending Habit: {{ adoption.time_spending_habbit }}
+					</p>
+					<p class="">Pet Fate: {{ adoption.pet_fate }}</p>
+					<p class="">Street: {{ adoption.street }}</p>
+					<p class="">City: {{ adoption.city }}</p>
+					<p class="">Living Space: {{ adoption.living_space }}</p>
+					<p class="">Square Meters: {{ adoption.square_meters }}</p>
+					<p class="">Initial Pet: {{ adoption.initial_pet }}</p>
+
+					<form method="post">
+						{% csrf_token %}
+
+						<div class="mb-3">
+							<label for="application_status" class="form-label"
+								>Application Status</label
+							>
+							<select
+								name="application_status"
+								id="application_status"
+								class="form-control"
+							>
+								<option value="Accepted">Accepted</option>
+								<option value="Denied">Denied</option>
+							</select>
+						</div>
+
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

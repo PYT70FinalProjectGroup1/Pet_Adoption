@@ -20,6 +20,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 
+
 /* Home Page Section */
 .user-profile {
   display: flex;
@@ -42,7 +43,7 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 40vh;
+  height: 55vh;
   overflow: hidden;  
   margin-bottom: 0vh;  
 }
@@ -52,14 +53,14 @@ body::-webkit-scrollbar-thumb {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transform: translateY(-20%);
+  transform: translateY(-10%);
 }
 
 .banner-text {
   position: absolute;
   text-align: center;
   color: white;
-  top: 60%;
+  top: 65%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
