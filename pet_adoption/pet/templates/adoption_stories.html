@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load bootstrap %} {% load static %} 
+{% extends 'base.html' %} {% load bootstrap %} {% load static %}
 {% block content %}
 
 <div class="container adoption-stories">
@@ -35,7 +35,8 @@
 					<p>{{ story.story_title }}</p>
 					<p>{{ story.story_description }}</p>
 					<p class="mb-0">
-						Adopted by: {{ story.adoption.user.first_name }} {{ story.adoption.user.last_name }}
+						Adopted by: {{ story.adoption.user.first_name }} {{
+						story.adoption.user.last_name }}
 					</p>
 					<p class="mb-0">
 						Location: {{ story.adoption.user.userprofile.location }}
@@ -47,6 +48,5 @@
 	</div>
 </div>
 {% else %}
-	<p class="my-5">We don't have any adoption stories yet.</p>
-{% endif %}
-{% endblock %}
+<p class="my-5">We don't have any adoption stories yet.</p>
+{% endif %} {% endblock %}
