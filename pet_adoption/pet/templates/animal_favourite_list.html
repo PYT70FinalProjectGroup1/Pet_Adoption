@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap %} {% load static %}
+
+{% block content %}
+<div class="container">
+  <h2>Your Favourite Animals</h2>
+  <ul>
+    {% for animal in favourite_animals %}
+    <li>
+      <img src="{{ animal.image.url }}" alt="{{ animal.name }}">
+      <h3>{{ animal.name }}</h3>
+      <p>{{ animal.about_pet }}</p>
+      <a href="{% url 'animal_detail' animal_id=animal.id %}" class="btn btn-primary">Details</a>
+      <form method="post" action="{% url 'animal_detail' animal_id=animal.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+          {% if animal in user_profile.favorites.all %}
+            Add to Favourites
+          {% else %}
+            Remove from Favourites
+          {% endif %}
+        </button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+

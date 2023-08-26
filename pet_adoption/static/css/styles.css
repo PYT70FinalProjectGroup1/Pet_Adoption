@@ -564,3 +564,28 @@ p {
 }
 
 
+
+/* Stylowanie przycisku */
+.custom-btn {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-btn i.bi-heart {
+  font-size: 2rem;
+  color: red;
+}
+
+.custom-btn:hover {
+  transform: scale(1.1);
+  color: red;
+}
+
+.custom-btn:hover .heart-fill {
+  width: 100%;
+}
+

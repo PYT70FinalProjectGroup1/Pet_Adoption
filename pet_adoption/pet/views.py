@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView, DetailView
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, get_user
 from .forms import (
     CustomUserCreationForm,
     ServiceForm,
@@ -15,7 +18,7 @@ from .forms import (
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Animal, Service, Treatment, Adoption, CustomUser, UserProfile, AdoptionStory
-from django.views import View   
+from django.views import View
 from django.views.generic import ListView
 
 
@@ -317,6 +320,17 @@ class AnimalDetailView(DetailView):
         context["other_available_adoption"] = other_available_adoption
         return context
 
+    def post(self, request, animal_id):
+        animal = get_object_or_404(Animal, id=animal_id)
+        user_profile = request.user.userprofile
+
+        if user_profile.favorites.filter(id=animal.id).exists():
+            user_profile.favorites.remove(animal)
+        else:
+            user_profile.favorites.add(animal)
+
+        return redirect('animal_detail', animal_id=animal.id)
+
 
 class CreateAdoptionView(LoginRequiredMixin, CreateView):
     model = Adoption
@@ -336,7 +350,7 @@ class CreateAdoptionView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse("home")
-    
+
 
 class AdoptionPendingListView(LoginRequiredMixin, ListView):
     template_name = "adoption_pending_view.html"
@@ -345,7 +359,7 @@ class AdoptionPendingListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Adoption.objects.filter(application_status="Pending")
-    
+
 
 class ApproveAdoptionView(LoginRequiredMixin, View):
     template_name = "adoption_approval.html"
@@ -354,27 +368,28 @@ class ApproveAdoptionView(LoginRequiredMixin, View):
         adoption = get_object_or_404(Adoption, pk=pk)
         context = {"adoption": adoption}
         return render(request, self.template_name, context)
-    
+
     def post(self, request, pk):
         adoption = get_object_or_404(Adoption, pk=pk)
         application_status = request.POST.get("application_status")
         is_approved = request.POST.get("is_approved")
-        
+
         if application_status in ["Accepted"]:
-            adoption.application_status = application_status            
+            adoption.application_status = application_status
             adoption.is_approved = True
 
             animal = adoption.animal
             animal.is_available_for_adoption = False
-            animal.save()            
+            animal.save()
 
         elif application_status in ["Denied"]:
-            adoption.application_status = application_status            
+            adoption.application_status = application_status
             adoption.is_approved = False
-        
+
         adoption.save()
-            
+
         return redirect("adoption_pending_list")
+
 
 class AddAdoptionStoryView(LoginRequiredMixin, View):
     template_name = "add_adoption_story.html"
@@ -396,13 +411,15 @@ class AddAdoptionStoryView(LoginRequiredMixin, View):
 
         context = {"adoption": adoption, "form": form}
         return render(request, self.template_name, context)
-    
+
+
 class AdoptionStoriesView(ListView):
     template_name = "adoption_stories.html"
     context_object_name = "adoption_stories"
 
     def get_queryset(self):
         return AdoptionStory.objects.all()
+
 
 class UserProfileDetailView(LoginRequiredMixin, DetailView):
     model = UserProfile
@@ -412,6 +429,7 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return UserProfile.objects.filter(user=self.request.user)
+
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
@@ -428,20 +446,20 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        
+
         user = get_user_model()
         user_instance = user.objects.get(pk=self.request.user.pk)
-        
+
         form.fields['email'].initial = user_instance.email
         form.fields['first_name'].initial = user_instance.first_name
         form.fields['last_name'].initial = user_instance.last_name
-        
+
         return form
 
     def form_valid(self, form):
         user = get_user_model()
         user_instance = user.objects.get(pk=self.request.user.pk)
-        
+
         user_instance.first_name = form.cleaned_data['first_name']
         user_instance.last_name = form.cleaned_data['last_name']
         user_instance.save()
@@ -450,5 +468,28 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
             user_profile = user_instance.userprofile
             user_profile.profile_picture = self.request.FILES['profile_picture']
             user_profile.save()
-        
+
         return super().form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class AnimalFavouriteListView(View):
+    template_name = 'animal_favourite_list.html'
+
+    def get(self, request):
+        favourite_animals = request.user.userprofile.favorites.all()
+
+        context = {
+            'favourite_animals': favourite_animals,
+        }
+
+        return render(request, self.template_name, context)
+
+
+class MyAdoptionFormsView(LoginRequiredMixin, ListView):
+    model = Adoption
+    template_name = 'my_adoption_forms.html'
+    context_object_name = 'adoption_forms'
+
+    def get_queryset(self):
+        return Adoption.objects.filter(user=self.request.user)

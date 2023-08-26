@@ -54,13 +54,18 @@
 						</tbody>
 					</table>
 					<div class="buttons-container mt-5">
-						<a href="{% url 'create_adoption' %}?animal_id={{ object.id }}" class="btn btn-success">Adopt {{ object.name }}</a>
-
-						<a
-							href="{% url 'find_all_pets' %}"
-							class="btn btn-outline-secondary"
-							>Back to All Pets</a
-						>
+						<a href="{% url 'create_adoption' %}?animal_id={{ animal.id }}" class="btn btn-success">Adopt {{ animal.name }}</a>
+						<a href="{% url 'find_all_pets' %}" class="btn btn-outline-secondary">Back to All Pets</a>
+    					<form method="post" action="{% url 'animal_detail' animal_id=animal.id %}">
+							{% csrf_token %}
+        					<button type="submit" class="btn btn-link">
+            				{% if is_favourite %}
+                				<i class="bi bi-heart-fill"></i> Remove from Favourites
+            				{% else %}
+                				<i class="bi bi-heart"></i> Add to Favourites
+            				{% endif %}
+        					</button>
+    					</form>
 					</div>
 				</div>
 			</div>

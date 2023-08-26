@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap %} {% load static %}
+
+{% block content %}
+<div class="container">
+  <h2>Your Adoption Forms</h2>
+  <ul>
+    {% for adoption_form in adoption_forms %}
+    {{ adoption_form.application_status }}
+    {{ adoption_form.application_text }}
+    {{ adoption_form.application_date }}
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

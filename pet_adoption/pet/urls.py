@@ -21,6 +21,8 @@ from .views import (
     AdoptionPendingListView,
     ApproveAdoptionView,
     AddAdoptionStoryView,
+    AnimalFavouriteListView,
+    MyAdoptionFormsView
 )
 from django.contrib.auth import views as auth_views
 
@@ -30,6 +32,7 @@ urlpatterns = [
     path("donate", DonateView.as_view(), name="donate"),
     path("animal_detail/<int:animal_id>/",AnimalDetailView.as_view(),name="animal_detail"),
     path("my_pets/", MyPetsView.as_view(), name="my_pets"),
+    path('my_adoption_form/', MyAdoptionFormsView.as_view(), name="my_adoption_forms"),
     path("services/<int:pk>/", AvailableServicesView.as_view(), name="services"),
     path("service/create/<int:animal_id>/",CreateServiceView.as_view(),name="create_service"),
     path("treatments/<int:pk>/", AvailableTreatmentsView.as_view(), name="treatments"),
@@ -52,4 +55,8 @@ urlpatterns = [
     path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("accounts/register/", RegisterView.as_view(), name="register"),
+
+    path('favourites/', AnimalFavouriteListView.as_view(), name='animal_favourite_list'),
+
+
 ]

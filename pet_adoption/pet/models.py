@@ -89,6 +89,7 @@ class Animal(BaseModel):
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
     about_pet = models.TextField(max_length=500, null=False)
     image = models.ImageField(upload_to="animal_pics/")
+    favourites = models.ManyToManyField(UserProfile, related_name='favorites', blank=True, default=None)
     is_available_for_adoption = models.BooleanField(default=True)
 
     class Meta:
