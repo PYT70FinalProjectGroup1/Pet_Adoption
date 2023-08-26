@@ -37,9 +37,8 @@ class UserProfile(BaseModel):
     phone = PhoneNumberField()
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
     profile_picture = models.ImageField(
-        upload_to="profile_pics/",
-        blank=False,
-        null=False,
+        upload_to="profile_pics/",        
+        null=True,
         default="profile_pics/default.jpg",
     )
 

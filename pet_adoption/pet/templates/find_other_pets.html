@@ -11,7 +11,7 @@
         </div>
         <div class="filters-content">
             <form method="get" action="">
-                {% csrf_token %} {{ filter_form|bootstrap }}
+                {{ filter_form|bootstrap }}
                 <button type="submit" class="btn btn-sm btn-success my-3">Apply Filters</button>
             </form>
         </div>
