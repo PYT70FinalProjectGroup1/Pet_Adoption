@@ -1,53 +1,81 @@
-{% extends 'base.html' %} {% load bootstrap %} {% load static %}
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
 {% block content %}
-<div class="container">
-	<div class="row">
-		<div class="col-md-8 offset-md-2">
-			<h2>Adoption Approval</h2>
-			<div class="card mt-4">
-				<div class="card-body">
-					<h4 class="card-title">
-						{{ adoption.user.first_name }} {{ adoption.user.last_name }}
-					</h4>
-					<p class="">
-						Application Date: {{ adoption.application_date|date:"Y-m-d H:i:s" }}
-					</p>
-					<p class="">Application Text: {{ adoption.application_text }}</p>
-					<p class="">
-						Reason for Adoption: {{ adoption.reason_for_adoption }}
-					</p>
-					<p class="">
-						Time Spending Habit: {{ adoption.time_spending_habbit }}
-					</p>
-					<p class="">Pet Fate: {{ adoption.pet_fate }}</p>
-					<p class="">Street: {{ adoption.street }}</p>
-					<p class="">City: {{ adoption.city }}</p>
-					<p class="">Living Space: {{ adoption.living_space }}</p>
-					<p class="">Square Meters: {{ adoption.square_meters }}</p>
-					<p class="">Initial Pet: {{ adoption.initial_pet }}</p>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Adoption Approval</h2>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>User</th>
+                                <td>{{ adoption.user.get_full_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Animal</th>
+                                <td>{{ adoption.animal }}</td>
+                            </tr>
+                            <tr>
+                                <th>Application Date</th>
+                                <td>{{ adoption.application_date|date:"Y-m-d H:i:s" }}</td>
+                            </tr>
+                            <tr>
+                                <th>Application Text</th>
+                                <td>{{ adoption.application_text }}</td>
+                            </tr>
+                            <tr>
+                                <th>Reason for Adoption</th>
+                                <td>{{ adoption.reason_for_adoption }}</td>
+                            </tr>
+                            <tr>
+                                <th>Time Spending Habit</th>
+                                <td>{{ adoption.time_spending_habbit }}</td>
+                            </tr>
+                            <tr>
+                                <th>Pet Fate</th>
+                                <td>{{ adoption.pet_fate }}</td>
+                            </tr>
+                            <tr>
+                                <th>Street</th>
+                                <td>{{ adoption.street }}</td>
+                            </tr>
+                            <tr>
+                                <th>City</th>
+                                <td>{{ adoption.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>Living Space</th>
+                                <td>{{ adoption.living_space }}</td>
+                            </tr>
+                            <tr>
+                                <th>Square Meters</th>
+                                <td>{{ adoption.square_meters }}</td>
+                            </tr>
+                            <tr>
+                                <th>Initial Pet</th>
+                                <td>{{ adoption.initial_pet }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-					<form method="post">
-						{% csrf_token %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="application_status" class="form-label">Application Status</label>
+                            <select name="application_status" id="application_status" class="form-control">
+                                <option value="Accepted" style="font-weight:bold; color:green;">Accepted</option>
+                                <option value="Denied" style="font-weight:bold; color:red;">Denied</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-						<div class="mb-3">
-							<label for="application_status" class="form-label"
-								>Application Status</label
-							>
-							<select
-								name="application_status"
-								id="application_status"
-								class="form-control"
-							>
-								<option value="Accepted">Accepted</option>
-								<option value="Denied">Denied</option>
-							</select>
-						</div>
-
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 {% endblock %}
+
