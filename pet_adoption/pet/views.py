@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
@@ -1059,3 +1059,24 @@ class MyAdoptionFormsView(LoginRequiredMixin, ListView):
             QuerySet: The queryset of adoption forms submitted by the user.
         """
         return Adoption.objects.filter(user=self.request.user)
+
+
+class AnimalSearchView(TemplateView):
+    template_name = 'animal_search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        find_pets = Animal.objects.filter(is_available_for_adoption=True)
+
+        filter_pets = AnimalFilterForm(self.request.GET)
+        if filter_pets.is_valid():
+            species = filter_pets.cleaned_data.get('species')
+
+            if species:
+                find_pets = find_pets.filter(species=species)
+
+        context['find_pets'] = find_pets
+        context['filter_pets'] = filter_pets
+        return context
+
+
