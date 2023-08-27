@@ -1,25 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<html>
-<head>
-    <title>Animal Search</title>
-</head>
-<body>
     <h1>Animal Search</h1>
-
+    
     {% if find_pets %}
-        <h2>Found Pets:</h2>
-        <ul>
+    <div class="col-md-9 pet-cards">
+        <div class="row row-cols-1 row-cols-lg-3 g-5 py-5">
             {% for pet in find_pets %}
-                <li>{{ pet.name }} - Species: {{ pet.species }} - Age: {{ pet.age }}</li>
+                <div class="col">
+                    <div class="fancy-card-home">
+                        <a href="{% url 'animal_detail' animal_id=pet.id %}">
+                        <img src="{{ pet.image.url }}" alt="Pet"></a>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ pet.name }}</h2>
+                            <div class="animal-data">
+                                <span>{{ pet.breed }} &#8226 </span>
+                                <span>{{ pet.gender }} &#8226 </span>
+                                <span>{{ pet.size }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No pets found.</p>
+        </div>
+    </div>
+    {% else%}
+    <p>No Animals in Dataset.</p>
     {% endif %}
 
-</body>
-</html>
 
 {% endblock %}

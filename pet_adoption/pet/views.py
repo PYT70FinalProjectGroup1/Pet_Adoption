@@ -28,6 +28,7 @@ from .models import (
 )
 from django.views import View
 from django.views.generic import ListView
+from django.db.models import Q
 
 
 class RegisterView(CreateView):
@@ -1066,17 +1067,18 @@ class AnimalSearchView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        searched = self.request.GET.get('searched')
+        
         find_pets = Animal.objects.filter(is_available_for_adoption=True)
 
-        filter_pets = AnimalFilterForm(self.request.GET)
-        if filter_pets.is_valid():
-            species = filter_pets.cleaned_data.get('species')
+        if searched is not None and searched.strip() != "":
+            find_pets =find_pets.filter(
+                Q(species__icontains=searched) | Q(breed__icontains=searched)| Q(name__icontains=searched),is_available_for_adoption=True
+            )
+        else:
+            find_pets = Animal.objects.none()
 
-            if species:
-                find_pets = find_pets.filter(species=species)
-
-        context['find_pets'] = find_pets
-        context['filter_pets'] = filter_pets
+        context['find_pets'] = find_pets        
         return context
 
 
