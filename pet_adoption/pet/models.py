@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from phonenumber_field.modelfields import PhoneNumberField
-from django.contrib.auth.models import AbstractUser
 
 
 class BaseModel(models.Model):
@@ -38,39 +36,14 @@ class Location(BaseModel):
         __str__(): Returns a string representation of the location using its city name.
     """
 
-    city_key = models.CharField(max_length=3, null=False)
-    city_name = models.CharField(max_length=32, null=False)
+    city_key = models.CharField(max_length=3, default="XXX",null=False)
+    city_name = models.CharField(max_length=32, default="XXXXXX",null=False)
 
     class Meta:
         verbose_name_plural = "Locations"
 
     def __str__(self):
         return f"{self.city_name}"
-
-
-class CustomUser(AbstractUser):
-    """
-    A custom user model extending Django's AbstractUser with an additional 'phone' field.
-
-    Fields:
-        phone (PhoneNumberField): The user's phone number.
-
-    You can further extend this class by adding any other fields you need in your custom user model.
-
-    Methods:
-        __str__(): Returns a string representation of the user by their username.
-    """
-
-    phone = PhoneNumberField(null=True, blank=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(
-        upload_to="profile_pics/",
-        null=True,
-        default="profile_pics/default.jpg",
-    )
-
-    def __str__(self):
-        return self.username
 
 
 class Animal(BaseModel):
@@ -136,7 +109,7 @@ class Animal(BaseModel):
     about_pet = models.TextField(max_length=500, null=False)
     image = models.ImageField(upload_to="animal_pics/")
     favourites = models.ManyToManyField(
-        CustomUser, related_name="favorites", blank=True, default=None
+        "accounts.CustomUser", related_name="favorites", blank=True, default=None
     )
     is_available_for_adoption = models.BooleanField(default=True)
 

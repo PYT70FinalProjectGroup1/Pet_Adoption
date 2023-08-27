@@ -6,9 +6,9 @@ from .models import (
     Animal,
     Adoption,
     Location,
-    CustomUser,
     AdoptionStory,
 )
+from accounts.models import CustomUser
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -260,7 +260,14 @@ class UserProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ["email", "first_name", "last_name", "phone", "location", "profile_picture"]
+        fields = [
+            "email",
+            "first_name",
+            "last_name",
+            "phone",
+            "location",
+            "profile_picture",
+        ]
 
 
 class AdoptionStoryForm(forms.ModelForm):

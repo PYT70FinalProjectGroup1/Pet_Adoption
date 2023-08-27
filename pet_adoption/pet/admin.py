@@ -21,11 +21,6 @@ class AnimalAdmin(admin.ModelAdmin):
     search_fields = ["species"]
 
 
-@admin.register(get_user_model())
-class UserModelAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     list_display = ["city_key", "city_name"]
@@ -52,6 +47,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display = ["animal", "service_name", "price"]
     list_filter = ["animal"]
     search_fields = ["animal"]
+
 
 @admin.register(AdoptionStory)
 class AdoptionStoryAdmin(admin.ModelAdmin):
