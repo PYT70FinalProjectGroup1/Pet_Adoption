@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html>
+<head>
+    <title>Animal Search</title>
+</head>
+<body>
+    <h1>Animal Search</h1>
+
+    {% if find_pets %}
+        <h2>Found Pets:</h2>
+        <ul>
+            {% for pet in find_pets %}
+                <li>{{ pet.name }} - Species: {{ pet.species }} - Age: {{ pet.age }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No pets found.</p>
+    {% endif %}
+
+</body>
+</html>
+
+{% endblock %}
