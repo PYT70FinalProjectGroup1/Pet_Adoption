@@ -21,7 +21,7 @@
 			<div class="adoption_story-card">
 				<img
 					class="user-img"
-					src="{{ story.adoption.user.userprofile.profile_picture.url }}"
+					src="{{ story.adoption.user.profile_picture.url }}"
 					alt="{{ story.adoption.user.first_name }}"
 				/>
 				<img
@@ -39,7 +39,7 @@
 						Adopted by: {{ story.adoption.user.first_name }} {{ story.adoption.user.last_name }}
 					</p>
 					<p class="mb-0">
-						Location: {{ story.adoption.user.userprofile.location }}
+						Location: {{ story.adoption.user.location }}
 					</p>
 				</div>
 			</div>

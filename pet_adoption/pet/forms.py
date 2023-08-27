@@ -1,11 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from .models import (
     Service,
     Treatment,
     Animal,
-    UserProfile,
     Adoption,
     Location,
     CustomUser,
@@ -36,7 +34,7 @@ class CustomUserCreationForm(UserCreationForm):
     phone = PhoneNumberField()
     location = forms.ModelChoiceField(
         label="Location",
-        queryset=Location.objects.all(),  # Provide the queryset for available locations
+        queryset=Location.objects.all(),
         required=True,
     )
     profile_picture = forms.ImageField(
@@ -71,19 +69,12 @@ class CustomUserCreationForm(UserCreationForm):
         """
         user = super().save(commit=False)
 
-        user_profile = UserProfile(
-            user=user,
-            phone=self.cleaned_data["phone"],
-            location=self.cleaned_data["location"],
-        )
-
         profile_picture = self.cleaned_data.get("profile_picture")
         if not profile_picture:
-            user_profile.profile_picture = "profile_pics/default.jpg"
+            user.profile_picture = "profile_pics/default.jpg"
 
         if commit:
             user.save()
-            user_profile.save()
         return user
 
 
@@ -195,7 +186,7 @@ class AnimalFilterForm(forms.Form):
     max_age = forms.IntegerField(required=False)
     location = forms.ModelChoiceField(
         label="Location",
-        queryset=Location.objects.all(),  # Provide the queryset for available locations
+        queryset=Location.objects.all(),
         required=False,
     )
 
@@ -268,8 +259,8 @@ class UserProfileUpdateForm(forms.ModelForm):
     last_name = forms.CharField(max_length=32, label="Last Name")
 
     class Meta:
-        model = UserProfile
-        fields = ["phone", "location", "profile_picture"]
+        model = CustomUser
+        fields = ["email", "first_name", "last_name", "phone", "location", "profile_picture"]
 
 
 class AdoptionStoryForm(forms.ModelForm):

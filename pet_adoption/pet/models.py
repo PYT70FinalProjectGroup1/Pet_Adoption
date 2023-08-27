@@ -1,6 +1,4 @@
-from django.utils import timezone
 from django.db import models
-from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractUser
@@ -23,25 +21,6 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
-
-
-class CustomUser(AbstractUser):
-    """
-    A custom user model extending Django's AbstractUser with an additional 'phone' field.
-
-    Fields:
-        phone (PhoneNumberField): The user's phone number.
-
-    You can further extend this class by adding any other fields you need in your custom user model.
-
-    Methods:
-        __str__(): Returns a string representation of the user by their username.
-    """
-
-    phone = PhoneNumberField(null=True, blank=True)
-
-    def __str__(self):
-        return self.username
 
 
 class Location(BaseModel):
@@ -69,25 +48,20 @@ class Location(BaseModel):
         return f"{self.city_name}"
 
 
-class UserProfile(BaseModel):
+class CustomUser(AbstractUser):
     """
-    Represents a user profile with additional information.
+    A custom user model extending Django's AbstractUser with an additional 'phone' field.
 
     Fields:
-        user (OneToOneField): A one-to-one relationship to the User model.
         phone (PhoneNumberField): The user's phone number.
-        location (ForeignKey): A foreign key to the Location model representing the user's location.
-        profile_picture (ImageField): The user's profile picture.
 
-    Meta:
-        verbose_name_plural = "User Profiles": Specifies the plural name for this model.
+    You can further extend this class by adding any other fields you need in your custom user model.
 
     Methods:
-        __str__(): Returns a string representation of the user's profile using their username.
+        __str__(): Returns a string representation of the user by their username.
     """
 
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     profile_picture = models.ImageField(
         upload_to="profile_pics/",
@@ -95,11 +69,8 @@ class UserProfile(BaseModel):
         default="profile_pics/default.jpg",
     )
 
-    class Meta:
-        verbose_name_plural = "User Profiles"
-
     def __str__(self):
-        return f"{self.user}"
+        return self.username
 
 
 class Animal(BaseModel):
@@ -165,7 +136,7 @@ class Animal(BaseModel):
     about_pet = models.TextField(max_length=500, null=False)
     image = models.ImageField(upload_to="animal_pics/")
     favourites = models.ManyToManyField(
-        UserProfile, related_name="favorites", blank=True, default=None
+        CustomUser, related_name="favorites", blank=True, default=None
     )
     is_available_for_adoption = models.BooleanField(default=True)
 

@@ -1,11 +1,8 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView, DetailView
-from django.contrib.auth import get_user_model, get_user
+from django.contrib.auth import get_user_model
 from .forms import (
     CustomUserCreationForm,
     ServiceForm,
@@ -23,7 +20,6 @@ from .models import (
     Treatment,
     Adoption,
     CustomUser,
-    UserProfile,
     AdoptionStory,
 )
 from django.views import View
@@ -99,7 +95,7 @@ class HomeView(TemplateView):
 
         if self.request.user.is_authenticated:
             try:
-                user_location = self.request.user.userprofile.location
+                user_location = self.request.user.location
                 animals_near_user = animals.filter(location=user_location)
                 context["animals_near_user"] = animals_near_user
                 context["user_location"] = user_location
@@ -637,8 +633,8 @@ class AnimalDetailView(DetailView):
         context["other_available_adoption"] = other_available_adoption
 
         if self.request.user.is_authenticated:
-            user_profile = UserProfile.objects.get(user=self.request.user)
-            context["user_favourite_animals"] = user_profile.favorites.all()
+            user_favourite_animals = self.request.user.favorites.all()
+            context["user_favourite_animals"] = user_favourite_animals
 
         return context
 
@@ -655,12 +651,11 @@ class AnimalDetailView(DetailView):
         """
 
         animal = get_object_or_404(Animal, id=animal_id)
-        user_profile = request.user.userprofile
 
-        if user_profile.favorites.filter(id=animal.id).exists():
-            user_profile.favorites.remove(animal)
+        if request.user.favorites.filter(id=animal.id).exists():
+            request.user.favorites.remove(animal)
         else:
-            user_profile.favorites.add(animal)
+            request.user.favorites.add(animal)
 
         return redirect("animal_detail", animal_id=animal.id)
 
@@ -903,7 +898,7 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
         get_queryset(): Retrieve the queryset for the user's profile.
     """
 
-    model = UserProfile
+    model = CustomUser
     template_name = "userprofile_detail.html"
     context_object_name = "user_profile"
     pk_url_kwarg = "pk"
@@ -916,7 +911,7 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
             QuerySet: The queryset containing the user's profile.
         """
 
-        return UserProfile.objects.filter(user=self.request.user)
+        return CustomUser.objects.filter(id=self.request.user.id)
 
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
@@ -937,7 +932,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         form_valid(form): Save the user's first name, last name, and profile picture (if provided).
     """
 
-    model = UserProfile
+    model = CustomUser
     form_class = UserProfileUpdateForm
     template_name = "userprofile_update.html"
     context_object_name = "user_profile"
@@ -950,7 +945,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         Returns:
             QuerySet: The queryset containing the user's profile.
         """
-        return UserProfile.objects.filter(user=self.request.user)
+        return CustomUser.objects.filter(id=self.request.user.id)
 
     def get_success_url(self):
         """
@@ -973,8 +968,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         """
         form = super().get_form(form_class)
 
-        user = get_user_model()
-        user_instance = user.objects.get(pk=self.request.user.pk)
+        user_instance = CustomUser.objects.get(pk=self.request.user.pk)
 
         form.fields["email"].initial = user_instance.email
         form.fields["first_name"].initial = user_instance.first_name
@@ -992,17 +986,16 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         Returns:
             HttpResponse: The response after successful form validation.
         """
-        user = get_user_model()
-        user_instance = user.objects.get(pk=self.request.user.pk)
+
+        user_instance = CustomUser.objects.get(pk=self.request.user.pk)
 
         user_instance.first_name = form.cleaned_data["first_name"]
         user_instance.last_name = form.cleaned_data["last_name"]
         user_instance.save()
 
         if "profile_picture" in self.request.FILES:
-            user_profile = user_instance.userprofile
-            user_profile.profile_picture = self.request.FILES["profile_picture"]
-            user_profile.save()
+            user_instance.profile_picture = self.request.FILES["profile_picture"]
+            user_instance.save()
 
         return super().form_valid(form)
 
@@ -1030,7 +1023,7 @@ class AnimalFavouriteListView(LoginRequiredMixin, View):
         Returns:
             HttpResponse: The rendered template with the list of favourite animals in the context.
         """
-        favourite_animals = request.user.userprofile.favorites.all()
+        favourite_animals = request.user.favorites.all()
         context = {"favourite_animals": favourite_animals}
         return render(request, self.template_name, context)
 
@@ -1063,9 +1056,41 @@ class MyAdoptionFormsView(LoginRequiredMixin, ListView):
 
 
 class AnimalSearchView(TemplateView):
+    """
+    A view that handles the search functionality for available animals
+    in the adoption system.
+
+    This view displays a template ('animal_search.html') and provides
+    a context variable 'find_pets' that contains a list of Animal objects
+    matching the search criteria, if any. The search can be performed based
+    on species, breed, and name of the animals.
+
+    Attributes:
+        template_name (str): The name of the HTML template to be rendered.
+
+    Methods:
+        get_context_data(**kwargs):
+            Retrieves and prepares the context data for rendering the template.
+            This method filters available Animal objects based on the search
+            criteria and updates the 'find_pets' context variable accordingly.
+    """
+        
     template_name = 'animal_search.html'
 
     def get_context_data(self, **kwargs):
+        """
+        Retrieve and prepare the context data for rendering the template.
+
+        If a search query parameter ('searched') is provided, filters the
+        available Animal objects based on the search criteria (species, breed,
+        and name) and updates the 'find_pets' context variable. If no valid
+        search criteria is provided, 'find_pets' is set to an empty queryset.
+
+        Returns:
+            dict: A dictionary containing the context data for rendering
+                  the template, including the 'find_pets' queryset.
+        """
+        
         context = super().get_context_data(**kwargs)
         searched = self.request.GET.get('searched')
         

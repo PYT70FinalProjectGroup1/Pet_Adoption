@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from .models import Animal, UserProfile, Adoption, Treatment, Service, Location, AdoptionStory
+from .models import Animal, Adoption, Treatment, Service, Location, AdoptionStory
 
 
 @admin.register(Animal)
@@ -31,13 +31,6 @@ class LocationAdmin(admin.ModelAdmin):
     list_display = ["city_key", "city_name"]
     list_filter = ["city_key"]
     search_fields = ["city_name"]
-
-
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ["user"]
-    list_filter = ["id"]
-    search_fields = ["surname"]
 
 
 @admin.register(Adoption)

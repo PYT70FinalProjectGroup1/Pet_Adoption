@@ -150,7 +150,7 @@
         <span></span>
       </div>
       <div class="fancy-text">
-        <h4 class="mt-5 mb-4">Discover Pets Near {{ user.userprofile.location }}</h4>
+        <h4 class="mt-5 mb-4">Discover Pets Near {{ user.location }}</h4>
         <p>
           Embrace the joy of adding a new furry family member from your very own neighborhood! Explore our charming pets, each
           brimming with affection and companionship, and awaiting a forever home just around the corner.
@@ -204,10 +204,10 @@
       <div class="adoption-card">
         <a href="{% url 'adoption_stories' %}">
         <img class="animal-img" src="{{ story.adoption.animal.image.url }}" alt="Animal">
-        <img class="user-img" src="{{ story.adoption.user.userprofile.profile_picture.url }}" alt="User"></a>
+        <img class="user-img" src="{{ story.adoption.user.profile_picture.url }}" alt="User"></a>
         <div class="card-body">
           <h2 class="card-title">{{ story.adoption.user.first_name }} {{ story.adoption.user.last_name }}</h2>
-          <p>{{ story.adoption.user.userprofile.location }}</p>
+          <p>{{ story.adoption.user.location }}</p>
         </div>
       </div>
     </div>  
