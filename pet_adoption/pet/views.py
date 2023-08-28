@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView, DetailView
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import (
+from pet.forms import (
     CustomUserCreationForm,
     ServiceForm,
     TreatmentForm,
@@ -14,7 +14,7 @@ from .forms import (
     AdoptionForm,
     AdoptionStoryForm,
 )
-from .models import (
+from pet.models import (
     Animal,
     Service,
     Treatment,
