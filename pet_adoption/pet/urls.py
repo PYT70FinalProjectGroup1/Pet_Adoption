@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (
+from pet.views import (
     HomeView,
     AboutView,
     DonateView,
