@@ -1,0 +1,2030 @@
+[
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "accounts",
+        "model": "customuser"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "pet",
+        "model": "adoption"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "pet",
+        "model": "animal"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "pet",
+        "model": "location"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "pet",
+        "model": "treatment"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "pet",
+        "model": "service"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "pet",
+        "model": "adoptionstory"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "sv5yyges2e62r6eqr4dugqokss2mnqq7",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQRP-FsyGFpbR49O43kF12sVVDk9KejP-uJD3oaZJ5b-alIu7bFPcqa5xZnZVRp9-OMD2kNMB3LLdFp6Vs60y6KfqgVV8XluflcP8OJqxTWzNbIeox9JRHmx1gZgsZvhkkQ2eSBOcMk5fRAwzBou3Ip4FH8F7U-wMXXjiY:1qbFv7:FwlVrGhpmeFPspYRie6YiM8OGETgd64FXR4vLlS4BMc",
+        "expire_date": "2023-09-13T07:47:21.291Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "vdi42lw3ttgknuoqih1lbad2x3t99whl",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQRP-FsyGFpbR49O43kF12sVVDk9KejP-uJD3oaZJ5b-alIu7bFPcqa5xZnZVRp9-OMD2kNMB3LLdFp6Vs60y6KfqgVV8XluflcP8OJqxTWzNbIeox9JRHmx1gZgsZvhkkQ2eSBOcMk5fRAwzBou3Ip4FH8F7U-wMXXjiY:1qaiVs:__isD4kszGWcw8p5mjDS4Wi4vVTFmcbmWPfFUipFR3M",
+        "expire_date": "2023-09-11T20:07:04.725Z"
+    }
+},
+{
+    "model": "pet.location",
+    "pk": 1,
+    "fields": {
+        "created_at": "2023-08-27T21:13:48.437Z",
+        "updated_at": "2023-08-27T21:13:48.437Z",
+        "city_key": "WAW",
+        "city_name": "Warsaw"
+    }
+},
+{
+    "model": "pet.location",
+    "pk": 2,
+    "fields": {
+        "created_at": "2023-09-02T08:08:38.736Z",
+        "updated_at": "2023-09-02T08:08:38.736Z",
+        "city_key": "KRK",
+        "city_name": "Krakow"
+    }
+},
+{
+    "model": "pet.location",
+    "pk": 3,
+    "fields": {
+        "created_at": "2023-09-02T08:08:48.291Z",
+        "updated_at": "2023-09-02T08:08:48.291Z",
+        "city_key": "LDZ",
+        "city_name": "Lodz"
+    }
+},
+{
+    "model": "pet.location",
+    "pk": 4,
+    "fields": {
+        "created_at": "2023-09-02T08:08:56.905Z",
+        "updated_at": "2023-09-02T08:08:56.905Z",
+        "city_key": "GDA",
+        "city_name": "Gdansk"
+    }
+},
+{
+    "model": "pet.location",
+    "pk": 5,
+    "fields": {
+        "created_at": "2023-09-02T08:09:03.267Z",
+        "updated_at": "2023-09-02T08:09:03.267Z",
+        "city_key": "POZ",
+        "city_name": "Poznan"
+    }
+},
+{
+    "model": "pet.treatment",
+    "pk": 1,
+    "fields": {
+        "created_at": "2023-09-02T08:24:34.791Z",
+        "updated_at": "2023-09-02T08:24:34.871Z",
+        "animal": 5,
+        "treatment_name": "Vaccination",
+        "next_date": "2023-09-16",
+        "description": "Vaccination done. Next visit scheduled"
+    }
+},
+{
+    "model": "pet.treatment",
+    "pk": 2,
+    "fields": {
+        "created_at": "2023-09-02T08:25:43.620Z",
+        "updated_at": "2023-09-02T08:25:43.740Z",
+        "animal": 8,
+        "treatment_name": "Dental Care",
+        "next_date": "2023-09-29",
+        "description": "Dental Care done. Next visit scheduled soon"
+    }
+},
+{
+    "model": "pet.service",
+    "pk": 1,
+    "fields": {
+        "created_at": "2023-09-02T08:24:07.360Z",
+        "updated_at": "2023-09-02T08:24:07.478Z",
+        "animal": 5,
+        "date": "2023-09-02",
+        "service_name": "Personalized Training Packages",
+        "description": "Running, jumping. A lot of excercises for your dog",
+        "price": "125.00"
+    }
+},
+{
+    "model": "pet.adoptionstory",
+    "pk": 4,
+    "fields": {
+        "created_at": "2023-09-02T08:21:50.796Z",
+        "updated_at": "2023-09-02T08:21:50.796Z",
+        "adoption": 4,
+        "story_title": "A New Beginning",
+        "story_description": "After years of solitude, John found comfort in adopting Bella, a rescue dog. Their bond was immediate, filling their lives with joy and endless adventures."
+    }
+},
+{
+    "model": "pet.adoptionstory",
+    "pk": 5,
+    "fields": {
+        "created_at": "2023-09-02T08:22:08.116Z",
+        "updated_at": "2023-09-02T08:22:08.116Z",
+        "adoption": 5,
+        "story_title": "Second Chances",
+        "story_description": "Lucy, once abandoned, was adopted by the Smiths. The shy cat soon became the center of attention, proving that love can heal even the deepest scars."
+    }
+},
+{
+    "model": "pet.adoptionstory",
+    "pk": 6,
+    "fields": {
+        "created_at": "2023-09-02T08:22:24.368Z",
+        "updated_at": "2023-09-02T08:22:24.368Z",
+        "adoption": 6,
+        "story_title": "The Perfect Match",
+        "story_description": "Sarah never believed in fate until she met Max at the shelter. It felt like they had known each other forever. Now, they're inseparable."
+    }
+},
+{
+    "model": "pet.adoptionstory",
+    "pk": 7,
+    "fields": {
+        "created_at": "2023-09-02T08:22:41.382Z",
+        "updated_at": "2023-09-02T08:22:41.382Z",
+        "adoption": 7,
+        "story_title": "Love at First Sight",
+        "story_description": "When the Thompsons visited the shelter, they weren't planning on adopting. But one look at Daisy, and they knew she was meant to be part of their family."
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "add_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "change_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "delete_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "view_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add adoption",
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "codename": "add_adoption"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change adoption",
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "codename": "change_adoption"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete adoption",
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "codename": "delete_adoption"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view adoption",
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "codename": "view_adoption"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add animal",
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "codename": "add_animal"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change animal",
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "codename": "change_animal"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete animal",
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "codename": "delete_animal"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view animal",
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "codename": "view_animal"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add location",
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "codename": "add_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change location",
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "codename": "change_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete location",
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "codename": "delete_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view location",
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "codename": "view_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add treatment",
+        "content_type": [
+            "pet",
+            "treatment"
+        ],
+        "codename": "add_treatment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change treatment",
+        "content_type": [
+            "pet",
+            "treatment"
+        ],
+        "codename": "change_treatment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete treatment",
+        "content_type": [
+            "pet",
+            "treatment"
+        ],
+        "codename": "delete_treatment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view treatment",
+        "content_type": [
+            "pet",
+            "treatment"
+        ],
+        "codename": "view_treatment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add service",
+        "content_type": [
+            "pet",
+            "service"
+        ],
+        "codename": "add_service"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change service",
+        "content_type": [
+            "pet",
+            "service"
+        ],
+        "codename": "change_service"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete service",
+        "content_type": [
+            "pet",
+            "service"
+        ],
+        "codename": "delete_service"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view service",
+        "content_type": [
+            "pet",
+            "service"
+        ],
+        "codename": "view_service"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add adoption story",
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "codename": "add_adoptionstory"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change adoption story",
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "codename": "change_adoptionstory"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete adoption story",
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "codename": "delete_adoptionstory"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view adoption story",
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "codename": "view_adoptionstory"
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$WlBVeGCkX5ma7VIO8zRR8Y$2QFsxW2Ga8VFQVujGvhRiB34VUQVNhIvK/fKOlwnrls=",
+        "last_login": "2023-09-02T08:24:56.047Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "Henry",
+        "last_name": "Witcher",
+        "email": "hw@wp.pl",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-08-27T21:03:46.739Z",
+        "phone": "+48223452324",
+        "location": 1,
+        "profile_picture": "profile_pics/Alan.jpg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$VIt2hOWoHxbl09J8gDQOof$z+PEZtXHmcXXMKfJJg+y2JQYF8WinGGNwVNuear42pQ=",
+        "last_login": "2023-09-02T08:23:21.501Z",
+        "is_superuser": false,
+        "username": "Dima",
+        "first_name": "Dima",
+        "last_name": "Victory",
+        "email": "dima@wp.pl",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-08-27T21:20:00.888Z",
+        "phone": "+48223453434",
+        "location": 1,
+        "profile_picture": "profile_pics/Dima.jpg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$FKNqIgHonAPrqVbu6Gj0eH$d0qvyFO9BnwB0kTHRNGFnq6U/g5cEYSB/w80/XGngUk=",
+        "last_login": "2023-08-28T11:35:02.931Z",
+        "is_superuser": false,
+        "username": "Tester",
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "tester@wp.pl",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-08-28T11:33:57.823Z",
+        "phone": "+48223453489",
+        "location": 1,
+        "profile_picture": "profile_pics/Tester.jpg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$243IqLvD1eUDka2huguWoH$n6cshUfc5g7103QIjohoIwMHJtc+aKQ8KIsXfp8MDtA=",
+        "last_login": "2023-08-28T11:34:51.806Z",
+        "is_superuser": false,
+        "username": "Monic",
+        "first_name": "Monic",
+        "last_name": "Sweathearth",
+        "email": "monic@wp.pl",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-08-28T11:34:31.580Z",
+        "phone": "+48126457812",
+        "location": 1,
+        "profile_picture": "profile_pics/Monic.jpg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 2,
+    "fields": {
+        "created_at": "2023-08-30T07:48:19.724Z",
+        "updated_at": "2023-09-02T08:20:46.781Z",
+        "name": "Billy",
+        "color": "Grey",
+        "species": "Cat",
+        "breed": "Maine Coon",
+        "gender": "Male",
+        "size": "Medium",
+        "age": 2,
+        "chip": "32342342",
+        "location": 1,
+        "about_pet": "Cat",
+        "image": "animal_pics/Billy.jpg",
+        "is_available_for_adoption": false,
+        "favourites": [
+            [
+                "Dima"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 3,
+    "fields": {
+        "created_at": "2023-08-30T07:48:49.940Z",
+        "updated_at": "2023-08-30T07:48:49.940Z",
+        "name": "Nemo",
+        "color": "Orange",
+        "species": "Other",
+        "breed": "Clownfish",
+        "gender": "Male",
+        "size": "Small",
+        "age": 1,
+        "chip": "55454399",
+        "location": 1,
+        "about_pet": "fish",
+        "image": "animal_pics/Nemo.jpg",
+        "is_available_for_adoption": true,
+        "favourites": [
+            [
+                "admin"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 4,
+    "fields": {
+        "created_at": "2023-09-02T08:10:04.494Z",
+        "updated_at": "2023-09-02T08:10:04.494Z",
+        "name": "Bobby",
+        "color": "Brown",
+        "species": "Dog",
+        "breed": "Amstaff",
+        "gender": "Male",
+        "size": "Small",
+        "age": 3,
+        "chip": "342334353432",
+        "location": 2,
+        "about_pet": "Good dog",
+        "image": "animal_pics/Bobby.jpg",
+        "is_available_for_adoption": true,
+        "favourites": [
+            [
+                "Dima"
+            ],
+            [
+                "Monic"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 5,
+    "fields": {
+        "created_at": "2023-09-02T08:10:57.231Z",
+        "updated_at": "2023-09-02T08:19:10.191Z",
+        "name": "Gacek",
+        "color": "Grey",
+        "species": "Dog",
+        "breed": "Amstaff",
+        "gender": "Female",
+        "size": "Large",
+        "age": 3,
+        "chip": "5545431",
+        "location": 5,
+        "about_pet": "Nice shiny amstaff",
+        "image": "animal_pics/Gacek.jpg",
+        "is_available_for_adoption": false,
+        "favourites": [
+            [
+                "admin"
+            ],
+            [
+                "Dima"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 6,
+    "fields": {
+        "created_at": "2023-09-02T08:11:33.901Z",
+        "updated_at": "2023-09-02T08:11:33.901Z",
+        "name": "Henry",
+        "color": "White",
+        "species": "Dog",
+        "breed": "Mongrel",
+        "gender": "Female",
+        "size": "Small",
+        "age": 6,
+        "chip": "2121",
+        "location": 3,
+        "about_pet": "Sweety dog",
+        "image": "animal_pics/Henry.jpg",
+        "is_available_for_adoption": true,
+        "favourites": [
+            [
+                "Tester"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 7,
+    "fields": {
+        "created_at": "2023-09-02T08:12:34.809Z",
+        "updated_at": "2023-09-02T08:12:34.809Z",
+        "name": "Jenna",
+        "color": "Grey",
+        "species": "Cat",
+        "breed": "European",
+        "gender": "Female",
+        "size": "Small",
+        "age": 3,
+        "chip": "45343",
+        "location": 4,
+        "about_pet": "Cat",
+        "image": "animal_pics/Jenna.jpg",
+        "is_available_for_adoption": true,
+        "favourites": [
+            [
+                "Monic"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 8,
+    "fields": {
+        "created_at": "2023-09-02T08:13:27.637Z",
+        "updated_at": "2023-09-02T08:19:40.346Z",
+        "name": "Pirat",
+        "color": "Green",
+        "species": "Other",
+        "breed": "Parakeet",
+        "gender": "Female",
+        "size": "Small",
+        "age": 3,
+        "chip": "6544",
+        "location": 4,
+        "about_pet": "Bird",
+        "image": "animal_pics/Pirat.jpg",
+        "is_available_for_adoption": false,
+        "favourites": [
+            [
+                "admin"
+            ],
+            [
+                "Monic"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 9,
+    "fields": {
+        "created_at": "2023-09-02T08:14:22.209Z",
+        "updated_at": "2023-09-02T08:20:11.899Z",
+        "name": "Ratatouile",
+        "color": "Grey",
+        "species": "Other",
+        "breed": "Rat X",
+        "gender": "Male",
+        "size": "Small",
+        "age": 3,
+        "chip": "231",
+        "location": 1,
+        "about_pet": "Rat",
+        "image": "animal_pics/Rat.jpg",
+        "is_available_for_adoption": false,
+        "favourites": [
+            [
+                "Dima"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 10,
+    "fields": {
+        "created_at": "2023-09-02T08:17:08.205Z",
+        "updated_at": "2023-09-02T08:17:08.205Z",
+        "name": "Sonic",
+        "color": "Brown",
+        "species": "Other",
+        "breed": "Hedgehog",
+        "gender": "Female",
+        "size": "Small",
+        "age": 2,
+        "chip": "3245",
+        "location": 3,
+        "about_pet": "Hedgehog",
+        "image": "animal_pics/Sonic.jpg",
+        "is_available_for_adoption": true,
+        "favourites": [
+            [
+                "Monic"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.animal",
+    "pk": 11,
+    "fields": {
+        "created_at": "2023-09-02T08:17:48.154Z",
+        "updated_at": "2023-09-02T08:17:48.154Z",
+        "name": "Witcher",
+        "color": "Brown",
+        "species": "Cat",
+        "breed": "British",
+        "gender": "Male",
+        "size": "Small",
+        "age": 4,
+        "chip": "57654",
+        "location": 3,
+        "about_pet": "Cat",
+        "image": "animal_pics/Witcher.jpg",
+        "is_available_for_adoption": true,
+        "favourites": [
+            [
+                "Dima"
+            ],
+            [
+                "Tester"
+            ],
+            [
+                "Monic"
+            ]
+        ]
+    }
+},
+{
+    "model": "pet.adoption",
+    "pk": 4,
+    "fields": {
+        "created_at": "2023-09-02T08:19:03.864Z",
+        "updated_at": "2023-09-02T08:19:03.864Z",
+        "user": [
+            "Dima"
+        ],
+        "animal": 5,
+        "application_text": "Testy",
+        "application_date": "2023-09-02T08:19:03.864Z",
+        "application_status": "Approved",
+        "reason_for_adoption": "Testy",
+        "time_spending_habbit": "Testy",
+        "pet_fate": "Testy",
+        "street": "Elm 10",
+        "city": 1,
+        "living_space": "House",
+        "square_meters": "56",
+        "initial_pet": "Yes",
+        "is_approved": true
+    }
+},
+{
+    "model": "pet.adoption",
+    "pk": 5,
+    "fields": {
+        "created_at": "2023-09-02T08:19:33.014Z",
+        "updated_at": "2023-09-02T08:25:07.694Z",
+        "user": [
+            "admin"
+        ],
+        "animal": 8,
+        "application_text": "Testy",
+        "application_date": "2023-09-02T08:19:33.014Z",
+        "application_status": "Approved",
+        "reason_for_adoption": "Testy",
+        "time_spending_habbit": "Testy",
+        "pet_fate": "Testy",
+        "street": "Vistory ln 10",
+        "city": 3,
+        "living_space": "House",
+        "square_meters": "32",
+        "initial_pet": "Yes",
+        "is_approved": true
+    }
+},
+{
+    "model": "pet.adoption",
+    "pk": 6,
+    "fields": {
+        "created_at": "2023-09-02T08:20:06.018Z",
+        "updated_at": "2023-09-02T08:20:06.018Z",
+        "user": [
+            "Tester"
+        ],
+        "animal": 9,
+        "application_text": "Testy",
+        "application_date": "2023-09-02T08:20:06.018Z",
+        "application_status": "Approved",
+        "reason_for_adoption": "Testy",
+        "time_spending_habbit": "Testy",
+        "pet_fate": "Testy",
+        "street": "Lust 69",
+        "city": 4,
+        "living_space": "House",
+        "square_meters": "32",
+        "initial_pet": "No",
+        "is_approved": true
+    }
+},
+{
+    "model": "pet.adoption",
+    "pk": 7,
+    "fields": {
+        "created_at": "2023-09-02T08:20:40.546Z",
+        "updated_at": "2023-09-02T08:20:40.546Z",
+        "user": [
+            "Monic"
+        ],
+        "animal": 2,
+        "application_text": "Testy",
+        "application_date": "2023-09-02T08:20:40.546Z",
+        "application_status": "Approved",
+        "reason_for_adoption": "Testy",
+        "time_spending_habbit": "Testy",
+        "pet_fate": "Testy",
+        "street": "Justice 11",
+        "city": 4,
+        "living_space": "House",
+        "square_meters": "45",
+        "initial_pet": "Yes",
+        "is_approved": true
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2023-08-27T21:13:48.439Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "object_id": "1",
+        "object_repr": "Warsaw",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-08-27T21:18:49.201Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "object_id": "2",
+        "object_repr": "Dima",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-08-27T21:21:18.897Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "1",
+        "object_repr": "Jimmy",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2023-08-28T20:07:46.335Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "2",
+        "object_repr": " 2 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2023-08-28T20:07:54.595Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "2",
+        "object_repr": "AdoptionStory object (2)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2023-08-28T20:16:33.170Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "1",
+        "object_repr": "Jimmy",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is available for adoption\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2023-08-28T20:17:26.832Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "2",
+        "object_repr": "AdoptionStory object (2)",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2023-08-28T20:17:26.939Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "1",
+        "object_repr": "AdoptionStory object (1)",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2023-08-28T20:17:32.515Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "2",
+        "object_repr": " 2 - True",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2023-08-28T20:17:32.598Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "1",
+        "object_repr": " 1 - True",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2023-08-28T20:18:01.866Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "1",
+        "object_repr": "Jimmy",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Species\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2023-08-28T20:23:11.484Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "1",
+        "object_repr": "Jimmy",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2023-08-28T20:23:15.329Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "1",
+        "object_repr": "Jimmy",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is available for adoption\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2023-08-30T07:48:19.727Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "2",
+        "object_repr": "Billy",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2023-08-30T07:48:49.944Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "3",
+        "object_repr": "Nemo",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2023-08-30T07:49:17.569Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "3",
+        "object_repr": " 3 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2023-08-30T07:50:11.593Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "3",
+        "object_repr": "AdoptionStory object (3)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2023-09-02T08:08:38.738Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "object_id": "2",
+        "object_repr": "Krakow",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2023-09-02T08:08:48.293Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "object_id": "3",
+        "object_repr": "Lodz",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2023-09-02T08:08:56.907Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "object_id": "4",
+        "object_repr": "Gdansk",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2023-09-02T08:09:03.268Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "location"
+        ],
+        "object_id": "5",
+        "object_repr": "Poznan",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2023-09-02T08:10:04.498Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "4",
+        "object_repr": "Bobby",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2023-09-02T08:10:57.242Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "5",
+        "object_repr": "Gacek",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2023-09-02T08:11:33.904Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "6",
+        "object_repr": "Henry",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2023-09-02T08:12:34.813Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "7",
+        "object_repr": "Jenna",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2023-09-02T08:13:27.641Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "8",
+        "object_repr": "Pirat",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2023-09-02T08:14:22.213Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "9",
+        "object_repr": "Ratatouile",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2023-09-02T08:14:57.237Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "3",
+        "object_repr": " 3 - True",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2023-09-02T08:15:08.878Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "1",
+        "object_repr": "Jimmy",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Favourites\", \"Is available for adoption\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2023-09-02T08:15:36.255Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "1",
+        "object_repr": "Jimmy",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2023-09-02T08:17:08.209Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "10",
+        "object_repr": "Sonic",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2023-09-02T08:17:48.158Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "11",
+        "object_repr": "Witcher",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2023-09-02T08:18:29.397Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "object_id": "6",
+        "object_repr": "Tester2",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2023-09-02T08:19:03.866Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "4",
+        "object_repr": " 4 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2023-09-02T08:19:10.194Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "5",
+        "object_repr": "Gacek",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is available for adoption\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2023-09-02T08:19:33.016Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "5",
+        "object_repr": " 5 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2023-09-02T08:19:40.349Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "8",
+        "object_repr": "Pirat",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is available for adoption\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2023-09-02T08:20:06.020Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "6",
+        "object_repr": " 6 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+        "action_time": "2023-09-02T08:20:11.901Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "9",
+        "object_repr": "Ratatouile",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is available for adoption\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+        "action_time": "2023-09-02T08:20:40.548Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "7",
+        "object_repr": " 7 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+        "action_time": "2023-09-02T08:20:46.783Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "animal"
+        ],
+        "object_id": "2",
+        "object_repr": "Billy",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is available for adoption\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+        "action_time": "2023-09-02T08:21:50.798Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "4",
+        "object_repr": "AdoptionStory object (4)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+        "action_time": "2023-09-02T08:22:08.117Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "5",
+        "object_repr": "AdoptionStory object (5)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+        "action_time": "2023-09-02T08:22:24.370Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "6",
+        "object_repr": "AdoptionStory object (6)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+        "action_time": "2023-09-02T08:22:41.384Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoptionstory"
+        ],
+        "object_id": "7",
+        "object_repr": "AdoptionStory object (7)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+        "action_time": "2023-09-02T08:25:07.696Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "pet",
+            "adoption"
+        ],
+        "object_id": "5",
+        "object_repr": " 5 - True",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"User\"]}}]"
+    }
+}
+]

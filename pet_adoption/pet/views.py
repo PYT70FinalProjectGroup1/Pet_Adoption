@@ -23,38 +23,6 @@ from pet.models import (
 )
 
 
-class RegisterView(CreateView):
-    """
-    A view for user registration.
-
-    Attributes:
-        form_class (CustomUserCreationForm): The form class for user registration.
-        template_name (str): The template name to render for user registration.
-        success_url (str): The URL to redirect to upon successful registration.
-
-    Methods:
-        form_valid(form): Overrides the default form_valid method to perform additional actions.
-    """
-
-    form_class = CustomUserCreationForm
-    template_name = "registration/register.html"
-    success_url = reverse_lazy("login")
-
-    def form_valid(self, form):
-        """
-        Handle valid form submission.
-
-        Args:
-            form (CustomUserCreationForm): The submitted form instance.
-
-        Returns:
-            HttpResponse: The response after successful form validation.
-        """
-
-        response = super().form_valid(form)
-        return response
-
-
 class HomeView(TemplateView):
     """
     A view for the home page.

@@ -1,10 +1,15 @@
 from django.test import TestCase
 from .models import Animal, Location
-
-
+from accounts.models import CustomUser
+from django.urls import reverse
+from django.test import TestCase
+from pet.models import Location
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.conf import settings
+import os
 class AnimalQueryTest(TestCase):
     def setUp(self):
-        location = Location.objects.create(city_key="WAW", city_name="Warsaw")
+        self.location = Location.objects.create(city_key="WAW", city_name="Warsaw")
 
         Animal.objects.create(
             name="Kojak",
@@ -15,7 +20,7 @@ class AnimalQueryTest(TestCase):
             size="Small",
             age="2",
             chip="456789",
-            location=location,
+            location=self.location,
             about_pet="I like this fish",
             is_available_for_adoption=True,
         )
@@ -29,15 +34,19 @@ class AnimalQueryTest(TestCase):
             size="Medium",
             age="1",
             chip="4567891",
-            location=location,
+            location=self.location,
             about_pet="I like this dog",
             is_available_for_adoption=True,
         )
 
-    def test_queryset_count(self):
+    def test_filter_dogs_available_for_adoption(self):
         queryset = Animal.objects.filter(is_available_for_adoption=True, species="Dog")
         self.assertEqual(queryset.count(), 1)
 
-    def test_name_in_queryset(self):
+    def test_jimmy_exists_with_filter(self):
         queryset = Animal.objects.filter(is_available_for_adoption=True, species="Dog")
-        self.assertTrue(queryset.filter(name="Jimmy").exists())
+        self.assertTrue(queryset.filter(name="Jimmy", location=self.location).exists())
+
+    def test_kojak_not_exists_with_filter(self):
+        queryset = Animal.objects.filter(is_available_for_adoption=True, species="Dog")
+        self.assertFalse(queryset.filter(name="Kojak", location=self.location).exists())
