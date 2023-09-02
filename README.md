@@ -22,7 +22,8 @@ git clone https://github.com/PYT70FinalProjectGroup1/Pet_Adoption.git
 python -m venv venv
 ```
 3. Run virtual environment
-```venv/Scripts/activate
+```
+venv/Scripts/activate
 ```
 4. Install the required dependencies:
 ```
