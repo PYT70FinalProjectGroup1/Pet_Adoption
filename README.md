@@ -14,28 +14,46 @@ submit adoption applications, and access various pet healthcare services.
 ## Installation
 To run AdoptMe locally, follow these steps:
 1. Clone the repository:
-`git clone https://github.com/PYT70FinalProjectGroup1/Pet_Adoption.git`
+```
+git clone https://github.com/PYT70FinalProjectGroup1/Pet_Adoption.git
+```
 2. Create a Python virtual environment and activate it:
-`python -m venv venv`
+```
+python -m venv venv
+```
 3. Run virtual environment
-`venv/Scripts/activate`
+```venv/Scripts/activate
+```
 4. Install the required dependencies:
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 5. Perform database migrations:
-`python manage.py makemigrations`
-`python manage.py migrate`
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
 6. Load data to Database
-`python manage.py loaddata output.json`
+```
+python manage.py loaddata output.json
+```
 7. Start the development server:
-`python manage.py runserver`
+```
+python manage.py runserver
+```
 Access the application in your web browser at http://localhost:8000/
 
 ## Configuration
 To configure AdoptMe, create a .env file in the project's root directory and customize it according to 
 your needs. Here's an example .env file:
+```
 DEBUG=True
 ALLOWED_HOSTS=localhost
 SECRET_KEY=my_secret_key
+```
+
 ## Usage Examples
 To Be Added
 ## Requirements
