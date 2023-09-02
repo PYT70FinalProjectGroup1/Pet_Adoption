@@ -160,6 +160,4 @@ cython_debug/
 .idea/
 .vscode/
 
-#media
-/media/animal_pics/
-/media/profile_pics/
+

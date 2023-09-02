@@ -1,12 +1,8 @@
 from django.test import TestCase
 from .models import Animal, Location
-from accounts.models import CustomUser
-from django.urls import reverse
 from django.test import TestCase
-from pet.models import Location
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.conf import settings
-import os
+
+
 class AnimalQueryTest(TestCase):
     def setUp(self):
         self.location = Location.objects.create(city_key="WAW", city_name="Warsaw")
