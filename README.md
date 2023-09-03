@@ -41,10 +41,14 @@ python manage.py migrate
 python manage.py loaddata output.json
 ```
 Four user created: 
-admin, password admin
-Monic, password admin123#
-Dima, password admin123#
-Tester, password admin123#
+
+- admin, password admin
+
+- Monic, password admin123#
+
+- Dima, password admin123#
+
+- Tester, password admin123#
 
 7. Start the development server:
 ```
