@@ -45,6 +45,7 @@ admin, password admin
 Monic, password admin123#
 Dima, password admin123#
 Tester, password admin123#
+
 7. Start the development server:
 ```
 python manage.py runserver
@@ -72,4 +73,6 @@ If you have any questions, feedback, or encounter issues with the AdoptMe applic
 don't hesitate to contact us at email@example.com.
 ## TEST
 To run the test, cd into the directory where manage.py is:
-```python manage.py test```
+```
+python manage.py test
+```
