@@ -792,7 +792,7 @@
         "is_active": true,
         "date_joined": "2023-08-27T21:20:00.888Z",
         "phone": "+48223453434",
-        "location": 1,
+        "location": 2,
         "profile_picture": "profile_pics/Dima.jpg",
         "groups": [],
         "user_permissions": []
@@ -812,7 +812,7 @@
         "is_active": true,
         "date_joined": "2023-08-28T11:33:57.823Z",
         "phone": "+48223453489",
-        "location": 1,
+        "location": 3,
         "profile_picture": "profile_pics/Tester.jpg",
         "groups": [],
         "user_permissions": []
@@ -832,7 +832,7 @@
         "is_active": true,
         "date_joined": "2023-08-28T11:34:31.580Z",
         "phone": "+48126457812",
-        "location": 1,
+        "location": 4,
         "profile_picture": "profile_pics/Monic.jpg",
         "groups": [],
         "user_permissions": []
