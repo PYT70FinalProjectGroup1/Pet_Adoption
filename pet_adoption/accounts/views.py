@@ -40,9 +40,11 @@ class RegisterView(CreateView):
         Returns:
             HttpResponse: The response after successful form validation.
         """
-
         response = super().form_valid(form)
         return response
+
+    
+   
 
 
 class UserProfileDetailView(LoginRequiredMixin, DetailView):

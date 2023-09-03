@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class BaseModel(models.Model):
@@ -103,7 +104,7 @@ class Animal(BaseModel):
         max_length=9, null=False, blank=False, choices=GENDER_CHOICE, default=""
     )
     size = models.CharField(max_length=32, blank=False, choices=SIZE_CHOICE, default="")
-    age = models.IntegerField(null=False)
+    age = models.IntegerField(validators=[MinLengthValidator(0), MaxLengthValidator(12)], null=False)
     chip = models.CharField(max_length=64, unique=True, null=False)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     about_pet = models.TextField(max_length=500, null=False)
